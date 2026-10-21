@@ -197,7 +197,7 @@ footer{padding-block:34px;border-top:1px solid rgba(201,162,74,.2);font-size:.82
 
 <script>
 // Contacto público de la galería: rellenar cuando esté decidido
-const CONTACTO = "";
+const CONTACTO = "jialivi26@gmail.com";
 
 const PIECES = [
  {id:"PRC-001",img:"obras/montacute.jpg",cls:"p1",
@@ -228,8 +228,8 @@ PIECES.forEach((p,i)=>{
   hang.appendChild(b);
 });
 document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Enmarcadas</span>`;
-const contactText = CONTACTO ? CONTACTO : "Muy pronto, aquí mismo.";
-document.getElementById("contactLine").textContent = contactText;
+const mailto=(subj,body)=>`mailto:${CONTACTO}?subject=${encodeURIComponent(subj)}${body?"&body="+encodeURIComponent(body):""}`;
+document.getElementById("contactLine").innerHTML=`<a href="${mailto("Consulta · Galería Procedencia")}">${CONTACTO}</a>`;
 
 const room=document.getElementById("room");let cur=-1,lastFocus=null;
 function openRoom(i){
@@ -250,8 +250,8 @@ function openRoom(i){
       <p class="story">${p.story}</p>
       <p class="hand">${p.hand}</p>
       <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status"><i></i>Disponible</span></div>
-      <button class="btn" id="bRes">Reservar o preguntar</button>
-      <div class="reserve" id="resBox" aria-live="polite"></div>
+      <a class="btn" style="display:inline-block;text-decoration:none" href="${mailto("Reserva "+p.id+" · "+p.t,"Hola, me interesa «"+p.t+"» ("+p.id+", "+euro(p.price)+"). Me gustaría reservarlo / tengo una pregunta:\n\n")}">Reservar o preguntar</a>
+      <p class="reserve">Escribe a <b>${CONTACTO}</b> indicando la referencia <b>${p.id}</b> y te la aparto 72 horas.</p>
     </article></div>
   </div>
   <div class="pn"><button class="nav-btn" id="rPrev" aria-label="Obra anterior">←</button><button class="nav-btn" id="rNext" aria-label="Obra siguiente">→</button></div>`;
@@ -259,7 +259,6 @@ function openRoom(i){
   document.getElementById("rClose").onclick=closeRoom;
   document.getElementById("rPrev").onclick=()=>openRoom((cur+PIECES.length-1)%PIECES.length);
   document.getElementById("rNext").onclick=()=>openRoom((cur+1)%PIECES.length);
-  document.getElementById("bRes").onclick=()=>{document.getElementById("resBox").textContent=CONTACTO?`Escríbeme a ${CONTACTO} indicando la referencia ${p.id} y te la aparto 72 horas.`:`Indica la referencia ${p.id} al escribir. El contacto para reservas estará disponible muy pronto.`};
   document.getElementById("rClose").focus();
 }
 function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(lastFocus)lastFocus.focus();lastFocus=null}
