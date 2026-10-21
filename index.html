@@ -128,6 +128,18 @@ footer{padding-block:34px;border-top:1px solid rgba(201,162,74,.2);font-size:.82
 .nav-btn:hover{border-color:var(--gilt-hi);color:var(--gilt-hi)}
 .room .x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:3}
 .room .pn{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px;z-index:3}
+
+.mdlg{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(10,3,4,.72);padding:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));animation:fade .25s ease}
+.mbox{background:var(--paper);color:var(--ink);width:min(440px,100%);padding:26px 24px 22px;box-shadow:0 30px 60px rgba(0,0,0,.6);position:relative}
+.mbox h3{font-family:var(--f-display);font-style:italic;font-size:1.7rem;font-weight:500;margin:0 0 4px}
+.mbox p{margin:0 0 14px;font-size:.92rem;color:var(--ink-soft)}
+.maddr{display:flex;gap:8px;align-items:center;background:#fbf7ee;border:1px solid rgba(29,19,17,.25);padding:10px 12px;font-family:var(--f-mono);font-size:.92rem;word-break:break-all;user-select:all;margin-bottom:12px}
+.mopts{display:grid;gap:8px}
+.mopt{display:block;text-align:center;text-decoration:none;font:600 .82rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:15px 14px;border:0;border-radius:2px;cursor:pointer;background:var(--wall);color:var(--fg)}
+.mopt.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.mref{font-size:.82rem;color:var(--ink-soft);margin-top:12px}
+.mclose{position:absolute;top:8px;right:8px;width:40px;height:40px;border:0;background:none;font-size:1.2rem;cursor:pointer;color:var(--ink)}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--gilt-hi);text-decoration:underline;cursor:pointer}
 </style>
 </head>
 <body>
@@ -193,6 +205,7 @@ footer{padding-block:34px;border-top:1px solid rgba(201,162,74,.2);font-size:.82
 
 <footer class="gut"><div class="wrap">Procedencia · obra con historia</div></footer>
 
+<div class="mdlg" id="mailDlg" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle"></div>
 <div class="room gut" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle"></div>
 
 <script>
@@ -206,9 +219,9 @@ const PIECES = [
   story:"Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.",
   hand:"Una casa señorial que acaba saliendo de otra casa.",price:95},
  {id:"PRC-002",img:"obras/four-courts.jpg",cls:"p2",
-  t:"Dublín, los Four Courts sobre el Liffey",a:"Anónimo",y:"Siglo XIX",
+  t:"Dublín, los Four Courts sobre el Liffey",a:"Dibujo de W. H. Bartlett · grabado de Owen",y:"c. 1840–1850",
   tech:"Grabado al acero coloreado a mano",marco:"Madera negra con filete dorado, paspartú",
-  story:"Vista del palacio de justicia de Dublín, el edificio de la cúpula, con el río Liffey, sus puentes y barcas. Al dorso lleva la etiqueta del enmarcador italiano que la identifica como estampa original del XIX procedente de libros de la época, coloreada a mano.",
+  story:"Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.",
   hand:"La cúpula, el puente y las barcas, a la luz de una tarde gris.",price:85},
  {id:"PRC-003",img:"obras/kininger.jpg",cls:"p3",
   t:"Escena de interior con dama, niño y caballero",a:"Dibujo de V. G. Kininger · grabado en Viena",y:"c. 1790–1810",
@@ -238,8 +251,34 @@ PIECES.forEach((p,i)=>{
   hang.appendChild(b);
 });
 document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Grabados y cromolitografías</span>`;
-const mailto=(subj,body)=>`mailto:${CONTACTO}?subject=${encodeURIComponent(subj)}${body?"&body="+encodeURIComponent(body):""}`;
-document.getElementById("contactLine").innerHTML=`<a href="${mailto("Consulta · Galería Procedencia")}">${CONTACTO}</a>`;
+const enc=encodeURIComponent;
+const mailto=(subj,body)=>`mailto:${CONTACTO}?subject=${enc(subj)}&body=${enc(body)}`;
+const gmail=(subj,body)=>`https://mail.google.com/mail/?view=cm&fs=1&to=${enc(CONTACTO)}&su=${enc(subj)}&body=${enc(body)}`;
+const mailDlg=document.getElementById("mailDlg");let mailPrevFocus=null;
+function openMail(subj,body,ref){
+  mailPrevFocus=document.activeElement;
+  mailDlg.innerHTML=`<div class="mbox"><button class="mclose" id="mClose" aria-label="Cerrar">✕</button>
+    <h3 id="mTitle">Escribir a la galería</h3>
+    <p>Reservas y consultas por correo. Respondo lo antes posible.</p>
+    <div class="maddr"><span>${CONTACTO}</span></div>
+    <div class="mopts">
+      <a class="mopt" href="${gmail(subj,body)}" target="_blank" rel="noopener">Escribir con Gmail</a>
+      <a class="mopt alt" href="${mailto(subj,body)}">Abrir mi app de correo</a>
+      <button class="mopt alt" id="mCopy" type="button">Copiar dirección</button>
+    </div>
+    ${ref?`<p class="mref">Indica la referencia <b>${ref}</b> y te aparto la obra 72 horas.</p>`:""}</div>`;
+  mailDlg.hidden=false;
+  document.getElementById("mClose").onclick=closeMail;
+  document.getElementById("mCopy").onclick=async e=>{const b=e.currentTarget;
+    try{await navigator.clipboard.writeText(CONTACTO);b.textContent="Dirección copiada"}
+    catch(_){const r=document.createRange();r.selectNodeContents(mailDlg.querySelector(".maddr span"));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent="Selecciónala y cópiala"}};
+  document.getElementById("mClose").focus();
+}
+function closeMail(){mailDlg.hidden=true;mailDlg.innerHTML="";if(mailPrevFocus)mailPrevFocus.focus()}
+mailDlg.addEventListener("click",e=>{if(e.target===mailDlg)closeMail()});
+const generalSubj="Consulta · Galería Procedencia",generalBody="Hola, quería hacer una consulta sobre la galería:\n\n";
+document.getElementById("contactLine").innerHTML=`<button class="linkbtn" id="cLink" type="button">${CONTACTO}</button>`;
+document.getElementById("cLink").onclick=()=>openMail(generalSubj,generalBody);
 
 const room=document.getElementById("room");let cur=-1,lastFocus=null;
 function openRoom(i){
@@ -260,7 +299,7 @@ function openRoom(i){
       <p class="story">${p.story}</p>
       <p class="hand">${p.hand}</p>
       <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status"><i></i>Disponible</span></div>
-      <a class="btn" style="display:inline-block;text-decoration:none" href="${mailto("Reserva "+p.id+" · "+p.t,"Hola, me interesa «"+p.t+"» ("+p.id+", "+euro(p.price)+"). Me gustaría reservarlo / tengo una pregunta:\n\n")}">Reservar o preguntar</a>
+      <button class="btn" id="bRes" type="button">Reservar o preguntar</button>
       <p class="reserve">Escribe a <b>${CONTACTO}</b> indicando la referencia <b>${p.id}</b> y te la aparto 72 horas.</p>
     </article></div>
   </div>
@@ -269,10 +308,11 @@ function openRoom(i){
   document.getElementById("rClose").onclick=closeRoom;
   document.getElementById("rPrev").onclick=()=>openRoom((cur+PIECES.length-1)%PIECES.length);
   document.getElementById("rNext").onclick=()=>openRoom((cur+1)%PIECES.length);
+  document.getElementById("bRes").onclick=()=>openMail("Reserva "+p.id+" · "+p.t,"Hola, me interesa «"+p.t+"» ("+p.id+", "+euro(p.price)+"). Me gustaría reservarla / tengo una pregunta:\n\n",p.id);
   document.getElementById("rClose").focus();
 }
 function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(lastFocus)lastFocus.focus();lastFocus=null}
-document.addEventListener("keydown",e=>{if(room.hidden)return;
+document.addEventListener("keydown",e=>{if(!mailDlg.hidden){if(e.key==="Escape")closeMail();return}if(room.hidden)return;
   if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")openRoom((cur+1)%PIECES.length);if(e.key==="ArrowLeft")openRoom((cur+PIECES.length-1)%PIECES.length)});
 </script>
 </body>
