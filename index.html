@@ -3,109 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Galería de pintura rescatada de vaciados de casas en Madrid y alrededores. Cada obra con su procedencia.">
 <title>Galería Procedencia</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Grabados antiguos y obra sobre papel con historia, rescatados de casas que se vacían. Piezas únicas a la venta.">
+<meta property="og:title" content="Galería Procedencia">
+<meta property="og:description" content="Grabados antiguos y obra sobre papel con historia. Piezas únicas a la venta.">
+<meta property="og:image" content="https://jia-lo.github.io/obras/montacute.jpg">
+<meta property="og:url" content="https://jia-lo.github.io/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Archivo:wdth,wght@75..100,400..700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
 <style>
-/* Layout: salón decimonónico — pared de tela granate con cuadros colgados en "hang de salón" (densos, de tamaños mezclados), cartelas de museo en papel y luz de cuadro. Una sola atmósfera, siempre oscura. */
+/* Salón granate con las obras colgadas a la altura de la mirada (centros alineados), cartelas de museo en papel y luz de cuadro. Una sola atmósfera, siempre oscura. */
 :root{
-  --wall:#4a1519;
-  --wall-deep:#2a0b0e;
-  --wall-hi:#5e1d22;
-  --gilt:#c9a24a;
-  --gilt-hi:#f1d98f;
-  --paper:#efe6d1;
-  --paper-dim:#d9ccb0;
-  --ink:#1d1311;
-  --ink-soft:#5b4a40;
-  --fg:#f2e7d4;
-  --fg-soft:#c9b49e;
-  --dot:#d8261c;
-  --dot-res:#e3a72f;
-  --f-display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
-  --f-body:"Archivo", "Helvetica Neue", Arial, sans-serif;
-  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --f-hand:"Caveat", "Segoe Print", cursive;
+  --wall:#4a1519;--wall-deep:#2a0b0e;--wall-hi:#5e1d22;
+  --gilt:#c9a24a;--gilt-hi:#f1d98f;
+  --paper:#efe6d1;--ink:#1d1311;--ink-soft:#5b4a40;
+  --fg:#f2e7d4;--fg-soft:#c9b49e;--ok:#3f8a55;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --f-hand:"Caveat","Segoe Print",cursive;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{
-  background:var(--wall);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,.035) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 75% 75%, rgba(0,0,0,.12) 0 1.5px, transparent 2px),
-    repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 1px, transparent 1px 3px);
-  background-size:22px 22px,22px 22px,auto;
-  overflow-x:hidden;
-}
+body{margin:0;background:var(--wall);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;overflow-x:hidden;
+  background-image:radial-gradient(circle at 25% 25%,rgba(255,255,255,.035) 0 1.5px,transparent 2px),radial-gradient(circle at 75% 75%,rgba(0,0,0,.12) 0 1.5px,transparent 2px),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px);
+  background-size:22px 22px,22px 22px,auto}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--wall-deep)}
+img{max-width:100%;display:block}
 .gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1240px;margin:0 auto}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--gilt-hi);outline-offset:3px}
 h1,h2,h3{text-wrap:balance;font-weight:400;margin:0}
 
-/* Cabecera */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:linear-gradient(var(--wall-deep),rgba(42,11,14,.92));border-bottom:1px solid rgba(201,162,74,.25);backdrop-filter:blur(6px)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
-.brand b{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.6rem;letter-spacing:.01em;color:var(--gilt-hi)}
+.brand b{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.6rem;color:var(--gilt-hi)}
 .brand span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-soft)}
 nav.menu{display:flex;gap:22px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;font-stretch:85%}
 nav.menu a{text-decoration:none;color:var(--fg-soft)}
 nav.menu a:hover{color:var(--gilt-hi)}
 @media (max-width:640px){nav.menu{display:none}}
 
-/* Hero */
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:end;padding-block:64px 36px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:end;padding-block:64px 30px}
 .eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt)}
-.hero h1{font-family:var(--f-display);font-size:clamp(3rem,8.6vw,7.4rem);line-height:.88;letter-spacing:-.025em;margin-top:18px;font-weight:400}
+.hero h1{font-family:var(--f-display);font-size:clamp(3rem,8.6vw,7.4rem);line-height:.88;letter-spacing:-.025em;margin-top:18px}
 .hero h1 em{display:block;font-style:italic;color:var(--gilt-hi);font-weight:500;padding-left:.6em}
 .hero p{max-width:44ch;color:var(--fg-soft);font-size:1.06rem;margin:0}
-.ledger{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-family:var(--f-mono);font-size:.78rem;color:var(--fg)}
-.ledger i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-@media (max-width:820px){.hero .wrap{grid-template-columns:1fr;gap:22px;padding-block:44px 24px}}
+.ledger{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-family:var(--f-mono);font-size:.78rem}
+.ledger i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--ok)}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr;gap:22px;padding-block:44px 20px}}
 
-/* Filtros */
-.filters{display:flex;flex-wrap:wrap;gap:8px;padding-block:8px 26px;align-items:center}
-.filters .lbl{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-soft);margin-right:6px}
-.chip{font:500 .82rem/1 var(--f-body);font-stretch:88%;letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;border-radius:2px;border:1px solid rgba(201,162,74,.45);background:transparent;color:var(--fg);cursor:pointer}
-.chip:hover{border-color:var(--gilt-hi)}
-.chip[aria-pressed="true"]{background:var(--gilt);color:var(--ink);border-color:var(--gilt)}
-.house-note{font-family:var(--f-hand);font-size:1.35rem;color:var(--gilt-hi);margin-left:4px}
-.house-note button{font:inherit;font-size:.95rem;color:var(--fg-soft);background:none;border:0;text-decoration:underline;cursor:pointer;font-family:var(--f-body)}
+/* Pared: centros alineados a la altura de la mirada */
+.wall{position:relative;padding-block:60px 70px}
+.eyeline{position:absolute;left:0;right:0;top:50%;border-top:1px dashed rgba(241,217,143,.18)}
+.eyeline span{position:absolute;right:0;top:-22px;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,217,143,.45)}
+.hang{position:relative;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:56px 6%}
+.piece{position:relative;border:0;padding:0;background:none;color:inherit;cursor:pointer;text-align:center;animation:hang .9s cubic-bezier(.2,.8,.2,1) backwards;min-width:0}
+@keyframes hang{from{transform:translateY(-14px) rotate(-1deg);opacity:.2}}
+.piece::before{content:"";position:absolute;left:8%;right:8%;top:-40px;height:110px;background:radial-gradient(ellipse at 50% 0,rgba(255,226,160,.26),transparent 70%);pointer-events:none}
+.piece img{width:100%;height:auto;box-shadow:0 22px 40px rgba(0,0,0,.55),0 3px 6px rgba(0,0,0,.4);transition:transform .35s ease}
+.piece:hover img,.piece:focus-visible img{transform:translateY(-5px)}
+.p1{width:min(30%,380px)}.p2{width:min(27%,340px)}.p3{width:min(29%,360px)}
+@media (max-width:820px){.p1,.p2,.p3{width:min(86%,420px)}.eyeline{display:none}}
+.tag{display:inline-block;margin-top:18px;background:var(--paper);color:var(--ink);padding:8px 12px 7px;box-shadow:0 6px 14px rgba(0,0,0,.35);text-align:left;max-width:100%}
+.tag b{display:block;font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1rem;line-height:1.15}
+.tag span{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-soft)}
 
-/* Pared de salón */
-.salon{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));grid-auto-rows:72px;grid-auto-flow:dense;gap:18px;padding-bottom:30px}
-@media (max-width:520px){.salon{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));grid-auto-rows:58px;gap:12px}}
-.piece{position:relative;cursor:pointer;border:0;padding:0;background:none;color:inherit;text-align:left;animation:hang .9s cubic-bezier(.2,.8,.2,1) backwards}
-@keyframes hang{from{transform:translateY(-14px) rotate(-1.2deg);opacity:.2}}
-.piece::before{content:"";position:absolute;left:10%;right:10%;top:-26px;height:70px;background:radial-gradient(ellipse at 50% 0,rgba(255,226,160,.22),transparent 70%);pointer-events:none}
-.piece[hidden]{display:none!important}
-.frame{position:relative;height:100%;display:flex;transition:transform .35s ease,box-shadow .35s ease}
-.piece:hover .frame,.piece:focus-visible .frame{transform:translateY(-4px)}
-.frame>.inner{flex:1;display:flex;position:relative;min-width:0}
-.frame canvas{display:block;width:100%;height:100%}
-.f-gilt{padding:10px;background:linear-gradient(135deg,#7d5d1c,#f1d98f 18%,#a77f2c 36%,#e8c56a 55%,#6f5016 74%,#d6b356 90%,#8b6a24);box-shadow:inset 0 0 0 1px rgba(0,0,0,.45),inset 0 0 0 4px rgba(255,236,170,.18),0 14px 26px rgba(0,0,0,.5),0 2px 4px rgba(0,0,0,.4)}
-.f-gilt>.inner{box-shadow:0 0 0 2px #4b360f,inset 0 0 8px rgba(0,0,0,.6)}
-.f-negro{padding:7px;background:linear-gradient(160deg,#2a2321,#0e0a09 50%,#221b19);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 14px 24px rgba(0,0,0,.55)}
-.f-madera{padding:8px;background:repeating-linear-gradient(100deg,#6b4527 0 3px,#7a5131 3px 7px,#5d3b20 7px 9px),#6b4527;box-shadow:inset 0 0 0 1px rgba(0,0,0,.35),0 14px 24px rgba(0,0,0,.5)}
-.mat{background:#ece4d2;padding:12%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
-.mat>div{flex:1;display:flex;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),0 0 0 3px #e2d8c2}
-.mat{display:flex}
-.cap{position:absolute;left:0;right:0;bottom:0;padding:8px 9px;background:linear-gradient(transparent,rgba(16,8,6,.86) 35%);font-size:.74rem;line-height:1.25;opacity:0;transform:translateY(6px);transition:.3s;pointer-events:none}
-.cap b{display:block;font-family:var(--f-display);font-style:italic;font-weight:500;font-size:.92rem}
-.cap span{font-family:var(--f-mono);font-size:.68rem;color:var(--gilt-hi)}
-.piece:hover .cap,.piece:focus-visible .cap{opacity:1;transform:none}
-.reddot{position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:var(--dot);box-shadow:0 0 0 2px var(--paper),0 2px 4px rgba(0,0,0,.5);z-index:2}
-.reddot.res{background:var(--dot-res)}
-.empty{grid-column:1/-1;font-family:var(--f-hand);font-size:1.6rem;color:var(--fg-soft);padding:30px 0}
-
-/* Secciones */
 section.band{padding-block:84px}
 .band.dark{background:var(--wall-deep)}
 .sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;align-items:end;margin-bottom:44px}
@@ -113,7 +81,6 @@ section.band{padding-block:84px}
 .sec-head h2 em{font-style:italic;color:var(--gilt-hi)}
 .sec-head p{color:var(--fg-soft);max-width:48ch;margin:0}
 @media (max-width:760px){.sec-head{grid-template-columns:1fr;gap:14px}}
-
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:rgba(201,162,74,.25);border:1px solid rgba(201,162,74,.25)}
 .step{background:var(--wall-deep);padding:26px 22px 30px;min-width:0}
 .step .n{font-family:var(--f-display);font-style:italic;font-size:3rem;line-height:1;color:var(--gilt)}
@@ -122,93 +89,54 @@ section.band{padding-block:84px}
 @media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.steps{grid-template-columns:1fr}}
 
-/* Libro de casas */
-.book{background:var(--paper);color:var(--ink);padding:10px 0;box-shadow:0 30px 60px rgba(0,0,0,.45);position:relative}
-.book::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(transparent 0 47px,rgba(80,50,30,.12) 47px 48px);pointer-events:none}
-.row{display:grid;grid-template-columns:110px minmax(0,1.6fr) minmax(0,1fr) 90px auto;gap:18px;align-items:center;padding:14px 26px;border-bottom:1px solid rgba(29,19,17,.14);position:relative}
-.row:last-child{border-bottom:0}
-.row.head{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
-.row .d{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
-.row .p{font-family:var(--f-display);font-size:1.25rem;line-height:1.15}
-.row .p small{display:block;font-family:var(--f-body);font-size:.82rem;color:var(--ink-soft)}
-.row .k{font-size:.9rem;color:var(--ink-soft)}
-.row .c{font-family:var(--f-hand);font-size:1.6rem;font-weight:700;color:#7a1d1f;font-variant-numeric:tabular-nums}
-.row button{font:600 .76rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:2px;white-space:nowrap}
-.row button:hover{background:var(--ink);color:var(--paper)}
-@media (max-width:760px){
-  .row{grid-template-columns:1fr auto;gap:4px 14px;padding:14px 18px}
-  .row.head{display:none}
-  .row .d{grid-column:1}.row .p{grid-column:1}.row .k{grid-column:1}
-  .row .c{grid-column:2;grid-row:1/3;align-self:center}
-  .row button{grid-column:2;grid-row:3}
-}
-
-/* Contacto */
 .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
 @media (max-width:820px){.contact{grid-template-columns:1fr}}
-.contact .big{font-family:var(--f-display);font-size:clamp(2rem,4.6vw,3.4rem);line-height:1;letter-spacing:-.02em}
-.contact .big em{color:var(--gilt-hi)}
-.facts{margin-top:28px;display:grid;gap:14px}
+.big{font-family:var(--f-display);font-size:clamp(2rem,4.6vw,3.4rem);line-height:1;letter-spacing:-.02em;margin:14px 0 0}
+.big em{color:var(--gilt-hi)}
+.facts{margin:0;display:grid;gap:14px}
 .facts div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;border-top:1px solid rgba(201,162,74,.25);padding-top:12px}
-.facts dt,.facts .t{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gilt)}
-.card{background:var(--paper);color:var(--ink);padding:30px;box-shadow:0 24px 50px rgba(0,0,0,.4)}
-.card h3{font-family:var(--f-display);font-style:italic;font-size:1.7rem;margin-bottom:6px}
-.card p{margin:0 0 18px;color:var(--ink-soft);font-size:.95rem}
-label{display:block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
-input,textarea{width:100%;font:1rem var(--f-body);padding:11px 12px;border:1px solid rgba(29,19,17,.35);background:#fbf7ee;color:var(--ink);border-radius:2px}
-textarea{min-height:90px;resize:vertical}
-.fgrid{display:grid;gap:14px}
-.btn{font:600 .85rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;padding:15px 20px;border:0;background:var(--wall);color:var(--fg);cursor:pointer;border-radius:2px}
-.btn:hover{background:var(--wall-hi)}
-.btn.gold{background:var(--gilt);color:var(--ink)}
-.btn.gold:hover{background:var(--gilt-hi)}
-.btn.ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(242,231,212,.45)}
-.ok{font-family:var(--f-hand);font-size:1.4rem;color:#7a1d1f;line-height:1.2}
-.ok small{display:block;font-family:var(--f-body);font-size:.82rem;color:var(--ink-soft);margin-top:6px}
-
+.facts dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gilt)}
+.facts dd{margin:0}
 footer{padding-block:34px;border-top:1px solid rgba(201,162,74,.2);font-size:.82rem;color:var(--fg-soft)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between}
 
-/* Sala de luz (detalle) */
+/* Sala de luz */
 .room{position:fixed;inset:0;z-index:50;background:radial-gradient(ellipse 60% 55% at 38% 30%,rgba(110,40,36,.55),transparent 70%),#140507;overflow-y:auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);animation:fade .35s ease}
 @keyframes fade{from{opacity:0}}
-.room-in{max-width:1240px;margin:0 auto;padding-block:70px 50px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:56px;align-items:center;min-height:100%}
-@media (max-width:860px){.room-in{grid-template-columns:1fr;gap:34px;padding-block:64px 40px}}
-.stage{position:relative;display:flex;justify-content:center;align-items:center}
+.room-in{max-width:1240px;margin:0 auto;padding-block:70px 90px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:56px;align-items:center;min-height:100%}
+@media (max-width:860px){.room-in{grid-template-columns:1fr;gap:34px;padding-block:64px 90px}}
+.stage{position:relative;display:flex;justify-content:center}
 .stage::before{content:"";position:absolute;left:5%;right:5%;top:-80px;height:220px;background:radial-gradient(ellipse at 50% 0,rgba(255,226,160,.28),transparent 70%);pointer-events:none}
-.stage .frame{height:auto;box-shadow:0 40px 80px rgba(0,0,0,.65)}
-.cartela{background:var(--paper);color:var(--ink);padding:28px 28px 26px;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:440px}
-.cartela .inv{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;color:var(--ink-soft);display:flex;justify-content:space-between;gap:10px}
-.cartela h2{font-family:var(--f-display);font-style:italic;font-size:clamp(1.8rem,3.2vw,2.4rem);line-height:1.02;margin:14px 0 4px;font-weight:500}
+.stage img{max-height:76vh;width:auto;box-shadow:0 40px 80px rgba(0,0,0,.65)}
+.cartela{background:var(--paper);color:var(--ink);padding:28px;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:460px}
+.inv{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;color:var(--ink-soft);display:flex;justify-content:space-between;gap:10px}
+.cartela h2{font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500}
 .cartela .art{font-size:.98rem;color:var(--ink-soft);margin:0 0 16px}
-.cartela dl{margin:0;display:grid;gap:0}
+.cartela dl{margin:0}
 .cartela dl>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid rgba(29,19,17,.12);font-size:.9rem}
 .cartela dt{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);padding-top:3px}
 .cartela dd{margin:0}
-.story{font-family:var(--f-hand);font-size:1.35rem;line-height:1.2;color:#5a1a1b;margin:16px 0 0}
+.story{font-size:.95rem;line-height:1.5;color:var(--ink-soft);margin:14px 0 0}
+.hand{font-family:var(--f-hand);font-size:1.3rem;line-height:1.2;color:#5a1a1b;margin:12px 0 0}
 .priceline{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:18px;padding-top:14px;border-top:2px solid var(--ink)}
 .price{font-family:var(--f-display);font-size:2rem;font-variant-numeric:tabular-nums;line-height:1}
 .status{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
-.status i{width:11px;height:11px;border-radius:50%;display:inline-block}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.scale{display:flex;align-items:end;gap:14px;margin-top:14px;font-family:var(--f-mono);font-size:.68rem;color:var(--ink-soft)}
-.scale svg{flex:none}
-.room .x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:3}
+.status i{width:11px;height:11px;border-radius:50%;background:var(--ok)}
+.btn{font:600 .85rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;padding:15px 20px;border:0;background:var(--wall);color:var(--fg);cursor:pointer;border-radius:2px;margin-top:18px}
+.btn:hover{background:var(--wall-hi)}
+.reserve{margin-top:16px;font-size:.92rem;color:var(--ink)}
 .nav-btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(242,231,212,.35);background:rgba(20,5,7,.6);color:var(--fg);font-size:1.3rem;cursor:pointer;display:grid;place-items:center}
 .nav-btn:hover{border-color:var(--gilt-hi);color:var(--gilt-hi)}
+.room .x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:3}
 .room .pn{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px;z-index:3}
-.inq{margin-top:16px;display:grid;gap:10px}
-.demo-note{margin-top:22px;font-size:.78rem;color:var(--fg-soft);opacity:.85;max-width:60ch}
 </style>
 </head>
 <body>
-
 
 <header class="top gut">
   <div class="wrap">
     <a class="brand" href="#sala"><b>Procedencia</b><span>galería</span></a>
     <nav class="menu" aria-label="Secciones">
-      <a href="#sala">La sala</a><a href="#casas">Las casas</a><a href="#como">Cómo llegan</a><a href="#visitas">Visitas</a>
+      <a href="#sala">La sala</a><a href="#como">Cómo llegan</a><a href="#reservas">Reservas</a>
     </nav>
   </div>
 </header>
@@ -216,344 +144,127 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-bet
 <section class="hero gut">
   <div class="wrap">
     <div>
-      <div class="eyebrow">Pintura rescatada de vaciados · Madrid y alrededores</div>
+      <div class="eyebrow">Grabados antiguos y obra sobre papel</div>
       <h1>Lo que colgaba <em>en otras casas</em></h1>
     </div>
     <div>
-      <p>Cuadros pequeños y medianos que encuentro cuando se vacían pisos señoriales, hotelitos y casonas antes de venderse. Cada obra lleva su procedencia: de qué casa salió, en qué habitación estaba y cuándo la rescaté.</p>
+      <p>Estampas y pequeñas obras con dos siglos de historia, rescatadas de casas que se vacían y de colecciones que se dispersan. Piezas únicas, enmarcadas y listas para colgar.</p>
       <div class="ledger" id="ledger"></div>
     </div>
   </div>
 </section>
 
 <main id="sala" class="gut">
-  <div class="wrap">
-    <div class="filters" role="group" aria-label="Filtrar obras">
-      <span class="lbl">Mirar</span>
-      <button class="chip" data-f="todo" aria-pressed="true">Todo</button>
-      <button class="chip" data-f="disponible" aria-pressed="false">Disponibles</button>
-      <button class="chip" data-f="oleo" aria-pressed="false">Óleo</button>
-      <button class="chip" data-f="papel" aria-pressed="false">Acuarela y gouache</button>
-      <button class="chip" data-f="grabado" aria-pressed="false">Grabado</button>
-      <span class="house-note" id="houseNote" hidden></span>
-    </div>
-    <div class="salon" id="salon"></div>
+  <div class="wrap wall">
+    <div class="eyeline" aria-hidden="true"><span>Altura de la mirada</span></div>
+    <div class="hang" id="hang"></div>
   </div>
 </main>
 
 <section id="como" class="band dark gut">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Cómo llega <em>un cuadro</em> a esta pared</h2>
-      <p>Cuando una familia vende una casa, una empresa de vaciados la abre unos días al público y se vende todo lo que hay dentro. Ahí empieza el recorrido.</p>
+      <h2>Cómo llega <em>una obra</em> a esta pared</h2>
+      <p>Cuando una casa se vacía antes de venderse, lo que había en sus paredes se dispersa. Algunas piezas merecen una segunda casa.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>El aviso</h3><p>La empresa anuncia el vaciado con pocos días de margen. Dirección, horario y unas fotos borrosas del salón.</p></div>
-      <div class="step"><div class="n">2</div><h3>La visita</h3><p>Hay que llegar a primera hora. Busco lo pequeño y lo raro: lo que estaba en un pasillo, un dormitorio o detrás de una puerta.</p></div>
-      <div class="step"><div class="n">3</div><h3>El cuidado</h3><p>Limpieza suave de la superficie, revisión del bastidor y del marco. Nada se repinta: el cuadro se queda como era.</p></div>
-      <div class="step"><div class="n">4</div><h3>La sala</h3><p>Fotografía, medidas, ficha y la historia de la casa. Cada obra se vende con su procedencia por escrito.</p></div>
+      <div class="step"><div class="n">1</div><h3>El aviso</h3><p>Una casa se vacía o una colección sale a la venta, a menudo con pocos días de margen.</p></div>
+      <div class="step"><div class="n">2</div><h3>La elección</h3><p>Busco lo pequeño y lo especial: estampas antiguas, marcos con carácter, obras que se pasan por alto.</p></div>
+      <div class="step"><div class="n">3</div><h3>La revisión</h3><p>Se estudia cada pieza: firmas en la plancha, técnica, época, estado del papel y del marco. Nada se altera.</p></div>
+      <div class="step"><div class="n">4</div><h3>La sala</h3><p>Fotografía y ficha con autor, técnica y época, para que sepas exactamente qué te llevas.</p></div>
     </div>
   </div>
 </section>
 
-<section id="casas" class="band gut">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>El libro <em>de las casas</em></h2>
-      <p>Cada vaciado queda anotado. Pulsa en una casa para ver en la pared solo los cuadros que salieron de ella.</p>
-    </div>
-    <div class="book" id="book"></div>
-  </div>
-</section>
-
-<section id="visitas" class="band dark gut">
+<section id="reservas" class="band gut">
   <div class="wrap contact">
     <div>
-      <div class="eyebrow">Visitas con cita</div>
-      <p class="big" style="margin:14px 0 0">Los cuadros se ven mejor <em>en persona</em>.</p>
-      <dl class="facts">
-        <div><dt>Dónde</dt><dd>Alcalá de Henares y Madrid. Te enseño las obras en mano o las llevo a tu casa para probarlas en la pared.</dd></div>
-        <div><dt>Envíos</dt><dd>Embalaje con cantoneras y caja doble. Península en 48–72 h.</dd></div>
-        <div><dt>Reservas</dt><dd>Una obra queda apartada 72 horas sin compromiso.</dd></div>
-        <div><dt>Contacto</dt><dd><span style="font-family:var(--f-mono)">correo@tugaleria.es</span></dd></div>
-      </dl>
+      <div class="eyebrow">Reservas</div>
+      <p class="big">Las obras se ven mejor <em>en persona</em>.</p>
     </div>
-    <div class="card">
-      <h3>Avísame del próximo vaciado</h3>
-      <p>Cuando entren obras nuevas, las verás antes de que se cuelguen aquí.</p>
-      <form id="newsForm" class="fgrid" novalidate>
-        <div><label for="nName">Nombre</label><input id="nName" autocomplete="name" placeholder="Carmen"></div>
-        <div><label for="nMail">Correo o teléfono</label><input id="nMail" required placeholder="carmen@correo.es"></div>
-        <div><label for="nLike">¿Qué te gusta?</label><input id="nLike" placeholder="Marinas pequeñas, flores, grabados…"></div>
-        <button class="btn" type="submit">Quiero el aviso</button>
-        <div id="newsOk" aria-live="polite"></div>
-      </form>
-    </div>
+    <dl class="facts">
+      <div><dt>Dónde</dt><dd>Alcalá de Henares y Madrid. Se pueden ver en mano antes de comprar.</dd></div>
+      <div><dt>Envíos</dt><dd>Embalaje con cantoneras y caja doble a toda la península.</dd></div>
+      <div><dt>Reservas</dt><dd>Una obra queda apartada 72 horas sin compromiso.</dd></div>
+      <div><dt>Contacto</dt><dd id="contactLine"></dd></div>
+    </dl>
   </div>
 </section>
 
-<footer class="gut">
-  <div class="wrap">
-    <span>Procedencia · pintura con historia</span>
-    <span>Las imágenes de las obras son ilustraciones provisionales hasta que subas las fotos reales.</span>
-  </div>
-</footer>
+<footer class="gut"><div class="wrap">Procedencia · obra con historia</div></footer>
 
 <div class="room gut" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle"></div>
 
 <script>
-const HOUSES = {
-  chamberi:{n:"Piso en Chamberí",z:"Calle de Fortuny, Madrid",k:"Piso de 1928, techos de 4 m",d:"2026-10"},
-  alcala:{n:"Casa del casco histórico",z:"Alcalá de Henares",k:"Casa con patio, tres plantas",d:"2026-09"},
-  siguenza:{n:"Casona en Sigüenza",z:"Guadalajara",k:"Casona de piedra con capilla",d:"2026-08"},
-  viso:{n:"Hotelito en El Viso",z:"Madrid",k:"Colonia de los años 30",d:"2026-06"},
-  moraleja:{n:"Chalet en La Moraleja",z:"Alcobendas",k:"Chalet de los 70, salón doble",d:"2026-05"},
-  velazquez:{n:"Piso señorial en Velázquez",z:"Barrio de Salamanca, Madrid",k:"Piso de 1915, 9 habitaciones",d:"2026-03"}
-};
-const MONTHS=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-const fmtMonth=s=>{const[y,m]=s.split("-");return MONTHS[+m-1]+" "+y};
+// Contacto público de la galería: rellenar cuando esté decidido
+const CONTACTO = "";
 
-// Obras de muestra: sustituir por las reales (título, medidas, precio y foto)
 const PIECES = [
- {id:"PRC-041",t:"Tarde sobre el Henares",a:"Firmado «M. Olalla», abajo a la derecha",y:"c. 1962",tech:"Óleo sobre lienzo",cat:"oleo",w:46,h:33,kind:"paisaje",seed:11,pal:["#f0b36a","#f6dca0","#7d8aa0","#9a8a4a","#4d5a2a"],frame:"f-gilt",house:"alcala",room:"el comedor, sobre el aparador",price:620,st:"disponible",span:[4,3],story:"Estaba sobre el aparador del comedor. Detrás tenía pegada una etiqueta de una tienda de marcos de la calle Mayor."},
- {id:"PRC-039",t:"Membrillos y jarra",a:"Anónimo, escuela española",y:"c. 1940",tech:"Óleo sobre tabla",cat:"oleo",w:24,h:30,kind:"bodegon",seed:4,pal:["#2a1d14","#5b3c22","#d9a83a","#c96a2c","#e9d6a8"],frame:"f-gilt",house:"siguenza",room:"la cocina vieja",price:480,st:"disponible",span:[3,4],story:"Colgaba en la cocina vieja, ennegrecido por el humo. Bajo la suciedad apareció el amarillo de los membrillos."},
- {id:"PRC-044",t:"Barcas en Luarca",a:"Firmado «J. Cienfuegos»",y:"1958",tech:"Gouache sobre papel",cat:"papel",w:22,h:16,kind:"marina",seed:21,pal:["#cfd8d6","#f2e2c0","#5f8796","#2d4f5c","#b8432f"],frame:"f-madera",mat:true,house:"chamberi",room:"un dormitorio interior",price:290,st:"disponible",span:[3,2],story:"Lo encontré en el dormitorio del fondo, apoyado en el suelo detrás de un armario."},
- {id:"PRC-037",t:"Peonías",a:"Firmado con iniciales «A. R.»",y:"c. 1970",tech:"Óleo sobre lienzo",cat:"oleo",w:38,h:46,kind:"flores",seed:7,pal:["#3a3a33","#6c6650","#e7a1a8","#c4485a","#f3e1d0"],frame:"f-gilt",house:"moraleja",room:"el salón grande",price:740,st:"reservado",span:[3,4],story:"Era uno de los seis cuadros del salón. Los otros eran copias; este no."},
- {id:"PRC-030",t:"Composición en ocre",a:"Anónimo",y:"c. 1965",tech:"Óleo sobre arpillera",cat:"oleo",w:50,h:40,kind:"abstracto",seed:33,pal:["#c98a2c","#7a2a1c","#2b2a33","#e9d3a0","#4a5a6a"],frame:"f-negro",house:"moraleja",room:"el despacho",price:1150,st:"disponible",span:[4,4],story:"En el despacho, frente a la mesa. La dueña contaba que lo compraron en una galería de la calle Villanueva."},
- {id:"PRC-046",t:"Tejados de Alcalá",a:"Firmado «Peña»",y:"c. 1980",tech:"Acuarela sobre papel",cat:"papel",w:28,h:20,kind:"ciudad",seed:15,pal:["#e9e2d0","#c97a4a","#a8573a","#7d8a8f","#efe7d7"],frame:"f-negro",mat:true,house:"alcala",room:"el descansillo de la escalera",price:220,st:"disponible",span:[3,2],story:"En el descansillo de la escalera, con el cristal partido en una esquina. El papel está intacto."},
- {id:"PRC-028",t:"Arboleda en invierno",a:"Firmado y fechado en plancha",y:"1921",tech:"Aguafuerte, tirada de 30",cat:"grabado",w:18,h:13,kind:"grabado",seed:9,pal:["#e9dfc7","#2b211b"],frame:"f-negro",mat:true,house:"velazquez",room:"la biblioteca",price:180,st:"disponible",span:[2,2],story:"Dentro de una carpeta de la biblioteca, con otros cuatro grabados sin enmarcar."},
- {id:"PRC-033",t:"Noche en el puerto",a:"Anónimo, firma ilegible",y:"c. 1950",tech:"Óleo sobre cartón",cat:"oleo",w:20,h:25,kind:"marina",seed:44,pal:["#1a2238","#3b4a6b","#203247","#0d1726","#f2c76a"],frame:"f-gilt",house:"velazquez",room:"el pasillo",price:340,st:"vendido",span:[2,3],story:"Colgaba en el pasillo, entre dos puertas, y casi nadie lo miraba."},
- {id:"PRC-045",t:"Campos de Castilla",a:"Firmado «L. Arnáiz»",y:"c. 1955",tech:"Óleo sobre lienzo",cat:"oleo",w:55,h:33,kind:"paisaje",seed:52,pal:["#b9c7cf","#e9e4d4","#8a96a6","#c7a24c","#8a6a2c"],frame:"f-madera",house:"siguenza",room:"el salón de la planta alta",price:890,st:"disponible",span:[5,3],story:"El salón de arriba llevaba años cerrado. Este paisaje era lo único que seguía en la pared."},
- {id:"PRC-038",t:"Bodegón con granadas",a:"Anónimo",y:"c. 1930",tech:"Óleo sobre lienzo",cat:"oleo",w:27,h:22,kind:"bodegon",seed:18,pal:["#1e1611","#4a2e1c","#9a2a22","#d8473a","#e4d3b0"],frame:"f-negro",house:"viso",room:"el comedor",price:410,st:"disponible",span:[3,3],story:"En el comedor del hotelito, sobre la chimenea. Tiene un sello de lacre en el bastidor."},
- {id:"PRC-047",t:"Ramo de campo",a:"Firmado «Teresa»",y:"c. 1975",tech:"Acuarela sobre papel",cat:"papel",w:20,h:26,kind:"flores",seed:62,pal:["#f2ede2","#cfd6c0","#e9c34a","#7a8ad0","#d86a5a"],frame:"f-madera",mat:true,house:"chamberi",room:"la habitación de costura",price:160,st:"disponible",span:[2,3],story:"En la habitación de costura. Firmado solo con un nombre de pila, a lápiz."},
- {id:"PRC-034",t:"Estudio azul",a:"Anónimo",y:"c. 1968",tech:"Gouache sobre papel",cat:"papel",w:24,h:24,kind:"abstracto",seed:71,pal:["#2c4a7a","#e9e1cf","#c9a24a","#1a1a22","#8aa0b8"],frame:"f-negro",mat:true,house:"viso",room:"el cuarto de invitados",price:260,st:"disponible",span:[2,2],story:"En el cuarto de invitados, junto a un espejo. Al dorso, una dedicatoria a lápiz muy borrada."},
- {id:"PRC-042",t:"El Manzanares desde el puente",a:"Firmado y fechado en plancha",y:"1934",tech:"Aguafuerte y aguatinta",cat:"grabado",w:24,h:17,kind:"grabado",seed:83,pal:["#ece2c9","#3a2a20"],frame:"f-madera",mat:true,house:"velazquez",room:"la biblioteca",price:210,st:"disponible",span:[3,2],story:"De la misma carpeta de la biblioteca. Conserva el margen original del papel."},
- {id:"PRC-036",t:"Marina al mediodía",a:"Firmado «E. Sorní»",y:"c. 1960",tech:"Óleo sobre tabla",cat:"oleo",w:33,h:24,kind:"marina",seed:95,pal:["#dce8ee","#f5ecd2","#4e93b0","#1f5b78","#ffffff"],frame:"f-gilt",house:"moraleja",room:"el porche acristalado",price:560,st:"disponible",span:[3,3],story:"En el porche acristalado. Por suerte estaba del lado de la sombra."}
+ {id:"PRC-001",img:"obras/montacute.jpg",cls:"p1",
+  t:"Montacute House, fachada este",a:"Dibujo de J. P. Neale · grabado de W. Wallis",y:"Londres, década de 1820",
+  tech:"Grabado coloreado a mano",marco:"Madera dorada envejecida con esquinas talladas, paspartú doble",
+  story:"Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.",
+  hand:"Una casa señorial que acaba saliendo de otra casa.",price:95},
+ {id:"PRC-002",img:"obras/four-courts.jpg",cls:"p2",
+  t:"Dublín, los Four Courts sobre el Liffey",a:"Anónimo",y:"Siglo XIX",
+  tech:"Grabado al acero coloreado a mano",marco:"Madera negra con filete dorado, paspartú",
+  story:"Vista del palacio de justicia de Dublín, el edificio de la cúpula, con el río Liffey, sus puentes y barcas. Al dorso lleva la etiqueta del enmarcador italiano que la identifica como estampa original del XIX procedente de libros de la época, coloreada a mano.",
+  hand:"La cúpula, el puente y las barcas, a la luz de una tarde gris.",price:85},
+ {id:"PRC-003",img:"obras/kininger.jpg",cls:"p3",
+  t:"Escena de interior con dama, niño y caballero",a:"Dibujo de V. G. Kininger · grabado en Viena",y:"c. 1790–1810",
+  tech:"Grabado calcográfico, ilustración de libro",marco:"Moldura negra y dorada, estampa montada sobre papel hecho a mano",
+  story:"Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.",
+  hand:"Más de dos siglos y la escena sigue en vilo.",price:70}
 ];
 
-/* ---------- Pintor generativo (ilustraciones provisionales) ---------- */
-function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-function hex(h){h=h.replace("#","");return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
-function mix(a,b,t){const A=hex(a),B=hex(b);return A.map((v,i)=>Math.round(v+(B[i]-v)*t))}
-function jit(c,R,j){return`rgb(${c.map(v=>Math.max(0,Math.min(255,v+(R()-.5)*j))).join(",")})`}
-
-function paint(cv,p,W,H){
-  const dpr=Math.min(window.devicePixelRatio||1,2);
-  cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
-  const c=cv.getContext("2d");c.scale(dpr,dpr);
-  const R=rng(p.seed*977+3), P=p.pal, wet=p.cat==="papel";
-  const S=Math.max(W,H)*(wet?.03:.02);
-  const amp=(f)=>{const ph=[R()*6,R()*6,R()*6];return x=>Math.sin(x*f+ph[0])*.5+Math.sin(x*f*2.3+ph[1])*.3+Math.sin(x*f*5.1+ph[2])*.2};
-  function dab(x,y,w,l,a,col,al){c.save();c.translate(x,y);c.rotate(a);c.globalAlpha=al;c.fillStyle=col;c.beginPath();c.ellipse(0,0,l/2,w/2,0,0,7);c.fill();c.restore()}
-  function region(x0,y0,x1,y1,inside,color,opt={}){
-    const sz=(opt.size||1)*S, dens=opt.dens||2.4, ang=opt.ang??0, va=opt.va??.35;
-    const n=Math.floor((x1-x0)*(y1-y0)/(sz*sz)*dens);
-    for(let i=0;i<n;i++){const x=x0+R()*(x1-x0),y=y0+R()*(y1-y0);if(inside&&!inside(x,y))continue;
-      dab(x,y,sz*(.35+R()*.4),sz*(1+R()*1.4),ang+(R()-.5)*va,jit(color(x,y),R,opt.j??26),(wet?.22:.55)+R()*(wet?.2:.4))}
-  }
-  // fondo / imprimación
-  c.fillStyle=wet?"#f3eee2":`rgb(${mix(P[0],P[1],.5)})`;c.fillRect(0,0,W,H);
-
-  if(p.kind==="paisaje"){
-    const hz=H*(.48+R()*.08), r1=amp(4/W), r2=amp(7/W);
-    region(0,0,W,hz+S,null,(x,y)=>mix(P[0],P[1],y/hz),{ang:0,va:.2});
-    for(let k=0;k<5;k++){const cx=R()*W,cy=R()*hz*.6;region(cx-W*.12,cy-H*.03,cx+W*.12,cy+H*.03,(x,y)=>((x-cx)/(W*.12))**2+((y-cy)/(H*.03))**2<1,()=>hex(P[1]).map(v=>Math.min(255,v+20)),{size:.8,dens:1.5})}
-    region(0,hz-H*.12,W,hz+S,(x,y)=>y>hz-H*.06-r1(x)*H*.05,()=>hex(P[2]),{ang:0});
-    region(0,hz-S,W,H,(x,y)=>y>hz-r2(x)*H*.025,(x,y)=>mix(P[3],P[4],(y-hz)/(H-hz)),{ang:-.08,va:.5});
-    for(let k=0;k<3+R()*4;k++){const tx=R()*W,ty=hz+R()*(H-hz)*.35,tr=S*(1.5+R()*2.5);region(tx-tr,ty-tr*2.2,tx+tr,ty+tr*.3,(x,y)=>((x-tx)/tr)**2+((y-ty+tr)/(tr*1.4))**2<1,()=>mix(P[4],"#1d2010",.5),{size:.6,dens:3,va:3})}
-  }
-  else if(p.kind==="marina"){
-    const hz=H*(.42+R()*.12), night=hex(P[0])[0]<60;
-    region(0,0,W,hz+2,null,(x,y)=>mix(P[0],P[1],y/hz),{ang:0,va:.15});
-    const sx=W*(.25+R()*.5), sy=hz*(.35+R()*.3);
-    c.globalAlpha=night?.9:.6;c.fillStyle=P[4];c.beginPath();c.arc(sx,sy,S*1.2,0,7);c.fill();c.globalAlpha=1;
-    region(0,hz,W,H,null,(x,y)=>mix(P[2],P[3],(y-hz)/(H-hz)),{ang:0,va:.08,size:1.1,dens:3});
-    region(sx-S*3,hz,sx+S*3,H,(x,y)=>Math.abs(x-sx)<S*(1+(y-hz)/H*4)*(.6+R()),()=>hex(P[4]),{ang:0,va:.05,size:.5,dens:1.2});
-    for(let b=0;b<1+Math.floor(R()*3);b++){const bx=W*(.15+R()*.7),by=hz+(H-hz)*(.25+R()*.5),bs=S*(1.6+R());
-      c.fillStyle=night?"#0b0f18":"#2a1f1a";c.beginPath();c.moveTo(bx-bs,by);c.lineTo(bx+bs,by);c.lineTo(bx+bs*.7,by+bs*.35);c.lineTo(bx-bs*.7,by+bs*.35);c.fill();
-      c.fillStyle=night?"#d9c48a":P[4]==="#ffffff"?"#f4efe4":"#efe6d0";c.beginPath();c.moveTo(bx-bs*.05,by-bs*2);c.lineTo(bx-bs*.05,by-bs*.1);c.lineTo(bx+bs*.9,by-bs*.1);c.fill();
-      if(!night){c.fillStyle=P[4];c.globalAlpha=.85;c.beginPath();c.moveTo(bx-bs*.15,by-bs*1.7);c.lineTo(bx-bs*.15,by-bs*.1);c.lineTo(bx-bs*.9,by-bs*.1);c.fill();c.globalAlpha=1}}
-  }
-  else if(p.kind==="bodegon"||p.kind==="flores"){
-    const tb=H*(p.kind==="flores"?.74:.64);
-    region(0,0,W,tb+S,null,(x,y)=>mix(P[0],P[1],Math.hypot(x-W*.4,y-H*.3)/W),{va:3,size:1.4});
-    region(0,tb,W,H,null,(x,y)=>mix(P[1],P[0],(y-tb)/(H-tb)*.7),{ang:0,va:.2});
-    c.fillStyle=`rgba(255,240,210,${wet?.25:.12})`;c.fillRect(0,tb-1,W,2);
-    if(p.kind==="bodegon"){
-      const jx=W*(.6+R()*.12), jw=W*.14, jh=H*.36;
-      region(jx-jw,tb-jh,jx+jw,tb,(x,y)=>((x-jx)/jw)**2+((y-(tb-jh*.42))/(jh*.58))**2<1||(Math.abs(x-jx)<jw*.42&&y<tb-jh*.6),(x,y)=>mix(P[4],P[1],(x-jx+jw)/(2*jw)*.8),{va:3,size:.7,dens:3.5});
-      const nf=3+Math.floor(R()*3);
-      for(let k=0;k<nf;k++){const fx=W*(.12+k*.12+R()*.04),fr=W*(.055+R()*.03),fy=tb-fr*.75+(k%2)*fr*.5;
-        region(fx-fr,fy-fr,fx+fr,fy+fr,(x,y)=>(x-fx)**2+(y-fy)**2<fr*fr,(x,y)=>mix(P[k%2?3:2],P[0],Math.max(0,(x-fx+fr*.5)/(fr*2))*.9),{va:3,size:.5,dens:4});
-        dab(fx-fr*.35,fy-fr*.35,fr*.25,fr*.4,-.6,"rgb(255,244,214)",.65)}
-    } else {
-      const vx=W*(.48+R()*.06), vw=W*.11, vh=H*.26;
-      region(vx-vw,tb-vh,vx+vw,tb,(x,y)=>Math.abs(x-vx)<vw*(.55+.45*Math.sin((tb-y)/vh*3)),(x,y)=>mix(P[1],P[0],(x-vx+vw)/(2*vw)),{va:3,size:.6,dens:3.5});
-      const nf=7+Math.floor(R()*6);
-      for(let k=0;k<nf;k++){const a=-Math.PI*(.1+R()*.8),d=H*(.18+R()*.22),fx=vx+Math.cos(a)*d*1.1,fy=tb-vh+Math.sin(a)*d*.9,fr=W*(.045+R()*.04);
-        region(fx-fr*1.8,fy-fr*1.6,fx+fr*1.8,fy+fr,(x,y)=>(x-fx)**2+(y-fy)**2<(fr*1.6)**2&&R()<.25,()=>hex(P[1]),{size:.5,dens:2,va:3});
-        region(fx-fr,fy-fr,fx+fr,fy+fr,(x,y)=>(x-fx)**2+(y-fy)**2<fr*fr,(x,y)=>mix(P[2+(k%3)],P[4],Math.max(0,1-Math.hypot(x-fx,y-fy)/fr)*.4),{va:3,size:.45,dens:5})}
-    }
-  }
-  else if(p.kind==="abstracto"){
-    if(R()<.5){const bands=[[.06,.38],[.44,.7],[.76,.94]];
-      region(0,0,W,H,null,()=>hex(P[1]),{va:3});
-      bands.forEach((b,i)=>region(W*.08,H*b[0],W*.92,H*b[1],null,()=>hex(P[[0,2,4][i]]),{ang:0,va:.4,size:1.2,dens:3}));
-    } else {
-      region(0,0,W,H,null,()=>hex(P[1]),{va:3});
-      for(let k=0;k<6;k++){const x0=R()*W*.7,y0=R()*H*.7,w=W*(.15+R()*.4),h=H*(.1+R()*.35),col=P[[0,2,3,4][k%4]];
-        if(k%3===0){const cx=x0+w/2,cy=y0+h/2,r=Math.min(w,h)/1.6;region(cx-r,cy-r,cx+r,cy+r,(x,y)=>(x-cx)**2+(y-cy)**2<r*r,()=>hex(col),{va:3,size:.8,dens:3})}
-        else region(x0,y0,x0+w,y0+h,null,()=>hex(col),{ang:k%2?1.57:0,va:.2,size:.9,dens:2.6})}
-    }
-  }
-  else if(p.kind==="ciudad"){
-    const hz=H*.38;
-    region(0,0,W,hz+S*2,null,(x,y)=>mix(P[3],P[0],y/hz),{ang:0,va:.2});
-    let x=-S;const rows=[hz,hz+H*.18,hz+H*.36];
-    rows.forEach((base,ri)=>{x=-S*(1+R()*2);while(x<W){const bw=W*(.12+R()*.14),bh=H*(.3+R()*.2);const col=P[1+((ri+Math.floor(x))%2)];
-      region(x,base,x+bw,base+bh,null,()=>mix(P[4],P[0],.3+R()*.2),{size:.7,dens:2,va:3});
-      region(x-bw*.06,base-bw*.3,x+bw*1.06,base+2,(px,py)=>py>base-bw*.3+Math.abs(px-(x+bw/2))*.55,()=>hex(col),{ang:.4*(R()<.5?1:-1),size:.6,dens:3});
-      for(let wy=0;wy<2;wy++)for(let wx=0;wx<2;wx++){c.globalAlpha=.6;c.fillStyle="#4a3a33";c.fillRect(x+bw*(.22+wx*.38),base+bh*(.18+wy*.3),bw*.14,bh*.12)}c.globalAlpha=1;
-      x+=bw+W*.01}});
-  }
-  else if(p.kind==="grabado"){
-    c.fillStyle=P[0];c.fillRect(0,0,W,H);
-    const hz=H*(.55+R()*.08),r1=amp(5/W),cx=W*(.3+R()*.4);
-    const trees=[...Array(6)].map(()=>({x:R()*W,y:hz-H*(.05+R()*.15),r:W*(.05+R()*.07)}));
-    const tone=(x,y)=>{let t=y<hz?.08+y/hz*.12:.35+(y-hz)/(H-hz)*.4;
-      if(y>hz-H*.07-r1(x)*H*.04&&y<hz)t=.45;
-      if(y>hz&&Math.abs(x-cx)<W*.05+(y-hz)*.6)t=.15;
-      for(const tr of trees){const d=((x-tr.x)/tr.r)**2+((y-tr.y)/(tr.r*1.5))**2;if(d<1)t=Math.max(t,.82-d*.25);if(Math.abs(x-tr.x)<tr.r*.08&&y>tr.y&&y<hz+H*.04)t=.95}
-      return t};
-    c.strokeStyle=P[1];c.lineWidth=Math.max(.6,W/600);c.lineCap="round";
-    const passes=[[.2,.15],[-.9,.35],[.75,.55],[1.57,.75]], gap=Math.max(2.4,W/170);
-    passes.forEach(([ang,th])=>{const dx=Math.cos(ang),dy=Math.sin(ang),nx=-dy,ny=dx,L=W+H;
-      for(let o=-L;o<L;o+=gap){let down=false;c.beginPath();
-        for(let s=-L;s<L;s+=2){const x=W/2+nx*o+dx*s,y=H/2+ny*o+dy*s;if(x<0||y<0||x>W||y>H){if(down){down=false}continue}
-          const on=tone(x,y)+(R()-.5)*.08>th;if(on&&!down){c.moveTo(x,y);down=true}else if(!on&&down){c.lineTo(x,y);down=false}else if(on)c.lineTo(x,y)}
-        c.globalAlpha=.85;c.stroke()}});
-    c.globalAlpha=1;
-  }
-  // barniz, viñeta y grano
-  if(!wet&&p.kind!=="grabado"){c.fillStyle="rgba(150,100,30,.08)";c.fillRect(0,0,W,H)}
-  const g=c.createRadialGradient(W/2,H/2,Math.min(W,H)*.3,W/2,H/2,Math.max(W,H)*.75);
-  g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,wet||p.kind==="grabado"?"rgba(90,60,20,.12)":"rgba(20,8,0,.35)");c.fillStyle=g;c.fillRect(0,0,W,H);
-  for(let i=0;i<W*H/60;i++){c.fillStyle=R()<.5?"rgba(0,0,0,.05)":"rgba(255,255,255,.04)";c.fillRect(R()*W,R()*H,1,1)}
-}
-
-/* ---------- Render de la sala ---------- */
-const salon=document.getElementById("salon");
 const euro=n=>n.toLocaleString("es-ES")+" €";
-const ST={disponible:["Disponible","#3f8a55"],reservado:["Reservado","var(--dot-res)"],vendido:["Vendido","var(--dot)"]};
-function frameHTML(p){
-  const art=`<canvas aria-hidden="true"></canvas>`;
-  const body=p.mat?`<div class="mat"><div>${art}</div></div>`:art;
-  return `<div class="frame ${p.frame}"><div class="inner">${body}</div></div>`;
-}
+const hang=document.getElementById("hang");
 PIECES.forEach((p,i)=>{
   const b=document.createElement("button");
-  b.className="piece";b.dataset.i=i;
-  b.style.gridColumn=`span ${p.span[0]}`;b.style.gridRow=`span ${p.span[1]}`;
-  b.style.animationDelay=(i*55)+"ms";
-  b.setAttribute("aria-label",`${p.t}, ${p.tech}, ${p.w} por ${p.h} cm, ${ST[p.st][0]}`);
-  b.innerHTML=frameHTML(p)+`<div class="cap"><b>${p.t}</b><span>${p.st==="vendido"?"Vendido":euro(p.price)} · ${p.w}×${p.h} cm</span></div>`+(p.st!=="disponible"?`<span class="reddot ${p.st==="reservado"?"res":""}" title="${ST[p.st][0]}"></span>`:"");
+  b.className="piece "+p.cls;b.style.animationDelay=(i*120)+"ms";
+  b.setAttribute("aria-label",`${p.t}. ${p.tech}. ${euro(p.price)}. Ver ficha`);
+  b.innerHTML=`<img src="${p.img}" alt="${p.t}, enmarcado" width="1600" height="1250"><span class="tag"><b>${p.t}</b><span>${p.tech} · ${euro(p.price)}</span></span>`;
   b.addEventListener("click",()=>openRoom(i));
-  salon.appendChild(b);
+  hang.appendChild(b);
 });
-function paintWall(){document.querySelectorAll(".piece").forEach(el=>{if(el.hidden)return;const cv=el.querySelector("canvas"),r=cv.getBoundingClientRect();if(r.width<4)return;if(cv.dataset.sz===r.width+"x"+r.height)return;cv.dataset.sz=r.width+"x"+r.height;paint(cv,PIECES[el.dataset.i],r.width,r.height)})}
-let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(paintWall,180)});
-requestAnimationFrame(()=>requestAnimationFrame(paintWall));
-if(document.fonts)document.fonts.ready.then(paintWall);
+document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Enmarcadas</span>`;
+const contactText = CONTACTO ? CONTACTO : "Muy pronto, aquí mismo.";
+document.getElementById("contactLine").textContent = contactText;
 
-// Libro de contabilidad de la sala
-const cnt=s=>PIECES.filter(p=>p.st===s).length;
-document.getElementById("ledger").innerHTML=`<span><i style="background:#3f8a55"></i>${cnt("disponible")} disponibles</span><span><i style="background:var(--dot-res)"></i>${cnt("reservado")} reservadas</span><span><i style="background:var(--dot)"></i>${cnt("vendido")} vendidas</span><span>${Object.keys(HOUSES).length} casas</span>`;
-
-/* ---------- Filtros ---------- */
-let F="todo",HF=null;
-function applyFilter(){
-  let shown=0;
-  document.querySelectorAll(".piece").forEach(el=>{const p=PIECES[el.dataset.i];
-    let ok=F==="todo"||(F==="disponible"?p.st==="disponible":p.cat===F);
-    if(HF&&p.house!==HF)ok=false;el.hidden=!ok;if(ok)shown++});
-  let e=salon.querySelector(".empty");if(!shown){if(!e){e=document.createElement("p");e.className="empty";salon.appendChild(e)}e.textContent="Ahora mismo no hay obras de este tipo en la sala. Pronto habrá vaciado nuevo."}else if(e)e.remove();
-  const hn=document.getElementById("houseNote");
-  if(HF){hn.hidden=false;hn.innerHTML=`De: ${HOUSES[HF].n} <button id="clearH">quitar</button>`;document.getElementById("clearH").onclick=()=>{HF=null;applyFilter()}}else hn.hidden=true;
-  requestAnimationFrame(paintWall);
-}
-document.querySelectorAll(".chip").forEach(ch=>ch.addEventListener("click",()=>{F=ch.dataset.f;document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===ch));applyFilter()}));
-
-/* ---------- Libro de las casas ---------- */
-const book=document.getElementById("book");
-book.innerHTML=`<div class="row head"><span>Vaciado</span><span>Casa</span><span>Cómo era</span><span>Obras</span><span></span></div>`+
- Object.entries(HOUSES).map(([k,h])=>{const n=PIECES.filter(p=>p.house===k).length;
-  return `<div class="row"><span class="d">${fmtMonth(h.d)}</span><span class="p">${h.n}<small>${h.z}</small></span><span class="k">${h.k}</span><span class="c">${n} ${n===1?"obra":"obras"}</span><button data-h="${k}">Ver en la pared</button></div>`}).join("");
-book.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{HF=b.dataset.h;F="todo";document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f==="todo"));applyFilter();document.getElementById("sala").scrollIntoView()}));
-
-/* ---------- Sala de luz ---------- */
 const room=document.getElementById("room");let cur=-1,lastFocus=null;
-function scaleSVG(p){const k=58/34,a4w=21*k/2,a4h=29.7*k/2,pw=p.w*k/2,ph=p.h*k/2,H=Math.max(a4h,ph)+2;
-  return `<svg width="${Math.ceil(a4w+pw+12)}" height="${Math.ceil(H)}" viewBox="0 0 ${Math.ceil(a4w+pw+12)} ${Math.ceil(H)}" aria-hidden="true"><rect x="1" y="${H-a4h-1}" width="${a4w}" height="${a4h}" fill="none" stroke="#5b4a40" stroke-dasharray="3 2"/><rect x="${a4w+10}" y="${H-ph-1}" width="${pw}" height="${ph}" fill="#4a1519"/></svg>`}
 function openRoom(i){
-  cur=i;const p=PIECES[i],h=HOUSES[p.house],s=ST[p.st];
-  lastFocus=lastFocus||document.activeElement;
+  cur=i;const p=PIECES[i];lastFocus=lastFocus||document.activeElement;
   room.innerHTML=`<button class="nav-btn x" id="rClose" aria-label="Cerrar">✕</button>
   <div class="room-in">
-    <div class="stage" id="stage">${frameHTML(p)}</div>
-    <div>
-      <article class="cartela">
-        <div class="inv"><span>${p.id}</span><span>${p.y}</span></div>
-        <h2 id="rTitle">${p.t}</h2>
-        <p class="art">${p.a}</p>
-        <dl>
-          <div><dt>Técnica</dt><dd>${p.tech}</dd></div>
-          <div><dt>Medidas</dt><dd>${p.w} × ${p.h} cm, sin marco</dd></div>
-          <div><dt>Procedencia</dt><dd>${h.n}, ${h.z}. Vaciado de ${fmtMonth(h.d)}. Estaba en ${p.room}.</dd></div>
-        </dl>
-        <div class="scale">${scaleSVG(p)}<span>Junto a un folio A4<br>(línea discontinua)</span></div>
-        <p class="story">${p.story}</p>
-        <div class="priceline"><span class="price">${p.st==="vendido"?"—":euro(p.price)}</span><span class="status"><i style="background:${s[1]}"></i>${s[0]}</span></div>
-        <div id="inqBox">${p.st==="disponible"?`<div class="actions"><button class="btn" id="bRes">Reservar 72 h</button><button class="btn ghost" style="color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)" id="bAsk">Preguntar</button></div>`:`<div class="actions"><button class="btn" id="bAsk">${p.st==="vendido"?"Avísame si llega algo parecido":"Avísame si se libera"}</button></div>`}</div>
-      </article>
-    </div>
+    <div class="stage"><img src="${p.img}" alt="${p.t}, enmarcado"></div>
+    <div><article class="cartela">
+      <div class="inv"><span>${p.id}</span><span>${p.y}</span></div>
+      <h2 id="rTitle">${p.t}</h2>
+      <p class="art">${p.a}</p>
+      <dl>
+        <div><dt>Técnica</dt><dd>${p.tech}</dd></div>
+        <div><dt>Época</dt><dd>${p.y}</dd></div>
+        <div><dt>Marco</dt><dd>${p.marco}</dd></div>
+        <div><dt>Medidas</dt><dd>A consultar</dd></div>
+      </dl>
+      <p class="story">${p.story}</p>
+      <p class="hand">${p.hand}</p>
+      <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status"><i></i>Disponible</span></div>
+      <button class="btn" id="bRes">Reservar o preguntar</button>
+      <div class="reserve" id="resBox" aria-live="polite"></div>
+    </article></div>
   </div>
   <div class="pn"><button class="nav-btn" id="rPrev" aria-label="Obra anterior">←</button><button class="nav-btn" id="rNext" aria-label="Obra siguiente">→</button></div>`;
   room.hidden=false;document.body.style.overflow="hidden";room.scrollTop=0;
-  // tamaño real proporcional
-  const stage=document.getElementById("stage"),fr=stage.querySelector(".frame"),cv=fr.querySelector("canvas");
-  const maxW=Math.min(stage.clientWidth,760),maxH=Math.min(window.innerHeight*.66,640);
-  const sc=Math.min(maxW/(p.w+(p.mat?p.w*.28:0)+3),maxH/(p.h+(p.mat?p.h*.28:0)+3),20);
-  const aw=Math.round(p.w*sc),ah=Math.round(p.h*sc);
-  cv.style.width=aw+"px";cv.style.height=ah+"px";paint(cv,p,aw,ah);
   document.getElementById("rClose").onclick=closeRoom;
-  document.getElementById("rPrev").onclick=()=>step(-1);
-  document.getElementById("rNext").onclick=()=>step(1);
-  const ask=document.getElementById("bAsk"),res=document.getElementById("bRes");
-  ask&&(ask.onclick=()=>inquiry(p,"pregunta"));res&&(res.onclick=()=>inquiry(p,"reserva"));
+  document.getElementById("rPrev").onclick=()=>openRoom((cur+PIECES.length-1)%PIECES.length);
+  document.getElementById("rNext").onclick=()=>openRoom((cur+1)%PIECES.length);
+  document.getElementById("bRes").onclick=()=>{document.getElementById("resBox").textContent=CONTACTO?`Escríbeme a ${CONTACTO} indicando la referencia ${p.id} y te la aparto 72 horas.`:`Indica la referencia ${p.id} al escribir. El contacto para reservas estará disponible muy pronto.`};
   document.getElementById("rClose").focus();
 }
-function inquiry(p,kind){
-  const box=document.getElementById("inqBox");
-  box.innerHTML=`<form class="inq" id="inqForm" novalidate>
-    <div><label for="iName">Tu nombre</label><input id="iName" autocomplete="name"></div>
-    <div><label for="iMail">Correo o teléfono</label><input id="iMail" required></div>
-    <div><label for="iMsg">${kind==="reserva"?"¿Cómo prefieres verlo?":"Tu pregunta"}</label><textarea id="iMsg">${kind==="reserva"?"Me gustaría reservar «"+p.t+"» y verlo en persona.":"Hola, sobre «"+p.t+"» ("+p.id+"): "}</textarea></div>
-    <button class="btn" type="submit">${kind==="reserva"?"Enviar reserva":"Enviar pregunta"}</button></form>`;
-  document.getElementById("iName").focus();
-  document.getElementById("inqForm").addEventListener("submit",e=>{e.preventDefault();
-    const m=document.getElementById("iMail");if(!m.value.trim()){m.focus();m.style.borderColor="#9a2a22";return}
-    box.innerHTML=`<p class="ok" style="margin-top:16px">${kind==="reserva"?"Reserva anotada. Te escribo hoy mismo.":"Pregunta recibida. Te contesto pronto."}<small>Versión de muestra: en la web publicada este formulario llegará a tu correo.</small></p>`});
-}
-function step(d){let i=cur;do{i=(i+d+PIECES.length)%PIECES.length}while(document.querySelector(`.piece[data-i="${i}"]`).hidden&&i!==cur);openRoom(i)}
 function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(lastFocus)lastFocus.focus();lastFocus=null}
-document.addEventListener("keydown",e=>{if(room.hidden)return;if(e.target.matches("input,textarea"))return;
-  if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)});
-
-/* Boletín */
-document.getElementById("newsForm").addEventListener("submit",e=>{e.preventDefault();const m=document.getElementById("nMail");
-  if(!m.value.trim()){m.focus();m.style.borderColor="#9a2a22";return}
-  document.getElementById("newsOk").innerHTML=`<p class="ok">Apuntado. Serás de los primeros en ver el próximo vaciado.<small>Versión de muestra: aún no guarda los datos.</small></p>`});
+document.addEventListener("keydown",e=>{if(room.hidden)return;
+  if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")openRoom((cur+1)%PIECES.length);if(e.key==="ArrowLeft")openRoom((cur+PIECES.length-1)%PIECES.length)});
 </script>
-
 </body>
 </html>
