@@ -68,8 +68,8 @@ nav.menu a:hover{color:var(--gilt-hi)}
 .piece::before{content:"";position:absolute;left:8%;right:8%;top:-40px;height:110px;background:radial-gradient(ellipse at 50% 0,rgba(255,226,160,.26),transparent 70%);pointer-events:none}
 .piece img{width:100%;height:auto;box-shadow:0 22px 40px rgba(0,0,0,.55),0 3px 6px rgba(0,0,0,.4);transition:transform .35s ease}
 .piece:hover img,.piece:focus-visible img{transform:translateY(-5px)}
-.p1{width:min(30%,380px)}.p2{width:min(27%,340px)}.p3{width:min(29%,360px)}.p4{width:min(24%,300px)}.p5{width:min(44%,560px)}
-@media (max-width:820px){.p1,.p2,.p3,.p4,.p5{width:min(86%,420px)}.eyeline{display:none}}
+.p1{width:min(30%,380px)}.p2{width:min(27%,340px)}.p3{width:min(29%,360px)}.p4{width:min(24%,300px)}.p5{width:min(44%,560px)}.p6,.p7{width:min(31%,400px)}
+@media (max-width:820px){.p1,.p2,.p3,.p4,.p5,.p6,.p7{width:min(86%,420px)}.eyeline{display:none}}
 .tag{display:inline-block;margin-top:18px;background:var(--paper);color:var(--ink);padding:8px 12px 7px;box-shadow:0 6px 14px rgba(0,0,0,.35);text-align:left;max-width:100%}
 .tag b{display:block;font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1rem;line-height:1.15}
 .tag span{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-soft)}
@@ -156,7 +156,7 @@ footer{padding-block:34px;border-top:1px solid rgba(201,162,74,.2);font-size:.82
 <section class="hero gut">
   <div class="wrap">
     <div>
-      <div class="eyebrow">Grabados antiguos y obra sobre papel</div>
+      <div class="eyebrow">Grabados antiguos, estampas y vistas enmarcadas</div>
       <h1>Lo que colgaba <em>en otras casas</em></h1>
     </div>
     <div>
@@ -237,7 +237,17 @@ const PIECES = [
   t:"Mujeres célebres de cuatro cortes",a:"Cromos de la serie 21 · impresor «SMH»",y:"c. 1890–1915",
   tech:"Cromolitografía, cuatro cromos",marco:"Moldura negra apaisada, fondo de papel rojo",
   story:"Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.",
-  hand:"De Bizancio a Londres, pasando por el Madrid de Felipe IV.",price:55}
+  hand:"De Bizancio a Londres, pasando por el Madrid de Felipe IV.",price:55},
+ {id:"PRC-006",img:"obras/venecia-san-marco.jpg",cls:"p6",
+  t:"Venecia, la plaza de San Marcos",a:"Según Canaletto",y:"Siglo XX",
+  tech:"Reproducción sobre tabla con textura de lienzo",marco:"Marco de estilo florentino, lacado en verde con decoración dorada a mano",
+  story:"Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.",
+  hand:"Se venden también en pareja: 80 € las dos.",price:45},
+ {id:"PRC-007",img:"obras/venecia-salute.jpg",cls:"p7",
+  t:"Venecia, entrada al Gran Canal y la Salute",a:"Según Canaletto",y:"Siglo XX",
+  tech:"Reproducción sobre tabla con textura de lienzo",marco:"Marco de estilo florentino, lacado en verde con decoración dorada a mano",
+  story:"Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.",
+  hand:"Se venden también en pareja: 80 € las dos.",price:45}
 ];
 
 const euro=n=>n.toLocaleString("es-ES")+" €";
@@ -250,7 +260,7 @@ PIECES.forEach((p,i)=>{
   b.addEventListener("click",()=>openRoom(i));
   hang.appendChild(b);
 });
-document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Grabados y cromolitografías</span>`;
+document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Grabados, cromos y vistas enmarcadas</span>`;
 const enc=encodeURIComponent;
 const mailto=(subj,body)=>`mailto:${CONTACTO}?subject=${enc(subj)}&body=${enc(body)}`;
 const gmail=(subj,body)=>`https://mail.google.com/mail/?view=cm&fs=1&to=${enc(CONTACTO)}&su=${enc(subj)}&body=${enc(body)}`;
