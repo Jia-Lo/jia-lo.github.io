@@ -581,3 +581,69 @@ html[data-luz="anochecer"] .haz-l{background:linear-gradient(180deg,rgba(255,226
 .hoja-nav{display:flex;justify-content:space-between;gap:16px;margin-top:30px;max-width:720px;font-size:.92rem}
 .hoja-nav a{color:var(--wine)}
 .hoja-nav .pronto{font-family:var(--f-hand);font-size:1.3rem;color:var(--ink-soft)}
+
+/* ===== Sala de pujas ===== */
+.pm{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:start}
+@media (max-width:900px){.pm{grid-template-columns:1fr}}
+.pm-ficha{margin:18px 0 0;display:flex;flex-direction:column;gap:4px}
+.pm-ficha .ref{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;color:var(--ink-soft);max-width:440px}
+.pm-ficha b{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.35rem}
+.pm-txt .puja{max-width:440px}
+.pm-txt .acts{margin-top:16px}
+.sala-pujas{position:relative;border:1px solid #9c7631;box-shadow:0 20px 40px rgba(33,23,21,.3),inset 0 0 0 4px rgba(232,207,134,.15);background:#3a0d13;overflow:hidden}
+.sala-pujas svg{display:block;width:100%;height:auto}
+.sp-et{font-family:var(--f-mono);font-size:10px;letter-spacing:2.5px;fill:#c9b49e}
+.sp-precio{font-family:var(--f-display);font-size:26px;fill:#f1d98f}
+.sp-voz{font-family:var(--f-hand);font-size:19px;fill:#5a1820}
+.sp-p{font-family:var(--f-display);font-style:italic;font-weight:700;font-size:20px;fill:#e8cf86}
+.sp-tag-t{font-family:var(--f-display);font-weight:600;font-size:17px;fill:#211715}
+.fig-num{font-family:var(--f-display);font-weight:600;font-size:15px;fill:#5a1820}
+.fig-cuerpo{animation:respira 4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes respira{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+.fig-brazo{opacity:0;transform:translateY(34px) rotate(-18deg);transform-box:fill-box;transform-origin:20% 100%;transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .2s ease}
+.fig.alza .fig-brazo{opacity:1;transform:none}
+.sp-tag.ve{animation:tagup 1.9s ease forwards}
+@keyframes tagup{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}
+.martillo{transform-box:fill-box;transform-origin:0% 100%}
+.martillo.golpe{animation:golpe .5s ease}
+@keyframes golpe{30%{transform:rotate(-26deg)}60%{transform:rotate(8deg)}}
+.sp-repetir{position:absolute;right:10px;bottom:10px;font:600 .72rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid #e8cf86;background:rgba(26,18,6,.75);color:#e8cf86;border-radius:2px;cursor:pointer}
+.puja-estado{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:12px}
+.puja-estado span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.puja-estado b{font-family:var(--f-display);font-size:1.9rem;font-weight:500;font-variant-numeric:tabular-nums}
+.puja-estado small{flex-basis:100%;font-size:.8rem;color:var(--ink-soft)}
+.tablero{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid rgba(156,118,49,.5);max-height:220px;overflow-y:auto}
+.tablero li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(33,23,21,.1);animation:fade .5s ease both}
+.tab-pal{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#f4ecd8;border:2px solid #9c7631;font-family:var(--f-display);font-weight:600;color:var(--wine)}
+.tab-quien{font-size:.9rem;min-width:0}.tab-quien small{display:block;font-size:.74rem;color:var(--ink-soft)}
+.tablero b{font-family:var(--f-display);font-size:1.15rem;font-variant-numeric:tabular-nums}
+.tablero li.lider .tab-pal{background:#e8cf86}
+.tablero li.lider b{color:var(--wine)}
+.tab-vacio{margin:12px 0 0;font-family:var(--f-hand);font-size:1.3rem;color:#8a6416;line-height:1.15}
+
+/* Formulario y paleta */
+.pujabox .puja-k{margin:0 0 4px}
+.puja-form{display:grid;gap:8px;margin-top:6px}
+.puja-form label{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.puja-form label small{text-transform:none;letter-spacing:0;font-family:var(--f-body)}
+.pj-imp{display:flex;align-items:center;gap:8px}
+.pj-imp input{flex:1;min-width:0;font:600 1.8rem var(--f-display);padding:8px 12px;border:1px solid rgba(29,19,17,.35);background:#fffdf7;color:var(--ink);border-radius:2px}
+.pj-imp span{font-family:var(--f-display);font-size:1.6rem}
+.puja-form input[type=text]{font:1rem var(--f-body);padding:11px 12px;border:1px solid rgba(29,19,17,.35);background:#fffdf7;color:var(--ink);border-radius:2px}
+.pj-err{margin:0;min-height:1.2em;color:var(--sold);font-size:.86rem}
+.puja-form .btn{margin-top:4px}
+.alzada{display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer;width:min(360px,90vw)}
+.alz-escena{position:relative;width:100%;height:min(380px,60vh);overflow:hidden}
+.alz-brazo{position:absolute;left:50%;bottom:0;width:150px;margin-left:-75px;display:flex;flex-direction:column;align-items:center;animation:alza 1.1s cubic-bezier(.25,1.4,.45,1) both;transform-origin:50% 100%}
+@keyframes alza{0%{transform:translateY(105%) rotate(-8deg)}70%{transform:translateY(-3%) rotate(2deg)}100%{transform:none}}
+.alz-paleta{width:150px;height:150px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;
+  background:radial-gradient(circle at 40% 30%,#fffaf0,#f1e6cc 70%,#ddcba3);border:5px solid #9c7631;box-shadow:0 0 0 2px #6d4f1c,0 14px 30px rgba(0,0,0,.5);animation:paleta 2.4s ease-in-out .9s infinite}
+@keyframes paleta{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg)}}
+.alz-paleta b{font-family:var(--f-display);font-size:2.3rem;font-weight:600;color:var(--wine);line-height:1}
+.alz-paleta small{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;color:var(--ink-soft)}
+.alz-sello{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin-bottom:2px;
+  background:radial-gradient(circle at 38% 32%,#c0303d,#8e1622 55%,#5c0b14);box-shadow:0 0 0 3px rgba(142,22,34,.4);font-family:var(--f-display);font-style:italic;font-weight:700;color:rgba(255,210,200,.7);font-size:1.15rem}
+.alz-mango{width:16px;height:70px;background:linear-gradient(90deg,#4f321b,#8a5a32,#4f321b);border-radius:0 0 4px 4px}
+.alz-mano{width:58px;height:46px;margin-top:-56px;border-radius:24px 24px 18px 18px;background:radial-gradient(circle at 40% 35%,#ecc3a1,#d4a580 70%,#b98263);box-shadow:inset -4px -3px 0 rgba(0,0,0,.08)}
+.alz-manga{width:74px;height:160px;margin-top:-4px;background:linear-gradient(90deg,#141b2e,#2c3a5c 50%,#141b2e);border-top:6px solid #f4efe6;border-radius:6px 6px 0 0}
+.alz-txt{margin:0;font-family:var(--f-hand);font-size:1.6rem;color:var(--gilt-hi)}

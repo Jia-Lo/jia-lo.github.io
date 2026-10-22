@@ -126,9 +126,9 @@ document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente
 const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
 if (PJ) {{
   document.getElementById("pujaBox").innerHTML = htmlPuja(P);
-  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${{euro(P.puja.salida)}}`;
+  document.querySelector(".priceline .price").innerHTML = `<small>${{pujaActual(P) == null ? "Salida" : "Puja actual"}}</small> ${{euro(pujaActual(P) == null ? P.puja.salida : pujaActual(P))}}`;
   const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${{PJ.abierta ? "En puja" : "Puja cerrada"}}`;
-  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  document.getElementById("bRes").textContent = PJ.abierta ? `Pujar · desde ${{euro(minimoPuja(P))}}` : "Preguntar por esta obra";
   tickRelojes();
 }}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
@@ -142,6 +142,13 @@ document.getElementById("bShare").onclick = () => compartir(P);
 
 def main():
     obras = json.load(open(ruta("datos.json"), encoding="utf-8"))
+    # Pujas reales recibidas y confirmadas por la galería (pujas.json); la salida es 20 € menos que el precio
+    pujas = json.load(open(ruta("pujas.json"), encoding="utf-8")) if os.path.exists(ruta("pujas.json")) else {}
+    for p in obras:
+        if p.get("puja"):
+            p["puja"]["salida"] = p["puja"].get("salida") or p["price"] - 20
+            p["puja"]["incremento"] = p["puja"].get("incremento", 5)
+            p["puja"]["pujas"] = pujas.get(p["id"], [])
     for p in obras: fotos(p)
 
     # Portada: datos de las obras e índice estático

@@ -72,9 +72,9 @@ document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente
 const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
 if (PJ) {
   document.getElementById("pujaBox").innerHTML = htmlPuja(P);
-  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${euro(P.puja.salida)}`;
+  document.querySelector(".priceline .price").innerHTML = `<small>${pujaActual(P) == null ? "Salida" : "Puja actual"}</small> ${euro(pujaActual(P) == null ? P.puja.salida : pujaActual(P))}`;
   const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${PJ.abierta ? "En puja" : "Puja cerrada"}`;
-  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  document.getElementById("bRes").textContent = PJ.abierta ? `Pujar · desde ${euro(minimoPuja(P))}` : "Preguntar por esta obra";
   tickRelojes();
 }
 ponerLupa(document.querySelector(".obra-grid .stage"), P);

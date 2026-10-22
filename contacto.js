@@ -34,16 +34,17 @@ function openMail(subj, body, ref, modo) {
   pintarCorreo(subj, body, ref, oferta);
 }
 function pintarCorreo(subj, body, ref, oferta) {
+  const puja = oferta === "puja";
   mailDlg.innerHTML = `<div class="mbox"><button class="mclose" id="mClose" type="button" aria-label="Cerrar">✕</button>
-    <h3 id="mTitle">${oferta ? "Su oferta, sellada" : ref ? "Su reserva, sellada" : "Escribir a la galería"}</h3>
-    <p>Reservas y consultas por correo. Respondo lo antes posible.</p>
+    <h3 id="mTitle">${puja ? "Paleta en alto" : oferta ? "Su oferta, sellada" : ref ? "Su reserva, sellada" : "Escribir a la galería"}</h3>
+    <p>${puja ? "Envíe este correo para registrar su puja." : "Reservas y consultas por correo. Respondo lo antes posible."}</p>
     <div class="maddr"><span>${CONTACTO}</span></div>
     <div class="mopts">
       <a class="mopt" href="${gmail(subj, body)}" target="_blank" rel="noopener">Escribir con Gmail</a>
       <a class="mopt alt" href="${mailto(subj, body)}">Abrir mi app de correo</a>
       <button class="mopt alt" id="mCopy" type="button">Copiar dirección</button>
     </div>
-    ${oferta ? `<p class="mref">Escriba el importe en el correo. Su oferta es secreta: solo la conoce la galería.</p>` : ref ? `<p class="mref">Indica la referencia <b>${ref}</b> y te aparto la obra 72 horas.</p>` : ""}</div>`;
+    ${puja ? `<p class="mref">Su puja aparecerá en el tablero con su número de paleta en cuanto la galería la confirme. Su nombre nunca se publica.</p>` : oferta ? `<p class="mref">Escriba el importe en el correo.</p>` : ref ? `<p class="mref">Indica la referencia <b>${ref}</b> y te aparto la obra 72 horas.</p>` : ""}</div>`;
   mailDlg.hidden = false;
   document.getElementById("mClose").onclick = closeMail;
   document.getElementById("mCopy").onclick = async e => {
