@@ -161,7 +161,7 @@ function htmlPuja(p) {
     <p class="puja-k">Puja en sobre cerrado</p>
     <div class="reloj" aria-label="Tiempo hasta el cierre de la puja"><span><b data-u="d">–</b>días</span><span><b data-u="h">–</b>horas</span><span><b data-u="m">–</b>min</span><span><b data-u="s">–</b>seg</span></div>
     <p class="puja-cierre">Cierra el ${p.puja.cierre_txt}, hora de Madrid · Salida <b>${euro(p.puja.salida)}</b></p>
-    <p class="puja-reglas">Las ofertas son secretas: solo las conoce la galería. Al cierre, la obra se adjudica a la oferta más alta igual o superior al precio de salida y se avisa por correo a quienes hayan participado.</p>
+    <p class="puja-reglas">Cada mes sale una pieza a puja y cierra el primer domingo del mes a las 20:00. Las ofertas son secretas: solo las conoce la galería. Al cierre, la obra se adjudica a la oferta más alta igual o superior al precio de salida y se avisa por correo a quienes hayan participado.</p>
   </div>`;
 }
 function ofertar(p) {

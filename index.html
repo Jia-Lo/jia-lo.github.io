@@ -24,7 +24,7 @@
   <div class="wrap">
     <a class="brand" href="/" aria-label="Procedencia, galería. Inicio"><span class="sello-marca" aria-hidden="true">P</span><span class="brand-txt"><b>Procedencia</b><span>Galería · Alcalá de Henares</span></span></a>
     <nav class="menu" aria-label="Secciones">
-      <a href="#sala">La sala</a><a href="#como">Cómo llegan</a><a href="#reservas">Reservas</a>
+      <a href="#sala">La sala</a><a href="/diario/">Diario</a><a href="#como">Cómo llegan</a><a href="#reservas">Reservas</a>
     </nav>
   </div>
 </header>
@@ -72,6 +72,33 @@
       <div class="hoja l" aria-hidden="true"></div><div class="hoja r" aria-hidden="true"></div>
       <div class="cerradura" aria-hidden="true"></div><div class="llave" aria-hidden="true"></div>
     </div>
+    </div>
+  </div>
+</section>
+
+<section id="puja-mes" class="gut puja-mes" hidden>
+  <div class="wrap pm">
+    <div class="pm-txt">
+      <div class="eyebrow">Cada mes, una pieza</div>
+      <h2>La puja <em>del mes</em></h2>
+      <p>Cada mes sale una obra a puja en sobre cerrado. Cierra siempre el primer domingo del mes a las 20:00, hora de Madrid. Las ofertas son secretas y solo las conoce la galería.</p>
+    </div>
+    <button type="button" class="pm-obra" id="pmObra"></button>
+  </div>
+</section>
+
+<section id="diario" class="gut diario-portada">
+  <div class="wrap">
+    <div class="sala-head"><h2>Del <em>diario</em></h2><p><a href="/diario/">Todos los cuadernos →</a></p></div>
+    <div class="hojas">
+<!--DIARIO-->
+<a class="hoja-card" href="/diario/aravaca-y-las-rozas-2026/la-vispera/">
+      <span class="hc-k">Cuaderno de Aravaca y Las Rozas · hoja 1</span>
+      <b>La víspera</b>
+      <span class="hc-f">jueves 22 de octubre de 2026 · Alcalá de Henares</span>
+      <span class="hc-x">Este viernes hay dos vaciados en el noroeste de Madrid: uno en Aravaca y otro en Las Rozas. Son casas que se vacían antes de venderse. Durante unos…</span>
+    </a>
+<!--/DIARIO-->
     </div>
   </div>
 </section>
@@ -300,6 +327,18 @@ addEventListener("touchmove",e=>{const t=e.touches[0];if(t)linterna(t.clientX,t.
 document.getElementById("lucesLink").onclick=()=>{if(oscuro){store.set("luces","on");encender()}else{store.set("luces","off");apagar();scrollTo({top:document.getElementById("sala").offsetTop-60})}};
 const pref=store.get("luces"),h=horaMadrid();
 if(location.hash==="#noche"||pref==="off"||(pref!=="on"&&(h>=22||h<8)))apagar();
+
+/* La puja del mes */
+(function(){
+  const i=PIECES.findIndex(p=>p.puja&&estado(p)==="disponible"),sec=document.getElementById("puja-mes");
+  if(i<0)return;const p=PIECES[i],st=estadoPuja(p);
+  sec.hidden=false;
+  document.getElementById("pmObra").innerHTML=`<img src="/${p.thumb}" alt="" width="${p.tw}" height="${p.th}">
+    <span class="pm-card"><span class="ref"><span>${p.id}</span><span>Salida ${euro(p.puja.salida)}</span></span><b>${p.t}</b>
+    <span class="pm-reloj" data-cierre="${p.puja.cierre}">${st&&st.abierta?"En puja":"Puja cerrada"}</span><span class="pm-ver">Ver la obra y ofertar →</span></span>`;
+  document.getElementById("pmObra").onclick=()=>openRoom(PIECES,i);
+  tickRelojes();
+})();
 
 /* El gabinete reservado */
 const puerta=document.getElementById("puerta"),gabMsg=document.getElementById("gabMsg");

@@ -42,7 +42,7 @@ CABECERA = """<header class="top gut">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Procedencia, galería. Inicio"><span class="sello-marca" aria-hidden="true">P</span><span class="brand-txt"><b>Procedencia</b><span>Galería · Alcalá de Henares</span></span></a>
     <nav class="menu" aria-label="Secciones">
-      <a href="/#sala">La sala</a><a href="/#como">Cómo llegan</a><a href="/#reservas">Reservas</a>
+      <a href="/#sala">La sala</a><a href="/diario/">Diario</a><a href="/#como">Cómo llegan</a><a href="/#reservas">Reservas</a>
     </nav>
   </div>
 </header>"""
@@ -156,6 +156,10 @@ def main():
     lista = "<ul>\n" + "\n".join(
         f'<li><a href="/obra/{p["slug"]}/"><b>{esc(p["t"])}</b><span>{esc(euro(p["price"]))}</span></a></li>' for p in sala) + "\n</ul>"
     idx = re.sub(r"<!--INDICE-->.*?<!--/INDICE-->", lambda m: f"<!--INDICE-->\n{lista}\n<!--/INDICE-->", idx, flags=re.S)
+    # Diario de la galería
+    import diario
+    durls, adelanto = diario.construir(BASE, SITIO, CABECERA, FUENTES, sala)
+    idx = re.sub(r"<!--DIARIO-->.*?<!--/DIARIO-->", lambda m: f"<!--DIARIO-->\n{adelanto}\n<!--/DIARIO-->", idx, flags=re.S)
     open(ruta("index.html"), "w", encoding="utf-8").write(idx)
 
     # Páginas de cada obra
@@ -165,7 +169,7 @@ def main():
 
     # Sitemap y robots
     hoy = date.today().isoformat()
-    urls = [f"{SITIO}/"] + [f"{SITIO}/obra/{p['slug']}/" for p in sala]
+    urls = [f"{SITIO}/"] + [f"{SITIO}/obra/{p['slug']}/" for p in sala] + [SITIO + u for u in durls]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
          "".join(f"  <url><loc>{u}</loc><lastmod>{hoy}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(ruta("sitemap.xml"), "w").write(sm)
