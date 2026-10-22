@@ -101,4 +101,6 @@
       ctx.clearRect(0, 0, W, H);
     },
   };
+  // Si la galería ya estaba cerrada al cargar la página, el sistema se activa ahora
+  if (document.querySelector(".oscuridad")) window.Seguridad.activar(true);
 })();
