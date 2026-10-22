@@ -112,3 +112,69 @@ function cerrarCertificado() {
   certDlg.hidden = true; certDlg.innerHTML = ""; document.documentElement.classList.remove("cert-abierto");
   if (certPrevFocus) certPrevFocus.focus();
 }
+
+/* ---------- Cajón del expediente ---------- */
+function htmlExpediente(p) {
+  const e = p.exp; if (!e) return "";
+  const fig = (src, txt, cls) => src ? `<figure class="exp-fig ${cls || ""}"><img src="/${src}" alt="" loading="lazy"><figcaption>${txt}</figcaption></figure>` : "";
+  const refs = (e.refs || []).length ? `<div class="exp-refs"><h5>En colecciones públicas</h5><ul>${e.refs.map(([t, s, u]) =>
+    `<li><a href="${u}" target="_blank" rel="noopener">${t}</a><span>${s}</span></li>`).join("")}</ul></div>` : "";
+  return `<div class="cajon">
+    <button type="button" class="cajon-frente" aria-expanded="false"><span class="tirador" aria-hidden="true"></span><span class="cajon-rot">Expediente ${p.id}</span><span class="cajon-acc">Abrir el cajón</span></button>
+    <div class="cajon-cuerpo" hidden><div class="cajon-fondo">
+      <p class="exp-k">Archivo de la galería · ${p.id}</p>
+      ${fig(e.detalle, e.detalle_txt, "ancho")}
+      ${fig(e.reverso, e.reverso_txt)}
+      ${(e.notas || []).length ? `<div class="exp-notas"><h5>Notas de la galería</h5><ul>${e.notas.map(n => `<li>${n}</li>`).join("")}</ul></div>` : ""}
+      ${refs}
+    </div></div></div>`;
+}
+function ponerExpediente(raiz) {
+  raiz.querySelectorAll(".cajon").forEach(c => {
+    const b = c.querySelector(".cajon-frente"), cu = c.querySelector(".cajon-cuerpo");
+    b.onclick = () => {
+      const abrir = cu.hidden;
+      if (abrir) { cu.hidden = false; requestAnimationFrame(() => c.classList.add("abierto")); }
+      else { c.classList.remove("abierto"); setTimeout(() => { cu.hidden = true; }, SIN_ANIM ? 0 : 450); }
+      b.setAttribute("aria-expanded", abrir);
+      b.querySelector(".cajon-acc").textContent = abrir ? "Cerrar el cajón" : "Abrir el cajón";
+    };
+  });
+}
+
+/* ---------- Puja en sobre cerrado ---------- */
+function estadoPuja(p) {
+  if (!p.puja) return null;
+  const fin = new Date(p.puja.cierre).getTime(), falta = fin - Date.now();
+  return { abierta: falta > 0, falta };
+}
+function textoFalta(ms, corto) {
+  const s = Math.max(0, Math.floor(ms / 1000)), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), ss = s % 60;
+  if (corto) return d ? `${d} d ${h} h` : h ? `${h} h ${m} min` : `${m} min`;
+  const dos = n => String(n).padStart(2, "0");
+  return { d, h: dos(h), m: dos(m), s: dos(ss) };
+}
+function htmlPuja(p) {
+  const st = estadoPuja(p); if (!st) return "";
+  if (!st.abierta) return `<div class="puja cerrada"><p class="puja-k">Puja en sobre cerrado</p><p class="puja-fin">La puja cerró el ${p.puja.cierre_txt}. Adjudicación en curso.</p></div>`;
+  return `<div class="puja" data-cierre="${p.puja.cierre}">
+    <p class="puja-k">Puja en sobre cerrado</p>
+    <div class="reloj" aria-label="Tiempo hasta el cierre de la puja"><span><b data-u="d">–</b>días</span><span><b data-u="h">–</b>horas</span><span><b data-u="m">–</b>min</span><span><b data-u="s">–</b>seg</span></div>
+    <p class="puja-cierre">Cierra el ${p.puja.cierre_txt}, hora de Madrid · Salida <b>${euro(p.puja.salida)}</b></p>
+    <p class="puja-reglas">Las ofertas son secretas: solo las conoce la galería. Al cierre, la obra se adjudica a la oferta más alta igual o superior al precio de salida y se avisa por correo a quienes hayan participado.</p>
+  </div>`;
+}
+function ofertar(p) {
+  openMail(`Oferta en sobre cerrado · ${p.id} · ${p.t}`,
+    `Mi oferta en sobre cerrado para «${p.t}» (${p.id}):\n\nImporte: ____ €  (salida: ${euro(p.puja.salida)})\nNombre:\nTeléfono (opcional):\n\n${SITIO}/obra/${p.slug}/\n`, p.id, "oferta");
+}
+function tickRelojes() {
+  document.querySelectorAll("[data-cierre]").forEach(el => {
+    const falta = new Date(el.dataset.cierre).getTime() - Date.now();
+    if (el.classList.contains("puja")) {
+      const t = textoFalta(falta);
+      el.querySelectorAll("[data-u]").forEach(b => { b.textContent = t[b.dataset.u]; });
+    } else el.textContent = falta > 0 ? `En puja · cierra en ${textoFalta(falta, true)}` : "Puja cerrada · adjudicación en curso";
+  });
+}
+tickRelojes(); setInterval(tickRelojes, 1000);

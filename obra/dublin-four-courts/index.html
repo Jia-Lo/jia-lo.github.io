@@ -34,7 +34,7 @@
   <nav class="crumb" aria-label="Ruta"><a href="/#sala">La sala</a> / PRC-002</nav>
   <div class="obra-grid">
     <div class="stage"><img src="/obras/four-courts.jpg" alt="Dublín, los Four Courts sobre el Liffey, enmarcado" width="1400" height="1115"></div>
-    <article class="cartela">
+    <div class="obra-col"><article class="cartela">
       <div class="inv"><span>PRC-002</span><span>c. 1840–1850</span></div>
       <h1 style="font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500">Dublín, los Four Courts sobre el Liffey</h1>
       <p class="art">Dibujo de W. H. Bartlett · grabado de Owen</p>
@@ -46,11 +46,12 @@
       </dl>
       <p class="story">Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.</p>
       <p class="hand">La cúpula, el puente y las barcas, a la luz de una tarde gris.</p>
+      <div id="pujaBox"></div>
       <div class="priceline"><span class="price">85 €</span><span class="status disponible"><i></i>Disponible</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
       
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
-    </article>
+    </article><div id="expBox"></div></div>
   </div>
   <section class="otras" aria-labelledby="otrasT"><h2 id="otrasT">Más obras en la sala</h2><ul>
 <li><a href="/obra/montacute-house/"><img src="/obras/mini/montacute.jpg" alt="Montacute House, fachada este" width="720" height="584" loading="lazy"><span>Montacute House, fachada este · 95 €</span></a></li>
@@ -64,11 +65,21 @@
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/luz.js"></script>
 <script>
-const P = {"id": "PRC-002", "slug": "dublin-four-courts", "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "medidas": null, "price": 85, "estado": "disponible", "notas": [[27, 70.5, "«W. H. Bartlett»: el dibujante viajero"], [75, 70.5, "«Owen»: el grabador"], [37, 37, "La cúpula de los Four Courts"], [66, 55, "Puente de tres arcos sobre el Liffey"]], "cadena": ["Grabada al acero por Owen sobre dibujo de W. H. Bartlett, c. 1840–1850", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"]};
+const P = {"id": "PRC-002", "slug": "dublin-four-courts", "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "medidas": null, "price": 85, "estado": "disponible", "notas": [[27, 70.5, "«W. H. Bartlett»: el dibujante viajero"], [75, 70.5, "«Owen»: el grabador"], [37, 37, "La cúpula de los Four Courts"], [66, 55, "Puente de tres arcos sobre el Liffey"]], "cadena": ["Grabada por Owen sobre dibujo de W. H. Bartlett; la misma estampa se publicó en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844)", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "exp": {"reverso": "obras/exp/PRC-002-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la misma etiqueta italiana «Certificato di garanzia» del enmarcador.", "detalle": "obras/exp/PRC-002-detalle.jpg", "detalle_txt": "Firmas de plancha bajo la imagen: «W. H. Bartlett» a la izquierda y «Owen» a la derecha.", "notas": ["La Biblioteca Nacional de Irlanda cataloga esta misma composición de Bartlett grabada por Owen con el título «The Four Law Courts, Dublin».", "Allí figura publicada en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844); este ejemplar procede probablemente de esa obra o de una de sus ediciones.", "Coloreado a mano sobre el grabado."], "refs": [["«The Four Law Courts, Dublin», Bartlett y Owen, en la Biblioteca Nacional de Irlanda", "National Library of Ireland", "https://catalogue.nli.ie/Record/vtls000542648"]]}, "puja": null};
+document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
+const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
+if (PJ) {
+  document.getElementById("pujaBox").innerHTML = htmlPuja(P);
+  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${euro(P.puja.salida)}`;
+  const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${PJ.abierta ? "En puja" : "Puja cerrada"}`;
+  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  tickRelojes();
+}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
 document.getElementById("bCert").onclick = () => abrirCertificado(P);
-document.getElementById("bRes").onclick = () => reservar(P);
+document.getElementById("bRes").onclick = () => PJ && PJ.abierta ? ofertar(P) : reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
 </body>

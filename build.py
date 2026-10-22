@@ -64,7 +64,7 @@ def pagina_obra(p, todas):
     otras = "\n".join(
         f'<li><a href="/obra/{o["slug"]}/"><img src="/{o["thumb"]}" alt="{esc(o["t"])}" width="{o["tw"]}" height="{o["th"]}" loading="lazy"><span>{esc(o["t"])} · {esc(euro(o["price"]))}</span></a></li>'
         for o in todas if o["id"] != p["id"])
-    datos_js = json.dumps({k: p.get(k) for k in ("id", "slug", "t", "a", "y", "tech", "marco", "medidas", "price", "estado", "notas", "cadena")}, ensure_ascii=False)
+    datos_js = json.dumps({k: p.get(k) for k in ("id", "slug", "t", "a", "y", "tech", "marco", "medidas", "price", "estado", "notas", "cadena", "exp", "puja")}, ensure_ascii=False)
     return f"""<!doctype html>
 <html lang="es">
 <head>
@@ -93,7 +93,7 @@ def pagina_obra(p, todas):
   <nav class="crumb" aria-label="Ruta"><a href="/#sala">La sala</a> / {esc(p['id'])}</nav>
   <div class="obra-grid">
     <div class="stage"><img src="/{p['img']}" alt="{esc(p['t'])}, enmarcado" width="{p['w']}" height="{p['h']}"></div>
-    <article class="cartela">
+    <div class="obra-col"><article class="cartela">
       <div class="inv"><span>{esc(p['id'])}</span><span>{esc(p['y'])}</span></div>
       <h1 style="font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500">{esc(p['t'])}</h1>
       <p class="art">{esc(p['a'])}</p>
@@ -105,11 +105,12 @@ def pagina_obra(p, todas):
       </dl>
       <p class="story">{esc(p['story'])}</p>
       <p class="hand">{esc(p['hand'])}</p>
+      <div id="pujaBox"></div>
       <div class="priceline"><span class="price">{esc(euro(p['price']))}</span><span class="status {esc(p.get('estado','disponible'))}"><i></i>{ {'disponible':'Disponible','reservado':'Reservada','vendido':'Vendida'}[p.get('estado','disponible')] }</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
       {'<p class="hand" style="color:var(--sold)">Ya cuelga en otra casa' + (' · vendida en ' + esc(p['vendida']) if p.get('vendida') else '') + '</p>' if p.get('estado') == 'vendido' else ''}
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
-    </article>
+    </article><div id="expBox"></div></div>
   </div>
   <section class="otras" aria-labelledby="otrasT"><h2 id="otrasT">Más obras en la sala</h2><ul>
 {otras}
@@ -118,11 +119,21 @@ def pagina_obra(p, todas):
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/luz.js"></script>
 <script>
 const P = {datos_js};
+document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
+const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
+if (PJ) {{
+  document.getElementById("pujaBox").innerHTML = htmlPuja(P);
+  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${{euro(P.puja.salida)}}`;
+  const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${{PJ.abierta ? "En puja" : "Puja cerrada"}}`;
+  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  tickRelojes();
+}}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
 document.getElementById("bCert").onclick = () => abrirCertificado(P);
-document.getElementById("bRes").onclick = () => reservar(P);
+document.getElementById("bRes").onclick = () => PJ && PJ.abierta ? ofertar(P) : reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
 </body>
@@ -135,7 +146,7 @@ def main():
 
     # Portada: datos de las obras e índice estático
     idx = open(ruta("index.html"), encoding="utf-8").read()
-    campos = ("id", "slug", "img", "thumb", "tw", "th", "estado", "modo", "vendida", "notas", "cadena", "gabinete", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
+    campos = ("id", "slug", "img", "thumb", "tw", "th", "estado", "modo", "vendida", "notas", "cadena", "gabinete", "exp", "puja", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
     sala = [p for p in obras if not p.get("gabinete")]
     gabinete = [p for p in obras if p.get("gabinete")]
     data = json.dumps([{k: p[k] for k in campos if k in p} for p in sala], ensure_ascii=False)

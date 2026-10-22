@@ -34,7 +34,7 @@
   <nav class="crumb" aria-label="Ruta"><a href="/#sala">La sala</a> / PRC-001</nav>
   <div class="obra-grid">
     <div class="stage"><img src="/obras/montacute.jpg" alt="Montacute House, fachada este, enmarcado" width="1400" height="1135"></div>
-    <article class="cartela">
+    <div class="obra-col"><article class="cartela">
       <div class="inv"><span>PRC-001</span><span>Londres, década de 1820</span></div>
       <h1 style="font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500">Montacute House, fachada este</h1>
       <p class="art">Dibujo de J. P. Neale · grabado de W. Wallis</p>
@@ -46,11 +46,12 @@
       </dl>
       <p class="story">Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.</p>
       <p class="hand">Una casa señorial que acaba saliendo de otra casa.</p>
+      <div id="pujaBox"></div>
       <div class="priceline"><span class="price">95 €</span><span class="status disponible"><i></i>Disponible</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
       
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
-    </article>
+    </article><div id="expBox"></div></div>
   </div>
   <section class="otras" aria-labelledby="otrasT"><h2 id="otrasT">Más obras en la sala</h2><ul>
 <li><a href="/obra/dublin-four-courts/"><img src="/obras/mini/four-courts.jpg" alt="Dublín, los Four Courts sobre el Liffey" width="720" height="573" loading="lazy"><span>Dublín, los Four Courts sobre el Liffey · 85 €</span></a></li>
@@ -64,11 +65,21 @@
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/luz.js"></script>
 <script>
-const P = {"id": "PRC-001", "slug": "montacute-house", "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "medidas": null, "price": 95, "estado": "disponible", "notas": [[34, 64, "«Drawn by J. P. Neale»: el dibujante"], [50, 66.5, "Montacute House, fachada este, Somersetshire"], [66, 64, "«Engraved by W. Wallis»: el grabador"], [50, 70.5, "Pie de imprenta: Londres, edición de Neale"]], "cadena": ["Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"]};
+const P = {"id": "PRC-001", "slug": "montacute-house", "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "medidas": null, "price": 95, "estado": "disponible", "notas": [[34, 64, "«Drawn by J. P. Neale»: el dibujante"], [50, 66.5, "Montacute House, fachada este, Somersetshire"], [66, 64, "«Engraved by W. Wallis»: el grabador"], [50, 70.5, "Pie de imprenta: Londres, edición de Neale"]], "cadena": ["Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "exp": {"reverso": "obras/exp/PRC-001-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la etiqueta italiana «Certificato di garanzia»: estampa original del siglo XIX, coloreada a mano, procedente de libros de la época.", "detalle": "obras/exp/PRC-001-detalle.jpg", "detalle_txt": "Pie de la lámina: «Drawn by J. P. Neale», «Engraved by W. Wallis», el título y el pie de imprenta de Londres, con Sherwood & Co. en Paternoster Row.", "notas": ["El pie de imprenta con Sherwood & Co. corresponde a la segunda serie de las vistas de Neale, publicada entre 1824 y 1829.", "Lámina con su margen original y el título grabado en la plancha.", "Coloreado a mano sobre el grabado."], "refs": [["Segunda serie de «Views of the Seats», 1824–1829, digitalizada (Getty Research Institute y Universidad de Michigan)", "HathiTrust", "https://catalog.hathitrust.org/Record/000153641"], ["Primera serie de la obra de Neale, 1818–1823, en el Yale Center for British Art", "Yale Center for British Art", "https://collections.britishart.yale.edu/catalog/orbis:3442767"]]}, "puja": null};
+document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
+const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
+if (PJ) {
+  document.getElementById("pujaBox").innerHTML = htmlPuja(P);
+  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${euro(P.puja.salida)}`;
+  const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${PJ.abierta ? "En puja" : "Puja cerrada"}`;
+  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  tickRelojes();
+}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
 document.getElementById("bCert").onclick = () => abrirCertificado(P);
-document.getElementById("bRes").onclick = () => reservar(P);
+document.getElementById("bRes").onclick = () => PJ && PJ.abierta ? ofertar(P) : reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
 </body>

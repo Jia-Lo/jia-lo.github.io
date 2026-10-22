@@ -34,7 +34,7 @@
   <nav class="crumb" aria-label="Ruta"><a href="/#sala">La sala</a> / PRC-004</nav>
   <div class="obra-grid">
     <div class="stage"><img src="/obras/cromos-francia.jpg" alt="Cuatro favoritas de la corte de Francia, enmarcado" width="1184" height="1400"></div>
-    <article class="cartela">
+    <div class="obra-col"><article class="cartela">
       <div class="inv"><span>PRC-004</span><span>c. 1890–1915</span></div>
       <h1 style="font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500">Cuatro favoritas de la corte de Francia</h1>
       <p class="art">Cromos de la serie 21 · impresor «SMH»</p>
@@ -46,11 +46,12 @@
       </dl>
       <p class="story">Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d&#x27;Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.</p>
       <p class="hand">Cuatro siglos de secretos de palacio en un solo marco.</p>
+      <div id="pujaBox"></div>
       <div class="priceline"><span class="price">55 €</span><span class="status disponible"><i></i>Disponible</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
       
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
-    </article>
+    </article><div id="expBox"></div></div>
   </div>
   <section class="otras" aria-labelledby="otrasT"><h2 id="otrasT">Más obras en la sala</h2><ul>
 <li><a href="/obra/montacute-house/"><img src="/obras/mini/montacute.jpg" alt="Montacute House, fachada este" width="720" height="584" loading="lazy"><span>Montacute House, fachada este · 95 €</span></a></li>
@@ -64,11 +65,21 @@
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/luz.js"></script>
 <script>
-const P = {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "medidas": null, "price": 55, "estado": "disponible", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"]};
+const P = {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "medidas": null, "price": 55, "estado": "disponible", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "exp": {"reverso": "obras/exp/PRC-004-reverso.jpg", "reverso_txt": "Reverso de cartón con cinta de papel y una etiqueta de cartulina antigua.", "detalle": "obras/exp/PRC-004-detalle.jpg", "detalle_txt": "Cromo nº 35 de la serie 21, sección Francia: la duquesa de Étampes. Abajo a la derecha, la marca del impresor «SMH».", "notas": ["Los cuatro cromos pertenecen a la sección Francia de la serie 21: números 35, 46, 49 y 65.", "Cada cromo lleva la marca de impresor «SMH».", "Cromolitografía: impresión en color por planchas sucesivas, típica de los cromos de finales del XIX y principios del XX."], "refs": []}, "puja": null};
+document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
+const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
+if (PJ) {
+  document.getElementById("pujaBox").innerHTML = htmlPuja(P);
+  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${euro(P.puja.salida)}`;
+  const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${PJ.abierta ? "En puja" : "Puja cerrada"}`;
+  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  tickRelojes();
+}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
 document.getElementById("bCert").onclick = () => abrirCertificado(P);
-document.getElementById("bRes").onclick = () => reservar(P);
+document.getElementById("bRes").onclick = () => PJ && PJ.abierta ? ofertar(P) : reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
 </body>

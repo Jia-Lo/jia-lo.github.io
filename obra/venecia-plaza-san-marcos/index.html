@@ -34,7 +34,7 @@
   <nav class="crumb" aria-label="Ruta"><a href="/#sala">La sala</a> / PRC-006</nav>
   <div class="obra-grid">
     <div class="stage"><img src="/obras/venecia-san-marco.jpg" alt="Venecia, la plaza de San Marcos, enmarcado" width="1400" height="1130"></div>
-    <article class="cartela">
+    <div class="obra-col"><article class="cartela">
       <div class="inv"><span>PRC-006</span><span>Siglo XX</span></div>
       <h1 style="font-family:var(--f-display);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.04;margin:14px 0 4px;font-weight:500">Venecia, la plaza de San Marcos</h1>
       <p class="art">Según Canaletto</p>
@@ -46,11 +46,12 @@
       </dl>
       <p class="story">Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.</p>
       <p class="hand">Se venden también en pareja: 80 € las dos.</p>
+      <div id="pujaBox"></div>
       <div class="priceline"><span class="price">45 €</span><span class="status disponible"><i></i>Disponible</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
       
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
-    </article>
+    </article><div id="expBox"></div></div>
   </div>
   <section class="otras" aria-labelledby="otrasT"><h2 id="otrasT">Más obras en la sala</h2><ul>
 <li><a href="/obra/montacute-house/"><img src="/obras/mini/montacute.jpg" alt="Montacute House, fachada este" width="720" height="584" loading="lazy"><span>Montacute House, fachada este · 95 €</span></a></li>
@@ -64,11 +65,21 @@
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/luz.js"></script>
 <script>
-const P = {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "medidas": null, "price": 45, "estado": "disponible", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"]};
+const P = {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "medidas": null, "price": 45, "estado": "disponible", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "exp": {"reverso": "obras/exp/PRC-006-reverso.jpg", "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.", "detalle": "", "detalle_txt": "", "notas": ["Reproducción impresa del siglo XX de la vista de Canaletto de la plaza de San Marcos: superficie lisa, sin relieve de pincel.", "El valor de la pieza está en el marco florentino lacado y decorado a mano, que hace pareja con la vista de la Salute."], "refs": []}, "puja": null};
+document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
+const PJ = (P.estado || "disponible") === "disponible" ? estadoPuja(P) : null;
+if (PJ) {
+  document.getElementById("pujaBox").innerHTML = htmlPuja(P);
+  document.querySelector(".priceline .price").innerHTML = `<small>Salida</small> ${euro(P.puja.salida)}`;
+  const st = document.querySelector(".priceline .status"); st.className = "status en-puja"; st.innerHTML = `<i></i>${PJ.abierta ? "En puja" : "Puja cerrada"}`;
+  document.getElementById("bRes").textContent = PJ.abierta ? "Enviar oferta en sobre cerrado" : "Preguntar por esta obra";
+  tickRelojes();
+}
 ponerLupa(document.querySelector(".obra-grid .stage"), P);
 document.getElementById("bCert").onclick = () => abrirCertificado(P);
-document.getElementById("bRes").onclick = () => reservar(P);
+document.getElementById("bRes").onclick = () => PJ && PJ.abierta ? ofertar(P) : reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
 </body>

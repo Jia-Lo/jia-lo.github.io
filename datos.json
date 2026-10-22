@@ -42,7 +42,30 @@
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-001-reverso.jpg",
+   "reverso_txt": "Reverso con papel de flor de lis y la etiqueta italiana «Certificato di garanzia»: estampa original del siglo XIX, coloreada a mano, procedente de libros de la época.",
+   "detalle": "obras/exp/PRC-001-detalle.jpg",
+   "detalle_txt": "Pie de la lámina: «Drawn by J. P. Neale», «Engraved by W. Wallis», el título y el pie de imprenta de Londres, con Sherwood & Co. en Paternoster Row.",
+   "notas": [
+    "El pie de imprenta con Sherwood & Co. corresponde a la segunda serie de las vistas de Neale, publicada entre 1824 y 1829.",
+    "Lámina con su margen original y el título grabado en la plancha.",
+    "Coloreado a mano sobre el grabado."
+   ],
+   "refs": [
+    [
+     "Segunda serie de «Views of the Seats», 1824–1829, digitalizada (Getty Research Institute y Universidad de Michigan)",
+     "HathiTrust",
+     "https://catalog.hathitrust.org/Record/000153641"
+    ],
+    [
+     "Primera serie de la obra de Neale, 1818–1823, en el Yale Center for British Art",
+     "Yale Center for British Art",
+     "https://collections.britishart.yale.edu/catalog/orbis:3442767"
+    ]
+   ]
+  }
  },
  {
   "id": "PRC-002",
@@ -81,23 +104,41 @@
    ]
   ],
   "cadena": [
-   "Grabada al acero por Owen sobre dibujo de W. H. Bartlett, c. 1840–1850",
+   "Grabada por Owen sobre dibujo de W. H. Bartlett; la misma estampa se publicó en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844)",
    "Coloreada a mano",
    "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX",
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-002-reverso.jpg",
+   "reverso_txt": "Reverso con papel de flor de lis y la misma etiqueta italiana «Certificato di garanzia» del enmarcador.",
+   "detalle": "obras/exp/PRC-002-detalle.jpg",
+   "detalle_txt": "Firmas de plancha bajo la imagen: «W. H. Bartlett» a la izquierda y «Owen» a la derecha.",
+   "notas": [
+    "La Biblioteca Nacional de Irlanda cataloga esta misma composición de Bartlett grabada por Owen con el título «The Four Law Courts, Dublin».",
+    "Allí figura publicada en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844); este ejemplar procede probablemente de esa obra o de una de sus ediciones.",
+    "Coloreado a mano sobre el grabado."
+   ],
+   "refs": [
+    [
+     "«The Four Law Courts, Dublin», Bartlett y Owen, en la Biblioteca Nacional de Irlanda",
+     "National Library of Ireland",
+     "https://catalogue.nli.ie/Record/vtls000542648"
+    ]
+   ]
+  }
  },
  {
   "id": "PRC-003",
   "img": "obras/kininger.jpg",
   "t": "Escena de interior con dama, niño y caballero",
-  "a": "Dibujo de V. G. Kininger · grabado en Viena",
+  "a": "Dibujo de V. G. Kininger · grabado de Clemens Kohl",
   "y": "c. 1790–1810",
   "tech": "Grabado calcográfico, ilustración de libro",
   "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano",
-  "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.",
+  "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851) y grabada por Clemens Kohl en Viena. Bajo la imagen se leen las firmas de plancha: «V. Kininger del.» señala al dibujante y «Cl. Kohl sc. W.», al grabador y la ciudad. Una escena teatral, casi de novela, en un salón gótico.",
   "hand": "Más de dos siglos y la escena sigue en vilo.",
   "price": 70,
   "slug": "kininger-escena-de-interior",
@@ -112,7 +153,7 @@
    [
     64,
     63.5,
-    "«sc. W.»: grabado en Viena"
+    "«Cl. Kohl sc. W.»: grabado por Clemens Kohl en Viena"
    ],
    [
     50,
@@ -121,12 +162,35 @@
    ]
   ],
   "cadena": [
-   "Dibujada por V. G. Kininger y grabada en Viena como ilustración de libro, c. 1790–1810",
+   "Dibujada por V. G. Kininger y grabada por Clemens Kohl en Viena como ilustración de libro, c. 1790–1810",
    "Montada sobre papel hecho a mano y enmarcada",
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-003-reverso.jpg",
+   "reverso_txt": "Reverso cerrado con papel kraft y cinta, con alcayata triangular de latón.",
+   "detalle": "obras/exp/PRC-003-detalle.jpg",
+   "detalle_txt": "Firmas de plancha: «V. Kininger del.» (lo dibujó Kininger) y «Cl. Kohl sc. W.» (lo grabó Clemens Kohl en Viena).",
+   "notas": [
+    "Vincenz Georg Kininger (1767–1851) dibujó numerosas ilustraciones de libro grabadas en Viena.",
+    "El MAK de Viena conserva ilustraciones de libro con la misma pareja de firmas: «V. Kininger del.» y «Cl. Kohl sc.»",
+    "Estampa montada sobre papel hecho a mano, con la huella de la plancha visible."
+   ],
+   "refs": [
+    [
+     "Ilustración de libro de Kininger grabada por Clemens Kohl, en la colección del MAK",
+     "MAK · Museum für angewandte Kunst, Viena",
+     "https://sammlung.mak.at/en/collect/buchillustration_210703"
+    ]
+   ]
+  },
+  "puja": {
+   "cierre": "2026-11-01T20:00:00+01:00",
+   "cierre_txt": "domingo 1 de noviembre, a las 20:00",
+   "salida": 60
+  }
  },
  {
   "id": "PRC-004",
@@ -165,7 +229,19 @@
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-004-reverso.jpg",
+   "reverso_txt": "Reverso de cartón con cinta de papel y una etiqueta de cartulina antigua.",
+   "detalle": "obras/exp/PRC-004-detalle.jpg",
+   "detalle_txt": "Cromo nº 35 de la serie 21, sección Francia: la duquesa de Étampes. Abajo a la derecha, la marca del impresor «SMH».",
+   "notas": [
+    "Los cuatro cromos pertenecen a la sección Francia de la serie 21: números 35, 46, 49 y 65.",
+    "Cada cromo lleva la marca de impresor «SMH».",
+    "Cromolitografía: impresión en color por planchas sucesivas, típica de los cromos de finales del XIX y principios del XX."
+   ],
+   "refs": []
+  }
  },
  {
   "id": "PRC-005",
@@ -188,7 +264,19 @@
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-005-reverso.jpg",
+   "reverso_txt": "Reverso de cartón con cinta de papel y alcayata lateral.",
+   "detalle": "obras/exp/PRC-005-detalle.jpg",
+   "detalle_txt": "Cromo nº 57 de la serie 21, sección España: María Calderón, «la Calderona», amiga de Felipe IV.",
+   "notas": [
+    "Cuatro cromos de la serie 21, uno de cada sección: Oriente (nº 20), España (nº 57), Francia (nº 46) e Inglaterra (nº 73).",
+    "La marquesa de Verneuil (Francia, nº 46) aparece también en el otro marco de cromos.",
+    "El cromo de Inglaterra llama «Emma Leona» a Emma Lyon, más tarde lady Hamilton."
+   ],
+   "refs": []
+  }
  },
  {
   "id": "PRC-006",
@@ -211,7 +299,18 @@
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-006-reverso.jpg",
+   "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.",
+   "detalle": "",
+   "detalle_txt": "",
+   "notas": [
+    "Reproducción impresa del siglo XX de la vista de Canaletto de la plaza de San Marcos: superficie lisa, sin relieve de pincel.",
+    "El valor de la pieza está en el marco florentino lacado y decorado a mano, que hace pareja con la vista de la Salute."
+   ],
+   "refs": []
+  }
  },
  {
   "id": "PRC-007",
@@ -234,6 +333,17 @@
    "Colección particular, España"
   ],
   "vendida": "",
-  "gabinete": false
+  "gabinete": false,
+  "exp": {
+   "reverso": "obras/exp/PRC-007-reverso.jpg",
+   "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.",
+   "detalle": "",
+   "detalle_txt": "",
+   "notas": [
+    "Reproducción impresa del siglo XX de la vista de Canaletto de la entrada al Gran Canal con Santa María de la Salute.",
+    "Mismo marco florentino que la vista de San Marcos, con la que forma pareja."
+   ],
+   "refs": []
+  }
  }
 ]

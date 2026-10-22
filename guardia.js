@@ -9,6 +9,7 @@
     <defs>
       <radialGradient id="gFoco" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fffbe8"/><stop offset=".35" stop-color="#ffe9a8" stop-opacity=".9"/><stop offset="1" stop-color="#ffe2a0" stop-opacity="0"/></radialGradient>
       <linearGradient id="gHaz" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#fff3c4" stop-opacity=".75"/><stop offset=".55" stop-color="#ffe7a6" stop-opacity=".22"/><stop offset="1" stop-color="#ffe7a6" stop-opacity="0"/></linearGradient>
+      <radialGradient id="gPool" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset=".6" stop-color="#ffe7a6" stop-opacity=".22"/><stop offset="1" stop-color="#ffe7a6" stop-opacity="0"/></radialGradient>
       <linearGradient id="gLat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa3ad"/><stop offset=".5" stop-color="#e6ebef"/><stop offset="1" stop-color="#6c747d"/></linearGradient>
     </defs>
     <ellipse cx="100" cy="292" rx="58" ry="7" fill="rgba(33,23,21,.22)"/>
@@ -46,7 +47,7 @@
     <path d="M96 44 l4 -5 l4 5 l-1.5 7 h-5 z" fill="${ORO}"/>
     <!-- brazo con la linterna (gira hacia quien mira) -->
     <g class="g-linterna">
-      <polygon class="g-haz" points="10,147 10,163 -240,230 -240,80" fill="url(#gHaz)"/>
+      <polygon class="g-haz" points="2,147 2,159 -238,183 -238,123" fill="url(#gHaz)"/><circle class="g-pool" cx="-238" cy="153" r="34" fill="url(#gPool)"/>
       <path d="M62 126 Q44 138 30 150" stroke="${NAVY}" stroke-width="17" stroke-linecap="round" fill="none"/>
       <circle cx="28" cy="153" r="8.5" fill="${PIEL}"/>
       <rect x="6" y="147" width="26" height="12" rx="3" fill="url(#gLat)"/>
@@ -65,27 +66,45 @@
   <span class="g-bocadillo" aria-hidden="true">Shhh…</span>`;
 
   const svg = sitio.querySelector("svg"), brazo = sitio.querySelector(".g-linterna");
-  // Hombro en coordenadas del dibujo; la linterna apunta a la izquierda (180°) en reposo
-  const HX = 62, HY = 126;
-  let destino = 0, actual = 0, raf = 0;
-  function apuntar(cx, cy) {
+  const haz = sitio.querySelector(".g-haz"), charco = sitio.querySelector(".g-pool");
+  // Hombro y foco de la linterna en coordenadas del dibujo; el haz se dibuja hacia la izquierda (180°)
+  const S = { x: 62, y: 126 }, L0 = { x: 2, y: 153 };
+  let meta = null, ang = 0, largo = 240, raf = 0, cursor = null;
+  function focoGirado(t) {
+    const r = t * Math.PI / 180, dx = L0.x - S.x, dy = L0.y - S.y;
+    return { x: S.x + dx * Math.cos(r) - dy * Math.sin(r), y: S.y + dx * Math.sin(r) + dy * Math.cos(r) };
+  }
+  function calcular() {
+    if (!cursor) return;
     const r = svg.getBoundingClientRect(); if (!r.width) return;
-    const k = r.width / 200, sx = r.left + HX * k, sy = r.top + HY * k;
-    let ang = Math.atan2(cy - sy, cx - sx) * 180 / Math.PI;      // ángulo hacia el puntero
-    let giro = ang - 180; if (giro < -180) giro += 360;            // respecto a apuntar a la izquierda
-    if (giro > 180) giro -= 360;
-    destino = Math.max(-38, Math.min(48, giro));
+    const k = r.width / 200, C = { x: (cursor.x - r.left) / k, y: (cursor.y - r.top) / k };
+    // Ángulo tal que la línea que sale del foco pase exactamente por el cursor
+    let t = ang;
+    for (let i = 0; i < 4; i++) { const L = focoGirado(t); t = Math.atan2(C.y - L.y, C.x - L.x) * 180 / Math.PI - 180; }
+    while (t - ang > 180) t -= 360; while (t - ang < -180) t += 360;
+    const L = focoGirado(t);
+    meta = { t, largo: Math.min(1600, Math.max(30, Math.hypot(C.x - L.x, C.y - L.y))) };
     if (!raf) raf = requestAnimationFrame(paso);
   }
+  function pintar() {
+    const w = 7 + largo * 0.1, x = L0.x - largo;
+    haz.setAttribute("points", `${L0.x},${L0.y - 6} ${L0.x},${L0.y + 6} ${x},${L0.y + w} ${x},${L0.y - w}`);
+    charco.setAttribute("cx", x); charco.setAttribute("r", (w * 1.25).toFixed(1));
+    brazo.style.transform = `rotate(${ang.toFixed(2)}deg)`;
+  }
   function paso() {
-    actual += (destino - actual) * 0.12;
-    brazo.style.transform = `rotate(${actual.toFixed(2)}deg)`;
-    raf = Math.abs(destino - actual) > 0.2 ? requestAnimationFrame(paso) : 0;
+    ang += (meta.t - ang) * 0.35; largo += (meta.largo - largo) * 0.35;
+    pintar();
+    raf = (Math.abs(meta.t - ang) > 0.05 || Math.abs(meta.largo - largo) > 0.5) ? requestAnimationFrame(paso) : 0;
   }
+  const seguir = (x, y) => { cursor = { x, y }; calcular(); };
   if (!quieto) {
-    addEventListener("pointermove", e => apuntar(e.clientX, e.clientY), { passive: true });
-    addEventListener("touchstart", e => { const t = e.touches[0]; if (t) apuntar(t.clientX, t.clientY); }, { passive: true });
+    addEventListener("pointermove", e => seguir(e.clientX, e.clientY), { passive: true });
+    addEventListener("touchstart", e => { const t = e.touches[0]; if (t) seguir(t.clientX, t.clientY); }, { passive: true });
+    addEventListener("touchmove", e => { const t = e.touches[0]; if (t) seguir(t.clientX, t.clientY); }, { passive: true });
+    addEventListener("scroll", calcular, { passive: true });
   }
+  pintar();
 
   // Pide silencio cada cierto tiempo
   let silencioT;

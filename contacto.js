@@ -17,24 +17,25 @@ let mailPrevFocus = null;
 
 const SIN_ANIM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let sobreTimer;
-function openMail(subj, body, ref) {
+function openMail(subj, body, ref, modo) {
+  const oferta = modo === "oferta";
   mailPrevFocus = document.activeElement;
   if (ref && !SIN_ANIM) {
     // Sobre que se cierra y se sella con lacre antes de escribir
     mailDlg.innerHTML = `<div class="sobre" aria-label="Preparando la reserva de ${ref}">
-      <div class="sobre-cuerpo"><div class="carta"><span>Reserva</span><b>${ref}</b></div><div class="sobre-frente"></div><div class="solapa"></div><div class="sello"><span>P</span></div></div>
-      <p class="sobre-txt">Sellando su reserva…</p></div>`;
+      <div class="sobre-cuerpo"><div class="carta"><span>${oferta ? "Oferta" : "Reserva"}</span><b>${ref}</b></div><div class="sobre-frente"></div><div class="solapa"></div><div class="sello"><span>P</span></div></div>
+      <p class="sobre-txt">${oferta ? "Sellando su oferta…" : "Sellando su reserva…"}</p></div>`;
     mailDlg.hidden = false;
-    const seguir = () => { clearTimeout(sobreTimer); mailDlg.onclick = null; pintarCorreo(subj, body, ref); };
+    const seguir = () => { clearTimeout(sobreTimer); mailDlg.onclick = null; pintarCorreo(subj, body, ref, oferta); };
     mailDlg.querySelector(".sobre").onclick = seguir;
     sobreTimer = setTimeout(seguir, 2300);
     return;
   }
-  pintarCorreo(subj, body, ref);
+  pintarCorreo(subj, body, ref, oferta);
 }
-function pintarCorreo(subj, body, ref) {
+function pintarCorreo(subj, body, ref, oferta) {
   mailDlg.innerHTML = `<div class="mbox"><button class="mclose" id="mClose" type="button" aria-label="Cerrar">✕</button>
-    <h3 id="mTitle">${ref ? "Su reserva, sellada" : "Escribir a la galería"}</h3>
+    <h3 id="mTitle">${oferta ? "Su oferta, sellada" : ref ? "Su reserva, sellada" : "Escribir a la galería"}</h3>
     <p>Reservas y consultas por correo. Respondo lo antes posible.</p>
     <div class="maddr"><span>${CONTACTO}</span></div>
     <div class="mopts">
@@ -42,7 +43,7 @@ function pintarCorreo(subj, body, ref) {
       <a class="mopt alt" href="${mailto(subj, body)}">Abrir mi app de correo</a>
       <button class="mopt alt" id="mCopy" type="button">Copiar dirección</button>
     </div>
-    ${ref ? `<p class="mref">Indica la referencia <b>${ref}</b> y te aparto la obra 72 horas.</p>` : ""}</div>`;
+    ${oferta ? `<p class="mref">Escriba el importe en el correo. Su oferta es secreta: solo la conoce la galería.</p>` : ref ? `<p class="mref">Indica la referencia <b>${ref}</b> y te aparto la obra 72 horas.</p>` : ""}</div>`;
   mailDlg.hidden = false;
   document.getElementById("mClose").onclick = closeMail;
   document.getElementById("mCopy").onclick = async e => {
