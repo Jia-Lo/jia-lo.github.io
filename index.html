@@ -65,10 +65,13 @@
       </form>
       <p class="gab-msg" id="gabMsg" aria-live="polite"></p>
     </div>
+    <div class="gab-escena">
+    <div class="guardia" id="guardia"></div>
     <div class="puerta" id="puerta">
       <div class="interior" id="gabInterior"><b>El gabinete</b><p>Cerrado con llave.</p></div>
       <div class="hoja l" aria-hidden="true"></div><div class="hoja r" aria-hidden="true"></div>
       <div class="cerradura" aria-hidden="true"></div><div class="llave" aria-hidden="true"></div>
+    </div>
     </div>
   </div>
 </section>
@@ -126,6 +129,7 @@
 
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
+<script src="/guardia.js" defer></script>
 <script>
 const GABINETE = /*GABINETE*/[]/*FIN-GABINETE*/;
 const GAB_HASH = "a3a5d7d8ea6d0078a495d25e564d9c3ea2eee1a1240da0282da50cf8666f4009";
@@ -152,13 +156,37 @@ function cartelaMini(p){
 const hero=PIECES.findIndex(p=>p.modo==="vitrina");
 if(hero>-1){
   const p=PIECES[hero],box=document.getElementById("heroPiece");
-  box.innerHTML=`<button class="vitrina" id="vitrina" type="button" aria-label="${p.t}, pieza protegida. ${euro(p.price)}. Ver ficha">
+  box.innerHTML=`<div class="expo"><button class="vitrina" id="vitrina" type="button" aria-label="${p.t}, pieza protegida. ${euro(p.price)}. Ver ficha">
       ${lienzo(p,false)}<span class="case" aria-hidden="true"></span></button>
-    <div class="barrier" aria-hidden="true"><span class="post l"></span><span class="post r"></span>
-      <svg class="rope" viewBox="0 0 300 56" preserveAspectRatio="none"><path d="M3 6 Q150 58 297 6"/><path class="hi" d="M6 5 Q150 54 294 5"/></svg></div>
+    <div class="barrier" aria-hidden="true"></div></div>
     <div class="placa"><b>Pieza protegida · ${p.id}</b><span>${p.t}</span><small id="placaTxt">${p.tech} · ${euro(p.price)}</small></div>`;
   const v=document.getElementById("vitrina"),bar=box.querySelector(".barrier"),pl=document.getElementById("placaTxt");
   const plTxt=pl.textContent;
+  // Postes y cordón medidos sobre la anchura real de la vitrina: siempre centrados y simétricos
+  function cordon(){
+    const w=Math.round(bar.clientWidth);if(!w)return;
+    const H=86,ins=Math.max(18,Math.round(w*.07)),x1=ins,x2=w-ins,by=17,mid=w/2,sag=Math.min(56,Math.max(34,w*.11));
+    const poste=x=>`<rect x="${x-6}" y="${by+6}" width="12" height="${H-by-14}" rx="3" fill="url(#latonV)"/>
+      <ellipse cx="${x}" cy="${H-7}" rx="19" ry="5" fill="url(#latonB)"/><ellipse cx="${x}" cy="${H-9}" rx="14" ry="3.2" fill="#c9a24a" opacity=".55"/>
+      <circle cx="${x}" cy="${by}" r="9.5" fill="url(#latonR)"/>`;
+    bar.innerHTML=`<svg width="${w}" height="${H}" viewBox="0 0 ${w} ${H}">
+      <defs>
+        <linearGradient id="latonV" x1="0" x2="1"><stop offset="0" stop-color="#6d4f1c"/><stop offset=".4" stop-color="#ecd28c"/><stop offset=".7" stop-color="#a9853c"/><stop offset="1" stop-color="#5e4318"/></linearGradient>
+        <radialGradient id="latonR" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c8"/><stop offset=".45" stop-color="#c9a24a"/><stop offset="1" stop-color="#6d4f1c"/></radialGradient>
+        <radialGradient id="latonB" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#9a7834"/><stop offset="1" stop-color="#4d3712"/></radialGradient>
+      </defs>
+      ${poste(x1)}${poste(x2)}
+      <g class="cuerda" style="transform-origin:${x1}px ${by}px">
+        <path d="M${x1} ${by} Q${mid} ${by+sag*2} ${x2} ${by}" fill="none" stroke="#4a0b13" stroke-width="9" stroke-linecap="round"/>
+        <path d="M${x1} ${by} Q${mid} ${by+sag*2} ${x2} ${by}" fill="none" stroke="#8e1d2b" stroke-width="6.5" stroke-linecap="round"/>
+        <path d="M${x1+2} ${by-1.5} Q${mid} ${by+sag*2-3} ${x2-2} ${by-1.5}" fill="none" stroke="#c8434f" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
+      </g>
+      <circle cx="${x1}" cy="${by}" r="9.5" fill="url(#latonR)"/><circle cx="${x2}" cy="${by}" r="9.5" fill="url(#latonR)"/>
+    </svg>`;
+  }
+  cordon();
+  v.querySelector("img").addEventListener("load",cordon);
+  let rT;addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(cordon,120)});
   v.addEventListener("pointermove",e=>{const r=v.getBoundingClientRect();v.style.setProperty("--gx",Math.round((e.clientX-r.left)/r.width*100)+"%")});
   v.addEventListener("click",()=>{
     bar.classList.add("unhooked");pl.textContent="Acceso concedido";
@@ -292,9 +320,11 @@ document.getElementById("gabForm").addEventListener("submit",async ev=>{
     gabMsg.textContent="La llave gira…";llenarGabinete();
     puerta.classList.add("girando");
     setTimeout(()=>{puerta.classList.add("abierta");gabMsg.textContent="Adelante: el gabinete está abierto."},RM?0:500);
+    if(window.guardiaSilencio)guardiaSilencio("Adelante");
   }else{
     gabMsg.textContent=hsh===null?"Este navegador no puede abrir el gabinete.":"Esa no es la palabra. Pruebe de nuevo.";
     puerta.classList.remove("sacude");void puerta.offsetWidth;puerta.classList.add("sacude");
+    if(window.guardiaSilencio)guardiaSilencio("¡Shhh!");
   }
 });
 </script>
