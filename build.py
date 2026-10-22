@@ -59,7 +59,7 @@ def pagina_obra(p, todas):
         "name": p["t"], "url": url, "image": img_abs, "description": p["story"],
         "artMedium": p["tech"], "creditText": p["a"],
         "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "EUR",
-                   "availability": "https://schema.org/InStock", "url": url},
+                   "availability": "https://schema.org/SoldOut" if p.get("estado") == "vendido" else "https://schema.org/InStock", "url": url},
     }
     otras = "\n".join(
         f'<li><a href="/obra/{o["slug"]}/"><img src="/{o["thumb"]}" alt="{esc(o["t"])}" width="{o["tw"]}" height="{o["th"]}" loading="lazy"><span>{esc(o["t"])} · {esc(euro(o["price"]))}</span></a></li>'
@@ -82,6 +82,7 @@ def pagina_obra(p, todas):
 <meta property="og:url" content="{url}">
 <meta property="og:site_name" content="Galería Procedencia">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2a0b0e">
 {FUENTES}
 <link rel="stylesheet" href="/estilo.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
@@ -104,7 +105,7 @@ def pagina_obra(p, todas):
       </dl>
       <p class="story">{esc(p['story'])}</p>
       <p class="hand">{esc(p['hand'])}</p>
-      <div class="priceline"><span class="price">{esc(euro(p['price']))}</span><span class="status"><i></i>Disponible</span></div>
+      <div class="priceline"><span class="price">{esc(euro(p['price']))}</span><span class="status {esc(p.get('estado','disponible'))}"><i></i>{ {'disponible':'Disponible','reservado':'Reservada','vendido':'Vendida'}[p.get('estado','disponible')] }</span></div>
       <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
     </article>
@@ -113,7 +114,7 @@ def pagina_obra(p, todas):
 {otras}
   </ul></section>
 </div></main>
-<footer class="gut"><div class="wrap">Procedencia · obra con historia</div></footer>
+<footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
 <script>
 const P = {datos_js};
@@ -130,7 +131,7 @@ def main():
 
     # Portada: datos de las obras e índice estático
     idx = open(ruta("index.html"), encoding="utf-8").read()
-    campos = ("id", "slug", "img", "thumb", "tw", "th", "cls", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
+    campos = ("id", "slug", "img", "thumb", "tw", "th", "estado", "modo", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
     data = json.dumps([{k: p[k] for k in campos if k in p} for p in obras], ensure_ascii=False)
     idx = re.sub(r"/\*OBRAS\*/.*?/\*FIN-OBRAS\*/", lambda m: f"/*OBRAS*/{data}/*FIN-OBRAS*/", idx, flags=re.S)
     lista = "<ul>\n" + "\n".join(

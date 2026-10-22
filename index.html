@@ -9,6 +9,7 @@
 <meta property="og:description" content="Grabados antiguos y obra sobre papel con historia. Piezas únicas a la venta.">
 <meta property="og:image" content="https://jia-lo.github.io/obras/montacute.jpg">
 <meta property="og:url" content="https://jia-lo.github.io/">
+<meta name="theme-color" content="#2a0b0e">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jia-lo.github.io/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Galería Procedencia","url":"https://jia-lo.github.io/","inLanguage":"es"}</script>
@@ -21,7 +22,7 @@
 
 <header class="top gut">
   <div class="wrap">
-    <a class="brand" href="#sala"><b>Procedencia</b><span>galería</span></a>
+    <a class="brand" href="/"><b>Procedencia</b><span>galería</span></a>
     <nav class="menu" aria-label="Secciones">
       <a href="#sala">La sala</a><a href="#como">Cómo llegan</a><a href="#reservas">Reservas</a>
     </nav>
@@ -30,38 +31,26 @@
 
 <section class="hero gut">
   <div class="wrap">
-    <div>
+    <div class="hero-text">
       <div class="eyebrow">Grabados antiguos, estampas y vistas enmarcadas</div>
       <h1>Lo que colgaba <em>en otras casas</em></h1>
+      <p class="intro">Estampas y pequeñas obras con historia, rescatadas de casas que se vacían. Piezas únicas, enmarcadas y listas para colgar.</p>
+      <div class="meta" id="meta"></div>
+      <a class="go" href="#sala">Entrar en la sala <span aria-hidden="true">↓</span></a>
     </div>
-    <div>
-      <p>Estampas y pequeñas obras con dos siglos de historia, rescatadas de casas que se vacían y de colecciones que se dispersan. Piezas únicas, enmarcadas y listas para colgar.</p>
-      <div class="ledger" id="ledger"></div>
-    </div>
+    <div class="hero-piece" id="heroPiece"></div>
   </div>
 </section>
 
-<main id="sala" class="gut">
-  <div class="wrap wall">
-    <div class="eyeline" aria-hidden="true"><span>Altura de la mirada</span></div>
+<main id="sala" class="gut sala">
+  <div class="wrap">
+    <div class="sala-head">
+      <h2>Sala <em>primera</em></h2>
+      <p id="salaHint">Las cortinas se abren a tu paso.</p>
+    </div>
     <div class="hang" id="hang"></div>
   </div>
 </main>
-
-<section class="indice gut" aria-labelledby="indiceT"><div class="wrap">
-<h2 id="indiceT">Todas las obras de la sala</h2>
-<!--INDICE-->
-<ul>
-<li><a href="/obra/montacute-house/"><b>Montacute House, fachada este</b><span>95 €</span></a></li>
-<li><a href="/obra/dublin-four-courts/"><b>Dublín, los Four Courts sobre el Liffey</b><span>85 €</span></a></li>
-<li><a href="/obra/kininger-escena-de-interior/"><b>Escena de interior con dama, niño y caballero</b><span>70 €</span></a></li>
-<li><a href="/obra/cromos-favoritas-corte-francia/"><b>Cuatro favoritas de la corte de Francia</b><span>55 €</span></a></li>
-<li><a href="/obra/cromos-mujeres-celebres-cuatro-cortes/"><b>Mujeres célebres de cuatro cortes</b><span>55 €</span></a></li>
-<li><a href="/obra/venecia-plaza-san-marcos/"><b>Venecia, la plaza de San Marcos</b><span>45 €</span></a></li>
-<li><a href="/obra/venecia-gran-canal-salute/"><b>Venecia, entrada al Gran Canal y la Salute</b><span>45 €</span></a></li>
-</ul>
-<!--/INDICE-->
-</div></section>
 
 <section id="como" class="band dark gut">
   <div class="wrap">
@@ -93,30 +82,106 @@
   </div>
 </section>
 
-<footer class="gut"><div class="wrap">Procedencia · obra con historia</div></footer>
+<footer class="gut">
+  <div class="wrap">
+    <nav class="idx" aria-labelledby="indiceT"><h2 id="indiceT">Todas las obras de la sala</h2>
+<!--INDICE-->
+<ul>
+<li><a href="/obra/montacute-house/"><b>Montacute House, fachada este</b><span>95 €</span></a></li>
+<li><a href="/obra/dublin-four-courts/"><b>Dublín, los Four Courts sobre el Liffey</b><span>85 €</span></a></li>
+<li><a href="/obra/kininger-escena-de-interior/"><b>Escena de interior con dama, niño y caballero</b><span>70 €</span></a></li>
+<li><a href="/obra/cromos-favoritas-corte-francia/"><b>Cuatro favoritas de la corte de Francia</b><span>55 €</span></a></li>
+<li><a href="/obra/cromos-mujeres-celebres-cuatro-cortes/"><b>Mujeres célebres de cuatro cortes</b><span>55 €</span></a></li>
+<li><a href="/obra/venecia-plaza-san-marcos/"><b>Venecia, la plaza de San Marcos</b><span>45 €</span></a></li>
+<li><a href="/obra/venecia-gran-canal-salute/"><b>Venecia, entrada al Gran Canal y la Salute</b><span>45 €</span></a></li>
+</ul>
+<!--/INDICE-->
+    </nav>
+    <div class="sign"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div>
+  </div>
+</footer>
 
 <div class="room gut" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle"></div>
 
 <script src="/contacto.js"></script>
 <script>
-const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "cls": "p1", "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "cls": "p2", "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "cls": "p3", "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado en Viena", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "cls": "p4", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "cls": "p5", "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "cls": "p6", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "cls": "p7", "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
+const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "estado": "disponible", "modo": "vitrina", "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "estado": "disponible", "modo": "telon", "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "estado": "disponible", "modo": "telon", "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado en Viena", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "estado": "disponible", "modo": "telon", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "estado": "disponible", "modo": "telon", "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "estado": "disponible", "modo": "cordon", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "estado": "disponible", "modo": "cordon", "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const ESTADO = {disponible:"Disponible",reservado:"Reservada",vendido:"Vendida"};
+const estado = p => p.estado || "disponible";
 
-const hang=document.getElementById("hang");
+function lienzo(p, conCortina){
+  return `<span class="lienzo"><img src="/${p.thumb}" alt="${p.t}, enmarcado" width="${p.tw}" height="${p.th}">`+
+    (conCortina?`<span class="veil" aria-hidden="true"><span class="cl"></span><span class="cr"></span><span class="val"></span></span>`:"")+
+    (p.modo==="cordon"?`<span class="cord" aria-hidden="true"></span>`:"")+`</span>`;
+}
+function cartelaMini(p){
+  const e=estado(p);
+  return `<div class="label${e==="vendido"?" sold":""}"><span class="ref"><span>${p.id}</span><span>${p.y}</span></span>
+    <b>${p.t}</b>
+    <span class="row"><span class="tech">${p.tech}</span><span class="pr">${e!=="disponible"?`<i class="dot ${e}" title="${ESTADO[e]}"></i>`:""}${euro(p.price)}</span></span>
+    ${p.modo==="cordon"?`<span class="hint">Tira del cordón para verla</span>`:""}</div>`;
+}
+
+/* Pieza protegida en la primera pantalla */
+const hero=PIECES.findIndex(p=>p.modo==="vitrina");
+if(hero>-1){
+  const p=PIECES[hero],box=document.getElementById("heroPiece");
+  box.innerHTML=`<button class="vitrina" id="vitrina" type="button" aria-label="${p.t}, pieza protegida. ${euro(p.price)}. Ver ficha">
+      ${lienzo(p,false)}<span class="case" aria-hidden="true"></span></button>
+    <div class="barrier" aria-hidden="true"><span class="post l"></span><span class="post r"></span>
+      <svg class="rope" viewBox="0 0 300 56" preserveAspectRatio="none"><path d="M3 6 Q150 58 297 6"/><path class="hi" d="M6 5 Q150 54 294 5"/></svg></div>
+    <div class="placa"><b>Pieza protegida · ${p.id}</b><span>${p.t}</span><small id="placaTxt">${p.tech} · ${euro(p.price)}</small></div>`;
+  const v=document.getElementById("vitrina"),bar=box.querySelector(".barrier"),pl=document.getElementById("placaTxt");
+  const plTxt=pl.textContent;
+  v.addEventListener("pointermove",e=>{const r=v.getBoundingClientRect();v.style.setProperty("--gx",Math.round((e.clientX-r.left)/r.width*100)+"%")});
+  v.addEventListener("click",()=>{
+    bar.classList.add("unhooked");pl.textContent="Acceso concedido";
+    setTimeout(()=>openRoom(hero),RM?0:650);
+  });
+  window.rehook=()=>{bar.classList.remove("unhooked");pl.textContent=plTxt};
+}
+
+/* La pared, con cortinas */
+const hang=document.getElementById("hang"),slots=[];
 PIECES.forEach((p,i)=>{
-  const b=document.createElement("button");
-  b.className="piece "+p.cls;b.style.animationDelay=(i*120)+"ms";
-  b.setAttribute("aria-label",`${p.t}. ${p.tech}. ${euro(p.price)}. Ver ficha`);
-  b.innerHTML=`<img src="/${p.thumb}" alt="${p.t}, enmarcado" width="${p.tw}" height="${p.th}"><span class="tag"><b>${p.t}</b><span>${p.tech} · ${euro(p.price)}</span></span>`;
-  b.addEventListener("click",()=>openRoom(i));
-  hang.appendChild(b);
+  if(i===hero)return;
+  const s=document.createElement("div");s.className="slot";
+  const b=document.createElement("button");b.type="button";b.className="piece";
+  b.innerHTML=lienzo(p,true);
+  s.innerHTML=`<div class="fbox"></div>`;s.firstChild.appendChild(b);
+  s.insertAdjacentHTML("beforeend",cartelaMini(p));
+  const abrir=()=>{s.classList.add("open");b.classList.add("open");b.setAttribute("aria-label",`${p.t}. ${euro(p.price)}. Ver ficha`)};
+  const cerrada=()=>!b.classList.contains("open");
+  b.setAttribute("aria-label",p.modo==="cordon"?`${p.t}: descorrer la cortina`:`${p.t}. ${euro(p.price)}. Ver ficha`);
+  b.addEventListener("click",()=>{
+    if(cerrada()){
+      if(p.modo==="cordon"&&!RM){b.classList.add("pulling");setTimeout(abrir,260)}else abrir();
+      return;
+    }
+    openRoom(i);
+  });
+  slots.push({s,b,p,abrir});
+  hang.appendChild(s);
 });
-document.getElementById("ledger").innerHTML=`<span><i></i>${PIECES.length} obras disponibles</span><span>Piezas únicas</span><span>Grabados, cromos y vistas enmarcadas</span>`;
+if(RM){slots.forEach(o=>o.abrir())}
+else if("IntersectionObserver" in window){
+  let lote=0,t;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;
+    const o=slots.find(x=>x.b===e.target);io.unobserve(e.target);
+    setTimeout(o.abrir,lote++*220);clearTimeout(t);t=setTimeout(()=>lote=0,300)})},{threshold:.45,rootMargin:"0px 0px -8% 0px"});
+  slots.forEach(o=>{if(o.p.modo!=="cordon")io.observe(o.b)});
+}else slots.forEach(o=>o.abrir());
+
+const libres=PIECES.filter(p=>estado(p)==="disponible").length;
+document.getElementById("meta").innerHTML=`<span><i></i>${libres} obras disponibles</span><span>Piezas únicas, listas para colgar</span>`;
 document.getElementById("contactLine").innerHTML=`<button class="linkbtn" id="cLink" type="button">${CONTACTO}</button>`;
 document.getElementById("cLink").onclick=()=>openMail("Consulta · Galería Procedencia","Hola, quería hacer una consulta sobre la galería:\n\n");
 
+/* Sala de luz */
 const room=document.getElementById("room");let cur=-1,lastFocus=null;
 function openRoom(i){
-  cur=i;const p=PIECES[i];lastFocus=lastFocus||document.activeElement;
+  cur=i;const p=PIECES[i],e=estado(p);lastFocus=lastFocus||document.activeElement;
   room.innerHTML=`<button class="nav-btn x" id="rClose" type="button" aria-label="Cerrar">✕</button>
   <div class="room-in">
     <div class="stage"><img src="/${p.img}" alt="${p.t}, enmarcado"></div>
@@ -132,8 +197,8 @@ function openRoom(i){
       </dl>
       <p class="story">${p.story}</p>
       <p class="hand">${p.hand}</p>
-      <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status"><i></i>Disponible</span></div>
-      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
+      <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status ${e}"><i></i>${ESTADO[e]}</span></div>
+      <div class="acts"><button class="btn" id="bRes" type="button">${e==="vendido"?"Avísame de algo parecido":"Reservar o preguntar"}</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
       <a class="fichalink" href="/obra/${p.slug}/">Abrir la ficha de esta obra →</a>
     </article></div>
   </div>
@@ -146,7 +211,7 @@ function openRoom(i){
   document.getElementById("bShare").onclick=()=>compartir(p);
   document.getElementById("rClose").focus();
 }
-function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(lastFocus)lastFocus.focus();lastFocus=null}
+function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(window.rehook)rehook();if(lastFocus)lastFocus.focus();lastFocus=null}
 document.addEventListener("keydown",e=>{if(!mailDlg.hidden||room.hidden)return;
   if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")openRoom((cur+1)%PIECES.length);if(e.key==="ArrowLeft")openRoom((cur+PIECES.length-1)%PIECES.length)});
 </script>

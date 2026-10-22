@@ -2,7 +2,6 @@
  {
   "id": "PRC-001",
   "img": "obras/montacute.jpg",
-  "cls": "p1",
   "t": "Montacute House, fachada este",
   "a": "Dibujo de J. P. Neale · grabado de W. Wallis",
   "y": "Londres, década de 1820",
@@ -11,12 +10,13 @@
   "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.",
   "hand": "Una casa señorial que acaba saliendo de otra casa.",
   "price": 95,
-  "slug": "montacute-house"
+  "slug": "montacute-house",
+  "estado": "disponible",
+  "modo": "vitrina"
  },
  {
   "id": "PRC-002",
   "img": "obras/four-courts.jpg",
-  "cls": "p2",
   "t": "Dublín, los Four Courts sobre el Liffey",
   "a": "Dibujo de W. H. Bartlett · grabado de Owen",
   "y": "c. 1840–1850",
@@ -25,12 +25,13 @@
   "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.",
   "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.",
   "price": 85,
-  "slug": "dublin-four-courts"
+  "slug": "dublin-four-courts",
+  "estado": "disponible",
+  "modo": "telon"
  },
  {
   "id": "PRC-003",
   "img": "obras/kininger.jpg",
-  "cls": "p3",
   "t": "Escena de interior con dama, niño y caballero",
   "a": "Dibujo de V. G. Kininger · grabado en Viena",
   "y": "c. 1790–1810",
@@ -39,12 +40,13 @@
   "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.",
   "hand": "Más de dos siglos y la escena sigue en vilo.",
   "price": 70,
-  "slug": "kininger-escena-de-interior"
+  "slug": "kininger-escena-de-interior",
+  "estado": "disponible",
+  "modo": "telon"
  },
  {
   "id": "PRC-004",
   "img": "obras/cromos-francia.jpg",
-  "cls": "p4",
   "t": "Cuatro favoritas de la corte de Francia",
   "a": "Cromos de la serie 21 · impresor «SMH»",
   "y": "c. 1890–1915",
@@ -53,12 +55,13 @@
   "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.",
   "hand": "Cuatro siglos de secretos de palacio en un solo marco.",
   "price": 55,
-  "slug": "cromos-favoritas-corte-francia"
+  "slug": "cromos-favoritas-corte-francia",
+  "estado": "disponible",
+  "modo": "telon"
  },
  {
   "id": "PRC-005",
   "img": "obras/cromos-cuatro-paises.jpg",
-  "cls": "p5",
   "t": "Mujeres célebres de cuatro cortes",
   "a": "Cromos de la serie 21 · impresor «SMH»",
   "y": "c. 1890–1915",
@@ -67,12 +70,13 @@
   "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.",
   "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.",
   "price": 55,
-  "slug": "cromos-mujeres-celebres-cuatro-cortes"
+  "slug": "cromos-mujeres-celebres-cuatro-cortes",
+  "estado": "disponible",
+  "modo": "telon"
  },
  {
   "id": "PRC-006",
   "img": "obras/venecia-san-marco.jpg",
-  "cls": "p6",
   "t": "Venecia, la plaza de San Marcos",
   "a": "Según Canaletto",
   "y": "Siglo XX",
@@ -81,12 +85,13 @@
   "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.",
   "hand": "Se venden también en pareja: 80 € las dos.",
   "price": 45,
-  "slug": "venecia-plaza-san-marcos"
+  "slug": "venecia-plaza-san-marcos",
+  "estado": "disponible",
+  "modo": "cordon"
  },
  {
   "id": "PRC-007",
   "img": "obras/venecia-salute.jpg",
-  "cls": "p7",
   "t": "Venecia, entrada al Gran Canal y la Salute",
   "a": "Según Canaletto",
   "y": "Siglo XX",
@@ -95,6 +100,8 @@
   "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.",
   "hand": "Se venden también en pareja: 80 € las dos.",
   "price": 45,
-  "slug": "venecia-gran-canal-salute"
+  "slug": "venecia-gran-canal-salute",
+  "estado": "disponible",
+  "modo": "cordon"
  }
 ]
