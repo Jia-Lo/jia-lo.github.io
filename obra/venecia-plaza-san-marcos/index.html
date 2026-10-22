@@ -47,7 +47,8 @@
       <p class="story">Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.</p>
       <p class="hand">Se venden también en pareja: 80 € las dos.</p>
       <div class="priceline"><span class="price">45 €</span><span class="status disponible"><i></i>Disponible</span></div>
-      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
+      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
+      
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
     </article>
   </div>
@@ -62,8 +63,11 @@
 </div></main>
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
+<script src="/ficha.js"></script>
 <script>
-const P = {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "t": "Venecia, la plaza de San Marcos", "tech": "Reproducción sobre tabla con textura de lienzo", "price": 45};
+const P = {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "medidas": null, "price": 45, "estado": "disponible", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"]};
+ponerLupa(document.querySelector(".obra-grid .stage"), P);
+document.getElementById("bCert").onclick = () => abrirCertificado(P);
 document.getElementById("bRes").onclick = () => reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>

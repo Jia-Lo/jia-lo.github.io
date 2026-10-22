@@ -15,10 +15,26 @@ if (!mailDlg) {
 }
 let mailPrevFocus = null;
 
+const SIN_ANIM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let sobreTimer;
 function openMail(subj, body, ref) {
   mailPrevFocus = document.activeElement;
+  if (ref && !SIN_ANIM) {
+    // Sobre que se cierra y se sella con lacre antes de escribir
+    mailDlg.innerHTML = `<div class="sobre" aria-label="Preparando la reserva de ${ref}">
+      <div class="sobre-cuerpo"><div class="carta"><span>Reserva</span><b>${ref}</b></div><div class="sobre-frente"></div><div class="solapa"></div><div class="sello"><span>P</span></div></div>
+      <p class="sobre-txt">Sellando su reserva…</p></div>`;
+    mailDlg.hidden = false;
+    const seguir = () => { clearTimeout(sobreTimer); mailDlg.onclick = null; pintarCorreo(subj, body, ref); };
+    mailDlg.querySelector(".sobre").onclick = seguir;
+    sobreTimer = setTimeout(seguir, 2300);
+    return;
+  }
+  pintarCorreo(subj, body, ref);
+}
+function pintarCorreo(subj, body, ref) {
   mailDlg.innerHTML = `<div class="mbox"><button class="mclose" id="mClose" type="button" aria-label="Cerrar">✕</button>
-    <h3 id="mTitle">Escribir a la galería</h3>
+    <h3 id="mTitle">${ref ? "Su reserva, sellada" : "Escribir a la galería"}</h3>
     <p>Reservas y consultas por correo. Respondo lo antes posible.</p>
     <div class="maddr"><span>${CONTACTO}</span></div>
     <div class="mopts">
@@ -36,7 +52,7 @@ function openMail(subj, body, ref) {
   };
   document.getElementById("mClose").focus();
 }
-function closeMail() { mailDlg.hidden = true; mailDlg.innerHTML = ""; if (mailPrevFocus) mailPrevFocus.focus(); }
+function closeMail() { clearTimeout(sobreTimer); mailDlg.hidden = true; mailDlg.innerHTML = ""; if (mailPrevFocus) mailPrevFocus.focus(); }
 mailDlg.addEventListener("click", e => { if (e.target === mailDlg) closeMail(); });
 document.addEventListener("keydown", e => { if (!mailDlg.hidden && e.key === "Escape") { e.stopImmediatePropagation(); closeMail(); } }, true);
 

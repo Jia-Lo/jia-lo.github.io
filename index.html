@@ -52,6 +52,27 @@
   </div>
 </main>
 
+<section id="gabinete" class="gut gabinete">
+  <div class="wrap gab">
+    <div>
+      <div class="eyebrow">Solo con palabra</div>
+      <h2>El gabinete <em>reservado</em></h2>
+      <p>Detrás de esta puerta esperan las piezas recién llegadas, antes de colgarse en la sala. La palabra cambia con cada vaciado: se da en Instagram, por correo o en persona a quien sigue la galería.</p>
+      <form id="gabForm" autocomplete="off">
+        <label for="gabPal">Palabra del gabinete</label>
+        <input id="gabPal" name="gabPal" type="text" autocapitalize="none" spellcheck="false" placeholder="Escriba la palabra">
+        <button class="btn" type="submit">Girar la llave</button>
+      </form>
+      <p class="gab-msg" id="gabMsg" aria-live="polite"></p>
+    </div>
+    <div class="puerta" id="puerta">
+      <div class="interior" id="gabInterior"><b>El gabinete</b><p>Cerrado con llave.</p></div>
+      <div class="hoja l" aria-hidden="true"></div><div class="hoja r" aria-hidden="true"></div>
+      <div class="cerradura" aria-hidden="true"></div><div class="llave" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
 <section id="como" class="band dark gut">
   <div class="wrap">
     <div class="sec-head">
@@ -97,20 +118,24 @@
 </ul>
 <!--/INDICE-->
     </nav>
-    <div class="sign"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div>
+    <div class="sign"><b>Procedencia</b><span><button type="button" class="luces" id="lucesLink">Visitar la sala de noche</button> · Obra con historia · Alcalá de Henares</span></div>
   </div>
 </footer>
 
 <div class="room gut" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle"></div>
 
 <script src="/contacto.js"></script>
+<script src="/ficha.js"></script>
 <script>
-const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "estado": "disponible", "modo": "vitrina", "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "estado": "disponible", "modo": "telon", "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "estado": "disponible", "modo": "telon", "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado en Viena", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "estado": "disponible", "modo": "telon", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "estado": "disponible", "modo": "telon", "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "estado": "disponible", "modo": "cordon", "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "estado": "disponible", "modo": "cordon", "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
+const GABINETE = /*GABINETE*/[]/*FIN-GABINETE*/;
+const GAB_HASH = "a3a5d7d8ea6d0078a495d25e564d9c3ea2eee1a1240da0282da50cf8666f4009";
+const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "estado": "disponible", "modo": "vitrina", "vendida": "", "notas": [[34, 64, "«Drawn by J. P. Neale»: el dibujante"], [50, 66.5, "Montacute House, fachada este, Somersetshire"], [66, 64, "«Engraved by W. Wallis»: el grabador"], [50, 70.5, "Pie de imprenta: Londres, edición de Neale"]], "cadena": ["Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[27, 70.5, "«W. H. Bartlett»: el dibujante viajero"], [75, 70.5, "«Owen»: el grabador"], [37, 37, "La cúpula de los Four Courts"], [66, 55, "Puente de tres arcos sobre el Liffey"]], "cadena": ["Grabada al acero por Owen sobre dibujo de W. H. Bartlett, c. 1840–1850", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[36, 63.5, "«V. Kininger del.»: dibujó la escena"], [64, 63.5, "«sc. W.»: grabado en Viena"], [50, 25, "Papel hecho a mano, con la huella de la plancha"]], "cadena": ["Dibujada por V. G. Kininger y grabada en Viena como ilustración de libro, c. 1790–1810", "Montada sobre papel hecho a mano y enmarcada", "Colección particular, España"], "gabinete": false, "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado en Viena", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851), dibujante activo en Viena. Bajo la imagen se leen las firmas de plancha: «del.» señala al dibujante y «sc. W.» indica que se grabó en Viena. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, secciones Oriente, España, Francia e Inglaterra, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const ESTADO = {disponible:"Disponible",reservado:"Reservada",vendido:"Vendida"};
+const ESTADO = ESTADOS;
 const estado = p => p.estado || "disponible";
 
 function lienzo(p, conCortina){
+  if(estado(p)==="vendido") return `<span class="lienzo vendida"><img src="/${p.thumb}" alt="" width="${p.tw}" height="${p.th}"><span class="marca" aria-hidden="true"></span></span>`;
   return `<span class="lienzo"><img src="/${p.thumb}" alt="${p.t}, enmarcado" width="${p.tw}" height="${p.th}">`+
     (conCortina?`<span class="veil" aria-hidden="true"><span class="cl"></span><span class="cr"></span><span class="val"></span></span>`:"")+
     (p.modo==="cordon"?`<span class="cord" aria-hidden="true"></span>`:"")+`</span>`;
@@ -120,7 +145,7 @@ function cartelaMini(p){
   return `<div class="label${e==="vendido"?" sold":""}"><span class="ref"><span>${p.id}</span><span>${p.y}</span></span>
     <b>${p.t}</b>
     <span class="row"><span class="tech">${p.tech}</span><span class="pr">${e!=="disponible"?`<i class="dot ${e}" title="${ESTADO[e]}"></i>`:""}${euro(p.price)}</span></span>
-    ${p.modo==="cordon"?`<span class="hint">Tira del cordón para verla</span>`:""}</div>`;
+    ${e==="vendido"?`<span class="otra">Ya cuelga en otra casa${p.vendida?" · vendida en "+p.vendida:""}</span>`:p.modo==="cordon"?`<span class="hint">Tira del cordón para verla</span>`:""}</div>`;
 }
 
 /* Pieza protegida en la primera pantalla */
@@ -137,7 +162,7 @@ if(hero>-1){
   v.addEventListener("pointermove",e=>{const r=v.getBoundingClientRect();v.style.setProperty("--gx",Math.round((e.clientX-r.left)/r.width*100)+"%")});
   v.addEventListener("click",()=>{
     bar.classList.add("unhooked");pl.textContent="Acceso concedido";
-    setTimeout(()=>openRoom(hero),RM?0:650);
+    setTimeout(()=>openRoom(PIECES,hero),RM?0:650);
   });
   window.rehook=()=>{bar.classList.remove("unhooked");pl.textContent=plTxt};
 }
@@ -148,18 +173,20 @@ PIECES.forEach((p,i)=>{
   if(i===hero)return;
   const s=document.createElement("div");s.className="slot";
   const b=document.createElement("button");b.type="button";b.className="piece";
-  b.innerHTML=lienzo(p,true);
+  b.innerHTML=lienzo(p,estado(p)!=="vendido");
   s.innerHTML=`<div class="fbox"></div>`;s.firstChild.appendChild(b);
   s.insertAdjacentHTML("beforeend",cartelaMini(p));
   const abrir=()=>{s.classList.add("open");b.classList.add("open");b.setAttribute("aria-label",`${p.t}. ${euro(p.price)}. Ver ficha`)};
   const cerrada=()=>!b.classList.contains("open");
-  b.setAttribute("aria-label",p.modo==="cordon"?`${p.t}: descorrer la cortina`:`${p.t}. ${euro(p.price)}. Ver ficha`);
+  const vendida=estado(p)==="vendido";
+  b.setAttribute("aria-label",vendida?`${p.t}. Vendida: ya cuelga en otra casa. Ver ficha`:p.modo==="cordon"?`${p.t}: descorrer la cortina`:`${p.t}. ${euro(p.price)}. Ver ficha`);
+  if(vendida){s.classList.add("open");b.classList.add("open")}
   b.addEventListener("click",()=>{
     if(cerrada()){
       if(p.modo==="cordon"&&!RM){b.classList.add("pulling");setTimeout(abrir,260)}else abrir();
       return;
     }
-    openRoom(i);
+    openRoom(PIECES,i);
   });
   slots.push({s,b,p,abrir});
   hang.appendChild(s);
@@ -170,7 +197,7 @@ else if("IntersectionObserver" in window){
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;
     const o=slots.find(x=>x.b===e.target);io.unobserve(e.target);
     setTimeout(o.abrir,lote++*220);clearTimeout(t);t=setTimeout(()=>lote=0,300)})},{threshold:.45,rootMargin:"0px 0px -8% 0px"});
-  slots.forEach(o=>{if(o.p.modo!=="cordon")io.observe(o.b)});
+  slots.forEach(o=>{if(o.p.modo!=="cordon"&&!o.b.classList.contains("open"))io.observe(o.b)});
 }else slots.forEach(o=>o.abrir());
 
 const libres=PIECES.filter(p=>estado(p)==="disponible").length;
@@ -179,9 +206,9 @@ document.getElementById("contactLine").innerHTML=`<button class="linkbtn" id="cL
 document.getElementById("cLink").onclick=()=>openMail("Consulta · Galería Procedencia","Hola, quería hacer una consulta sobre la galería:\n\n");
 
 /* Sala de luz */
-const room=document.getElementById("room");let cur=-1,lastFocus=null;
-function openRoom(i){
-  cur=i;const p=PIECES[i],e=estado(p);lastFocus=lastFocus||document.activeElement;
+const room=document.getElementById("room");let cur=-1,lista=PIECES,lastFocus=null;
+function openRoom(l,i){
+  lista=l;cur=i;const p=lista[i],e=estado(p);lastFocus=lastFocus||document.activeElement;
   room.innerHTML=`<button class="nav-btn x" id="rClose" type="button" aria-label="Cerrar">✕</button>
   <div class="room-in">
     <div class="stage"><img src="/${p.img}" alt="${p.t}, enmarcado"></div>
@@ -198,22 +225,78 @@ function openRoom(i){
       <p class="story">${p.story}</p>
       <p class="hand">${p.hand}</p>
       <div class="priceline"><span class="price">${euro(p.price)}</span><span class="status ${e}"><i></i>${ESTADO[e]}</span></div>
-      <div class="acts"><button class="btn" id="bRes" type="button">${e==="vendido"?"Avísame de algo parecido":"Reservar o preguntar"}</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
-      <a class="fichalink" href="/obra/${p.slug}/">Abrir la ficha de esta obra →</a>
+      <div class="acts"><button class="btn" id="bRes" type="button">${e==="vendido"?"Avísame de algo parecido":"Reservar o preguntar"}</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
+      ${p.gabinete?"":`<a class="fichalink" href="/obra/${p.slug}/">Abrir la ficha de esta obra →</a>`}
     </article></div>
   </div>
   <div class="pn"><button class="nav-btn" id="rPrev" type="button" aria-label="Obra anterior">←</button><button class="nav-btn" id="rNext" type="button" aria-label="Obra siguiente">→</button></div>`;
   room.hidden=false;document.body.style.overflow="hidden";room.scrollTop=0;
   document.getElementById("rClose").onclick=closeRoom;
-  document.getElementById("rPrev").onclick=()=>openRoom((cur+PIECES.length-1)%PIECES.length);
-  document.getElementById("rNext").onclick=()=>openRoom((cur+1)%PIECES.length);
+  document.getElementById("rPrev").onclick=()=>openRoom(lista,(cur+lista.length-1)%lista.length);
+  document.getElementById("rNext").onclick=()=>openRoom(lista,(cur+1)%lista.length);
   document.getElementById("bRes").onclick=()=>reservar(p);
+  document.getElementById("bCert").onclick=()=>abrirCertificado(p);
+  ponerLupa(room.querySelector(".stage"),p);
   document.getElementById("bShare").onclick=()=>compartir(p);
   document.getElementById("rClose").focus();
 }
 function closeRoom(){room.hidden=true;room.innerHTML="";document.body.style.overflow="";if(window.rehook)rehook();if(lastFocus)lastFocus.focus();lastFocus=null}
 document.addEventListener("keydown",e=>{if(!mailDlg.hidden||room.hidden)return;
-  if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")openRoom((cur+1)%PIECES.length);if(e.key==="ArrowLeft")openRoom((cur+PIECES.length-1)%PIECES.length)});
+  if(e.key==="Escape")closeRoom();if(e.key==="ArrowRight")openRoom(lista,(cur+1)%lista.length);if(e.key==="ArrowLeft")openRoom(lista,(cur+lista.length-1)%lista.length)});
+
+/* La sala de noche: de 22:00 a 8:00 en Madrid se visita con linterna */
+const store={get(k){try{return sessionStorage.getItem(k)}catch(_){return null}},set(k,v){try{sessionStorage.setItem(k,v)}catch(_){}}};
+function horaMadrid(){try{return +new Intl.DateTimeFormat("es-ES",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}).format(new Date())}catch(_){return new Date().getHours()}}
+let oscuro=null,cartel=null;
+function apagar(){
+  if(oscuro)return;
+  oscuro=document.createElement("div");oscuro.className="oscuridad";oscuro.setAttribute("aria-hidden","true");
+  cartel=document.createElement("div");cartel.className="cartel-noche";cartel.setAttribute("role","status");
+  cartel.innerHTML=`<p><b>La galería está cerrada</b>Puede recorrer la sala con la linterna${matchMedia("(hover: none)").matches?": deslice el dedo por la pantalla":": mueva el ratón"}.</p><button type="button" id="encender">Encender las luces</button>`;
+  document.body.append(oscuro,cartel);
+  document.getElementById("encender").onclick=()=>{store.set("luces","on");encender()};
+  document.getElementById("lucesLink").textContent="Encender las luces";
+}
+function encender(){
+  if(!oscuro)return;oscuro.remove();cartel.remove();oscuro=cartel=null;
+  document.getElementById("lucesLink").textContent="Visitar la sala de noche";
+}
+const linterna=(x,y)=>{if(oscuro){oscuro.style.setProperty("--lx",x+"px");oscuro.style.setProperty("--ly",y+"px")}};
+addEventListener("pointermove",e=>linterna(e.clientX,e.clientY),{passive:true});
+addEventListener("touchstart",e=>{const t=e.touches[0];if(t)linterna(t.clientX,t.clientY)},{passive:true});
+addEventListener("touchmove",e=>{const t=e.touches[0];if(t)linterna(t.clientX,t.clientY)},{passive:true});
+document.getElementById("lucesLink").onclick=()=>{if(oscuro){store.set("luces","on");encender()}else{store.set("luces","off");apagar();scrollTo({top:document.getElementById("sala").offsetTop-60})}};
+const pref=store.get("luces"),h=horaMadrid();
+if(location.hash==="#noche"||pref==="off"||(pref!=="on"&&(h>=22||h<8)))apagar();
+
+/* El gabinete reservado */
+const puerta=document.getElementById("puerta"),gabMsg=document.getElementById("gabMsg");
+async function huella(t){
+  const limpio=t.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  if(!(window.crypto&&crypto.subtle))return null;
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(limpio));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function llenarGabinete(){
+  const box=document.getElementById("gabInterior");
+  if(!GABINETE.length){box.innerHTML=`<b>Recién barrido</b><p>Ahora mismo el gabinete está vacío. Las piezas del próximo vaciado aparecerán aquí antes que en la sala.</p>`;return}
+  box.innerHTML=`<b>Recién llegadas</b><div class="gab-obras">${GABINETE.map((p,i)=>`<button type="button" data-i="${i}"><img src="/${p.thumb}" alt="" width="${p.tw}" height="${p.th}">${p.t}</button>`).join("")}</div>`;
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>openRoom(GABINETE,+b.dataset.i));
+}
+document.getElementById("gabForm").addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const v=document.getElementById("gabPal").value;
+  if(!v.trim()){gabMsg.textContent="Escriba la palabra para girar la llave.";return}
+  const hsh=await huella(v);
+  if(hsh===GAB_HASH){
+    gabMsg.textContent="La llave gira…";llenarGabinete();
+    puerta.classList.add("girando");
+    setTimeout(()=>{puerta.classList.add("abierta");gabMsg.textContent="Adelante: el gabinete está abierto."},RM?0:500);
+  }else{
+    gabMsg.textContent=hsh===null?"Este navegador no puede abrir el gabinete.":"Esa no es la palabra. Pruebe de nuevo.";
+    puerta.classList.remove("sacude");void puerta.offsetWidth;puerta.classList.add("sacude");
+  }
+});
 </script>
 </body>
 </html>

@@ -47,7 +47,8 @@
       <p class="story">Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d&#x27;Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.</p>
       <p class="hand">Cuatro siglos de secretos de palacio en un solo marco.</p>
       <div class="priceline"><span class="price">55 €</span><span class="status disponible"><i></i>Disponible</span></div>
-      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
+      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
+      
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
     </article>
   </div>
@@ -62,8 +63,11 @@
 </div></main>
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
+<script src="/ficha.js"></script>
 <script>
-const P = {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "t": "Cuatro favoritas de la corte de Francia", "tech": "Cromolitografía, cuatro cromos", "price": 55};
+const P = {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "medidas": null, "price": 55, "estado": "disponible", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"]};
+ponerLupa(document.querySelector(".obra-grid .stage"), P);
+document.getElementById("bCert").onclick = () => abrirCertificado(P);
 document.getElementById("bRes").onclick = () => reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>

@@ -12,7 +12,37 @@
   "price": 95,
   "slug": "montacute-house",
   "estado": "disponible",
-  "modo": "vitrina"
+  "modo": "vitrina",
+  "notas": [
+   [
+    34,
+    64,
+    "«Drawn by J. P. Neale»: el dibujante"
+   ],
+   [
+    50,
+    66.5,
+    "Montacute House, fachada este, Somersetshire"
+   ],
+   [
+    66,
+    64,
+    "«Engraved by W. Wallis»: el grabador"
+   ],
+   [
+    50,
+    70.5,
+    "Pie de imprenta: Londres, edición de Neale"
+   ]
+  ],
+  "cadena": [
+   "Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831",
+   "Coloreada a mano",
+   "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-002",
@@ -27,7 +57,37 @@
   "price": 85,
   "slug": "dublin-four-courts",
   "estado": "disponible",
-  "modo": "telon"
+  "modo": "telon",
+  "notas": [
+   [
+    27,
+    70.5,
+    "«W. H. Bartlett»: el dibujante viajero"
+   ],
+   [
+    75,
+    70.5,
+    "«Owen»: el grabador"
+   ],
+   [
+    37,
+    37,
+    "La cúpula de los Four Courts"
+   ],
+   [
+    66,
+    55,
+    "Puente de tres arcos sobre el Liffey"
+   ]
+  ],
+  "cadena": [
+   "Grabada al acero por Owen sobre dibujo de W. H. Bartlett, c. 1840–1850",
+   "Coloreada a mano",
+   "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-003",
@@ -42,7 +102,31 @@
   "price": 70,
   "slug": "kininger-escena-de-interior",
   "estado": "disponible",
-  "modo": "telon"
+  "modo": "telon",
+  "notas": [
+   [
+    36,
+    63.5,
+    "«V. Kininger del.»: dibujó la escena"
+   ],
+   [
+    64,
+    63.5,
+    "«sc. W.»: grabado en Viena"
+   ],
+   [
+    50,
+    25,
+    "Papel hecho a mano, con la huella de la plancha"
+   ]
+  ],
+  "cadena": [
+   "Dibujada por V. G. Kininger y grabada en Viena como ilustración de libro, c. 1790–1810",
+   "Montada sobre papel hecho a mano y enmarcada",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-004",
@@ -57,7 +141,31 @@
   "price": 55,
   "slug": "cromos-favoritas-corte-francia",
   "estado": "disponible",
-  "modo": "telon"
+  "modo": "telon",
+  "notas": [
+   [
+    33,
+    24.5,
+    "«S.e 21 · Francia»: serie y sección de la colección"
+   ],
+   [
+    47,
+    46.5,
+    "«SMH»: marca del impresor"
+   ],
+   [
+    38,
+    44.5,
+    "La duquesa de Étampes, amiga de Francisco I"
+   ]
+  ],
+  "cadena": [
+   "Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915",
+   "Reunidos y enmarcados sobre papel rojo",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-005",
@@ -72,7 +180,15 @@
   "price": 55,
   "slug": "cromos-mujeres-celebres-cuatro-cortes",
   "estado": "disponible",
-  "modo": "telon"
+  "modo": "telon",
+  "notas": [],
+  "cadena": [
+   "Impresos en España por «SMH» como cromos de la serie 21, secciones Oriente, España, Francia e Inglaterra, c. 1890–1915",
+   "Reunidos y enmarcados sobre papel rojo",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-006",
@@ -87,7 +203,15 @@
   "price": 45,
   "slug": "venecia-plaza-san-marcos",
   "estado": "disponible",
-  "modo": "cordon"
+  "modo": "cordon",
+  "notas": [],
+  "cadena": [
+   "Reproducción del siglo XX de la vista de Canaletto (1697–1768)",
+   "Montada en marco florentino lacado en verde y decorado a mano",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  },
  {
   "id": "PRC-007",
@@ -102,6 +226,14 @@
   "price": 45,
   "slug": "venecia-gran-canal-salute",
   "estado": "disponible",
-  "modo": "cordon"
+  "modo": "cordon",
+  "notas": [],
+  "cadena": [
+   "Reproducción del siglo XX de la vista de Canaletto (1697–1768)",
+   "Montada en marco florentino lacado en verde y decorado a mano",
+   "Colección particular, España"
+  ],
+  "vendida": "",
+  "gabinete": false
  }
 ]

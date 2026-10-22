@@ -64,7 +64,7 @@ def pagina_obra(p, todas):
     otras = "\n".join(
         f'<li><a href="/obra/{o["slug"]}/"><img src="/{o["thumb"]}" alt="{esc(o["t"])}" width="{o["tw"]}" height="{o["th"]}" loading="lazy"><span>{esc(o["t"])} · {esc(euro(o["price"]))}</span></a></li>'
         for o in todas if o["id"] != p["id"])
-    datos_js = json.dumps({k: p[k] for k in ("id", "slug", "t", "tech", "price")}, ensure_ascii=False)
+    datos_js = json.dumps({k: p.get(k) for k in ("id", "slug", "t", "a", "y", "tech", "marco", "medidas", "price", "estado", "notas", "cadena")}, ensure_ascii=False)
     return f"""<!doctype html>
 <html lang="es">
 <head>
@@ -106,7 +106,8 @@ def pagina_obra(p, todas):
       <p class="story">{esc(p['story'])}</p>
       <p class="hand">{esc(p['hand'])}</p>
       <div class="priceline"><span class="price">{esc(euro(p['price']))}</span><span class="status {esc(p.get('estado','disponible'))}"><i></i>{ {'disponible':'Disponible','reservado':'Reservada','vendido':'Vendida'}[p.get('estado','disponible')] }</span></div>
-      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button></div>
+      <div class="acts"><button class="btn" id="bRes" type="button">Reservar o preguntar</button><button class="btn ghost" id="bShare" type="button">Compartir</button><button class="btn cert-btn" id="bCert" type="button">Certificado de procedencia</button></div>
+      {'<p class="hand" style="color:var(--sold)">Ya cuelga en otra casa' + (' · vendida en ' + esc(p['vendida']) if p.get('vendida') else '') + '</p>' if p.get('estado') == 'vendido' else ''}
       <a class="fichalink" href="/#sala">← Volver a la sala</a>
     </article>
   </div>
@@ -116,8 +117,11 @@ def pagina_obra(p, todas):
 </div></main>
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/contacto.js"></script>
+<script src="/ficha.js"></script>
 <script>
 const P = {datos_js};
+ponerLupa(document.querySelector(".obra-grid .stage"), P);
+document.getElementById("bCert").onclick = () => abrirCertificado(P);
 document.getElementById("bRes").onclick = () => reservar(P);
 document.getElementById("bShare").onclick = () => compartir(P);
 </script>
@@ -131,22 +135,26 @@ def main():
 
     # Portada: datos de las obras e índice estático
     idx = open(ruta("index.html"), encoding="utf-8").read()
-    campos = ("id", "slug", "img", "thumb", "tw", "th", "estado", "modo", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
-    data = json.dumps([{k: p[k] for k in campos if k in p} for p in obras], ensure_ascii=False)
+    campos = ("id", "slug", "img", "thumb", "tw", "th", "estado", "modo", "vendida", "notas", "cadena", "gabinete", "t", "a", "y", "tech", "marco", "medidas", "story", "hand", "price")
+    sala = [p for p in obras if not p.get("gabinete")]
+    gabinete = [p for p in obras if p.get("gabinete")]
+    data = json.dumps([{k: p[k] for k in campos if k in p} for p in sala], ensure_ascii=False)
+    gdata = json.dumps([{k: p[k] for k in campos if k in p} for p in gabinete], ensure_ascii=False)
     idx = re.sub(r"/\*OBRAS\*/.*?/\*FIN-OBRAS\*/", lambda m: f"/*OBRAS*/{data}/*FIN-OBRAS*/", idx, flags=re.S)
+    idx = re.sub(r"/\*GABINETE\*/.*?/\*FIN-GABINETE\*/", lambda m: f"/*GABINETE*/{gdata}/*FIN-GABINETE*/", idx, flags=re.S)
     lista = "<ul>\n" + "\n".join(
-        f'<li><a href="/obra/{p["slug"]}/"><b>{esc(p["t"])}</b><span>{esc(euro(p["price"]))}</span></a></li>' for p in obras) + "\n</ul>"
+        f'<li><a href="/obra/{p["slug"]}/"><b>{esc(p["t"])}</b><span>{esc(euro(p["price"]))}</span></a></li>' for p in sala) + "\n</ul>"
     idx = re.sub(r"<!--INDICE-->.*?<!--/INDICE-->", lambda m: f"<!--INDICE-->\n{lista}\n<!--/INDICE-->", idx, flags=re.S)
     open(ruta("index.html"), "w", encoding="utf-8").write(idx)
 
     # Páginas de cada obra
-    for p in obras:
+    for p in sala:
         os.makedirs(ruta("obra", p["slug"]), exist_ok=True)
-        open(ruta("obra", p["slug"], "index.html"), "w", encoding="utf-8").write(pagina_obra(p, obras))
+        open(ruta("obra", p["slug"], "index.html"), "w", encoding="utf-8").write(pagina_obra(p, sala))
 
     # Sitemap y robots
     hoy = date.today().isoformat()
-    urls = [f"{SITIO}/"] + [f"{SITIO}/obra/{p['slug']}/" for p in obras]
+    urls = [f"{SITIO}/"] + [f"{SITIO}/obra/{p['slug']}/" for p in sala]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
          "".join(f"  <url><loc>{u}</loc><lastmod>{hoy}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(ruta("sitemap.xml"), "w").write(sm)
