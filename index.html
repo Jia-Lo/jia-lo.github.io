@@ -42,6 +42,10 @@
   </div>
 </section>
 
+<div class="pasillo" aria-label="Pasillo hacia Sala primera">
+  <div class="pas-pared"><button type="button" class="pas-cuadro" data-obra="0" style="left:14%"></button><button type="button" class="pas-cuadro" data-obra="3" style="left:44%"></button><a class="pas-placa" href="#sala">Sala primera <span aria-hidden="true">→</span></a></div>
+  <div class="pas-suelo"></div><div class="pas-gente" aria-hidden="true"></div>
+</div>
 <main id="sala" class="gut sala">
   <div class="wrap">
     <div class="sala-head">
@@ -52,6 +56,10 @@
   </div>
 </main>
 
+<div class="pasillo" aria-label="Pasillo hacia Gabinete reservado">
+  <div class="pas-pared"><button type="button" class="pas-cuadro" data-obra="4" style="left:18%"></button><button type="button" class="pas-cuadro" data-obra="5" style="left:52%"></button><a class="pas-placa" href="#gabinete">Gabinete reservado <span aria-hidden="true">→</span></a></div>
+  <div class="pas-suelo"></div><div class="pas-gente" aria-hidden="true"></div>
+</div>
 <section id="gabinete" class="gut gabinete">
   <div class="wrap gab">
     <div>
@@ -88,6 +96,10 @@
   </div>
 </section>
 
+<div class="pasillo" aria-label="Pasillo hacia Diario de la galería">
+  <div class="pas-pared"><button type="button" class="pas-cuadro" data-obra="6" style="left:22%"></button><button type="button" class="pas-cuadro" data-obra="1" style="left:58%"></button><a class="pas-placa" href="#diario">Diario de la galería <span aria-hidden="true">→</span></a></div>
+  <div class="pas-suelo"></div><div class="pas-gente" aria-hidden="true"></div>
+</div>
 <section id="diario" class="gut diario-portada">
   <div class="wrap">
     <div class="sala-head"><h2>Del <em>diario</em></h2><p><a href="/diario/">Todos los cuadernos →</a></p></div>
@@ -375,5 +387,6 @@ document.getElementById("gabForm").addEventListener("submit",async ev=>{
   }
 });
 </script>
+<script src="/pasillos.js"></script>
 </body>
 </html>
