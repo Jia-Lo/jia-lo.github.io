@@ -53,6 +53,7 @@ def pagina(titulo, desc, url, cuerpo, cab, fuentes, sitio, extra_head=""):
 </div></main>
 <footer class="gut"><div class="wrap"><div class="sign" style="margin-top:0"><b>Procedencia</b><span>Obra con historia · Alcalá de Henares</span></div></div></footer>
 <script src="/luz.js"></script>
+<script src="/presencia.js"></script>
 </body>
 </html>
 """

@@ -669,16 +669,21 @@ html[data-luz="anochecer"] .haz-l{background:linear-gradient(180deg,rgba(255,226
 .visitante.izq .v-svg{transform:scaleX(-1)}
 .v-cuerpo>g,.v-cabeza{transform-box:view-box}
 .v-pierna-a,.v-pierna-b{transform-origin:32px 98px}
+.v-tibia{transform-box:view-box;transform-origin:32.5px 136px}
 .v-brazo-a,.v-brazo-b,.v-apunta{transform-origin:32px 40px}
 .v-cabeza{transform-origin:32px 28px;transition:transform .5s ease}
 .v-apunta{opacity:0;transition:transform .55s cubic-bezier(.3,1.3,.5,1),opacity .2s ease}
-.camina .v-pierna-a{animation:pierna var(--paso,1.1s) ease-in-out infinite}
-.camina .v-pierna-b{animation:pierna var(--paso,1.1s) ease-in-out infinite reverse}
-.camina .v-brazo-a{animation:brazo var(--paso,1.1s) ease-in-out infinite reverse}
+.camina .v-pierna-a{animation:pierna var(--paso,1.1s) linear infinite}
+.camina .v-pierna-b{animation:pierna var(--paso,1.1s) linear infinite;animation-delay:calc(var(--paso,1.1s) / -2)}
+.camina .v-pierna-a .v-tibia{animation:rodilla var(--paso,1.1s) linear infinite}
+.camina .v-pierna-b .v-tibia{animation:rodilla var(--paso,1.1s) linear infinite;animation-delay:calc(var(--paso,1.1s) / -2)}
+.camina .v-brazo-a{animation:brazo var(--paso,1.1s) ease-in-out infinite;animation-delay:calc(var(--paso,1.1s) / -2)}
 .camina .v-brazo-b{animation:brazo var(--paso,1.1s) ease-in-out infinite}
+.v-pierna-b{filter:brightness(.82)}
 .camina .v-cuerpo{animation:bote calc(var(--paso,1.1s) / 2) ease-in-out infinite}
-@keyframes pierna{0%,100%{transform:rotate(20deg)}50%{transform:rotate(-20deg)}}
-@keyframes brazo{0%,100%{transform:rotate(16deg)}50%{transform:rotate(-16deg)}}
+@keyframes pierna{0%{transform:rotate(-24deg)}50%{transform:rotate(22deg)}100%{transform:rotate(-24deg)}}
+@keyframes rodilla{0%{transform:rotate(0)}50%{transform:rotate(0)}68%{transform:rotate(38deg)}85%{transform:rotate(12deg)}100%{transform:rotate(0)}}
+@keyframes brazo{0%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}100%{transform:rotate(-18deg)}}
 @keyframes bote{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
 .para .v-cabeza{transform:rotate(-9deg)}
 .apunta .v-brazo-a{opacity:0}
@@ -848,3 +853,9 @@ html.cerrada .lampara .haz-l{opacity:0!important;transition:opacity .6s ease}
   .cj-txt>.eyebrow,.rs-txt>.eyebrow{order:1}.cj-txt>h2,.rs-txt>h2{order:2}.cj-txt>p:first-of-type,.rs-txt>p:first-of-type{order:3}
   .caja-escena,.mesa{order:4;margin-block:10px 6px}
 }
+
+/* ===== Aforo real ===== */
+.top .wrap{position:relative}
+.aforo{display:flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid rgba(232,207,134,.35);border-radius:20px;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-soft);white-space:nowrap}
+.aforo i{width:7px;height:7px;border-radius:50%;background:#36d16b;box-shadow:0 0 7px #36d16b;animation:led 2.4s ease-in-out infinite}
+@media (max-width:900px){.aforo{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:-30px;background:var(--wine-deep);font-size:.56rem;padding:5px 9px}}

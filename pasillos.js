@@ -25,9 +25,16 @@
       monio: `<circle cx="23" cy="10" r="6" fill="${t.pelo}"/><path d="M22 19 Q22 7 33 7 Q42 8 43 15 Q36 11 28 16 L26 24 Q22 23 22 19 Z" fill="${t.pelo}"/>`,
       calvo: `<path d="M22 22 Q22 15 26 13 L27 24 Q23 25 22 22 Z" fill="${t.pelo}"/>`,
     }[t.estilo];
-    const pierna = (cls, sombra) => `<g class="${cls}"><path d="M28 98 L37 98 L36 140 L35 174 L29 174 L28 140 Z" fill="${sombra ? t.ropa2 : t.baja}"/>
-        ${t.falda ? `<path d="M29 136 L35 136 L34.5 174 L29.5 174 Z" fill="${t.piel2}"/>` : ""}
-        <path d="M27 174 L36 174 Q42 175 43 180 L27 180 Z" fill="${t.zapato}"/></g>`;
+    // Pierna en dos tramos (muslo y espinilla) para que la rodilla se doble al andar
+    const pierna = (cls, sombra) => {
+      const c = sombra ? t.ropa2 : t.baja;
+      return `<g class="${cls}">
+        <path d="M27.5 97 L37 97 L36.2 137 L29 137 Z" fill="${c}"/>
+        <g class="v-tibia">
+          <path d="M29 135 L36.2 135 L35.4 173 L29.6 173 Z" fill="${t.falda ? t.piel2 : c}"/>
+          <path d="M28 172 L36 172 Q42 173 43 178.5 L28 178.5 Z" fill="${t.zapato}"/>
+        </g></g>`;
+    };
     const brazo = (cls) => `<g class="${cls}"><path d="M28 39 L36 39 L36 70 L34.5 94 L29.5 94 L29 70 Z" fill="url(#${id}r)"/><circle cx="32" cy="97" r="3.6" fill="${t.piel}"/></g>`;
     const apunta = `<g class="v-apunta"><path d="M28 39 L36 39 L36 70 L34.5 92 L29.5 92 L29 70 Z" fill="url(#${id}r)"/>
         <ellipse cx="32" cy="95" rx="3.4" ry="3.8" fill="${t.piel}"/><path d="M32 97 L32.5 105" stroke="${t.piel}" stroke-width="2.4" stroke-linecap="round"/></g>`;
@@ -80,7 +87,7 @@
     }
     function paso(ts) {
       const dt = Math.min(.05, (ts - (ultimo || ts)) / 1000); ultimo = ts;
-      if (activo) { prox -= dt * 1000; if (prox <= 0 && vivos.length < (pas.clientWidth < 600 ? 2 : 3)) { nace(); prox = 3500 + Math.random() * 5500; } }
+      if (activo) { prox -= dt * 1000; if (prox <= 0 && vivos.length < Math.min(pas.clientWidth < 600 ? 2 : 3, window.aforoReal || 3)) { nace(); prox = 3500 + Math.random() * 5500; } }
       const W = pas.clientWidth;
       vivos = vivos.filter(v => {
         if (v.espera > 0) {

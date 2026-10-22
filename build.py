@@ -120,6 +120,7 @@ def pagina_obra(p, todas):
 <script src="/contacto.js"></script>
 <script src="/ficha.js"></script>
 <script src="/luz.js"></script>
+<script src="/presencia.js"></script>
 <script>
 const P = {datos_js};
 document.getElementById("expBox").innerHTML = htmlExpediente(P); ponerExpediente(document);
