@@ -1,7 +1,12 @@
 // Visitantes reales en la galería ahora mismo (Firebase Realtime Database, plan gratuito).
 // Cada visitante abre una conexión y deja una marca que se borra sola al cerrar la página.
-// Mientras FIREBASE sea null, el contador no se muestra y no se carga nada.
-const FIREBASE = null;
+const FIREBASE = {
+  apiKey: "AIzaSyAyTAM50TVRSHK2UEg7Y1kOlv6RM_hN1yI",
+  authDomain: "procedencia-galeria.firebaseapp.com",
+  databaseURL: "https://procedencia-galeria-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "procedencia-galeria",
+  appId: "1:110526941647:web:b9fcfce3ede025ff7e2aba",
+};
 
 (function () {
   if (!FIREBASE) return;
