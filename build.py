@@ -163,6 +163,8 @@ def main():
     lista = "<ul>\n" + "\n".join(
         f'<li><a href="/obra/{p["slug"]}/"><b>{esc(p["t"])}</b><span>{esc(euro(p["price"]))}</span></a></li>' for p in sala) + "\n</ul>"
     idx = re.sub(r"<!--INDICE-->.*?<!--/INDICE-->", lambda m: f"<!--INDICE-->\n{lista}\n<!--/INDICE-->", idx, flags=re.S)
+    firmas = json.load(open(ruta("firmas.json"), encoding="utf-8")) if os.path.exists(ruta("firmas.json")) else []
+    idx = re.sub(r"/\*FIRMAS\*/.*?/\*FIN-FIRMAS\*/", lambda m: "/*FIRMAS*/" + json.dumps(firmas, ensure_ascii=False) + "/*FIN-FIRMAS*/", idx, flags=re.S)
     # Diario de la galería
     import diario
     durls, adelanto = diario.construir(BASE, SITIO, CABECERA, FUENTES, sala)
@@ -181,6 +183,13 @@ def main():
          "".join(f"  <url><loc>{u}</loc><lastmod>{hoy}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(ruta("sitemap.xml"), "w").write(sm)
     open(ruta("robots.txt"), "w").write(f"User-agent: *\nAllow: /\n\nSitemap: {SITIO}/sitemap.xml\n")
+    # Versión en estilos y scripts para que los navegadores no usen copias antiguas
+    import hashlib, glob
+    def ver(nombre): return hashlib.sha1(open(ruta(nombre), "rb").read()).hexdigest()[:8]
+    for f in glob.glob(ruta("**", "*.html"), recursive=True):
+        t = open(f, encoding="utf-8").read()
+        t2 = re.sub(r'(src|href)="/([a-z]+\.(?:js|css))(?:\?v=[0-9a-f]+)?"', lambda m: f'{m.group(1)}="/{m.group(2)}?v={ver(m.group(2))}"', t)
+        if t2 != t: open(f, "w", encoding="utf-8").write(t2)
     print(f"{len(obras)} obras · {len(urls)} páginas en el sitemap")
 
 if __name__ == "__main__":

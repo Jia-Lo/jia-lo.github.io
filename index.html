@@ -15,7 +15,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Galería Procedencia","url":"https://jia-lo.github.io/","inLanguage":"es"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Archivo:wdth,wght@75..100,400..700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/estilo.css">
+<link rel="stylesheet" href="/estilo.css?v=bc7be1c4">
 
 </head>
 <body>
@@ -84,6 +84,44 @@
   </div>
 </section>
 
+<section id="caja" class="gut caja" data-h="f106b6288c23e8ca7de66025e413e3cf807f4b0cef71ec5c134789716e017686">
+  <div class="wrap cj">
+    <div class="cj-txt">
+      <div class="eyebrow">Cada mes, un secreto</div>
+      <h2>La caja <em>fuerte</em></h2>
+      <p>Tres números la abren. Las pistas están escondidas en esta misma web: en las fichas, en los expedientes y en la sala de pujas. Cada mes cambian la combinación y lo que guarda dentro.</p>
+      <ol class="pistas">
+        <li><span>I</span>Las dos últimas cifras del año en que nació el dibujante de la escena de interior.</li>
+        <li><span>II</span>El número que lleva en la serie 21 el cromo de María Calderón, «la Calderona».</li>
+        <li><span>III</span>La hora, en formato de 24 horas, a la que cae el martillo de la puja del mes.</li>
+      </ol>
+      <div class="comb" aria-label="Combinación introducida"><b>··</b><b>··</b><b>··</b></div>
+      <div class="cj-acts"><button type="button" class="btn fijar">Fijar número</button><button type="button" class="btn ghost borrar">Empezar de nuevo</button></div>
+      <p class="caja-msg" aria-live="polite"></p>
+      <p class="cj-ayuda">Gire el dial arrastrando, o con las flechas del teclado, hasta el número y pulse «Fijar número».</p>
+    </div>
+    <div class="caja-escena">
+      <div class="caja-cuerpo">
+        <div class="caja-interior botin" aria-hidden="true">
+          <div class="ficha-cofre"><span class="fc-k">Código de coleccionista</span><b>COFRE · 1026</b><span class="fc-n">Menciónelo al reservar cualquier obra: la galería le guarda un detalle.</span></div>
+          <p class="botin-txt">Usted ha abierto la caja de octubre. En noviembre, nueva combinación.</p>
+        </div>
+        <div class="caja-puerta">
+          <div class="placa-caja">Procedencia · Alcalá</div>
+          <div class="dial" role="slider" tabindex="0" aria-label="Dial de la combinación" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0">
+            <div class="dial-aro"></div>
+            <div class="dial-disco"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" class="dc-fondo"/><g class="marcas"></g><circle cx="100" cy="100" r="44" class="dc-centro"/><circle cx="100" cy="100" r="16" class="dc-pomo"/></svg></div>
+            <span class="dial-indice" aria-hidden="true"></span>
+            <span class="dial-lectura" aria-hidden="true">00</span>
+          </div>
+          <div class="manilla" aria-hidden="true"></div>
+          <span class="bisagra b1"></span><span class="bisagra b2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="puja-mes" class="gut puja-mes" hidden>
   <div class="wrap pm">
     <div class="pm-txt">
@@ -93,6 +131,25 @@
       <div id="pmObra"></div>
     </div>
     <div id="pmSala"></div>
+  </div>
+</section>
+
+<section id="restauracion" class="gut restauracion" data-obra="PRC-002">
+  <div class="wrap rs">
+    <div class="rs-txt">
+      <div class="eyebrow">Mesa de restauración</div>
+      <h2>Limpie <em>la estampa</em></h2>
+      <p>Así llegan muchas obras de los vaciados: con años de humo, polvo y barniz amarillento. Pase el hisopo por encima, con el ratón o con el dedo, hasta devolverle sus colores.</p>
+      <div class="rest-medidor" aria-hidden="true"><i></i></div>
+      <p class="rest-estado">Limpio: <b class="rest-cifra">0 %</b></p>
+      <div class="rest-fin" hidden><p class="hand">Lista para colgar.</p></div>
+      <div class="cj-acts"><button type="button" class="btn ghost rest-otra">Volver a ensuciarla</button><button type="button" class="btn rest-ver">Ver esta obra</button></div>
+      <p class="rest-nota">El velo es una simulación para el juego. La obra que se vende es la de la fotografía, tal como está hoy.</p>
+    </div>
+    <div class="mesa">
+      <div class="rest-obra"><img alt="" decoding="async"><canvas tabindex="0" aria-label="Superficie de la obra para limpiar. Pulse Intro para limpiarla de una vez."></canvas><span class="hisopo" aria-hidden="true"></span></div>
+      <span class="frasco" aria-hidden="true"></span><span class="algodones" aria-hidden="true"></span>
+    </div>
   </div>
 </section>
 
@@ -127,6 +184,39 @@
       <div class="step"><div class="n">2</div><h3>La elección</h3><p>Busco lo pequeño y lo especial: estampas antiguas, marcos con carácter, obras que se pasan por alto.</p></div>
       <div class="step"><div class="n">3</div><h3>La revisión</h3><p>Se estudia cada pieza: firmas en la plancha, técnica, época, estado del papel y del marco. Nada se altera.</p></div>
       <div class="step"><div class="n">4</div><h3>La sala</h3><p>Fotografía y ficha con autor, técnica y época, para que sepas exactamente qué te llevas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="libro" class="gut libro">
+  <div class="wrap">
+    <div class="sala-head"><h2>El libro <em>de visitas</em></h2><p>Firme antes de irse.</p></div>
+    <div class="atril">
+      <div class="libro-abierto">
+        <div class="pagina hoja-izq">
+          <p class="pag-k">Firmas de la galería</p>
+          <ol class="pag-firmas"></ol>
+          <div class="libro-nav"><button type="button" class="ant" aria-label="Página anterior">←</button><span class="libro-pag"></span><button type="button" class="sig" aria-label="Página siguiente">→</button></div>
+        </div>
+        <div class="pagina hoja-der">
+          <p class="pag-k">Su firma</p>
+          <div class="firma-vista" aria-live="polite"></div>
+          <svg class="pluma" viewBox="0 0 40 140" aria-hidden="true"><defs><linearGradient id="plumaG" x1="0" x2="1"><stop offset="0" stop-color="#d9d2c4"/><stop offset=".5" stop-color="#fbf8f2"/><stop offset="1" stop-color="#cfc6b4"/></linearGradient></defs>
+            <path d="M20 4 C34 22 36 58 24 100 L20 108 L17 100 C6 60 6 24 20 4 Z" fill="url(#plumaG)" stroke="#b8ad98" stroke-width=".8"/>
+            <path d="M20 8 L20 112" stroke="#8a7a68" stroke-width="1.2"/>
+            <path d="M20 30 L30 22 M20 44 L32 36 M20 58 L31 52 M20 72 L28 68 M20 30 L10 22 M20 44 L9 37 M20 58 L10 53 M20 72 L12 69" stroke="#c9bfab" stroke-width=".7"/>
+            <path d="M18.5 108 L21.5 108 L20.6 128 L20 136 L19.4 128 Z" fill="#3a2a1e"/><path d="M20 128 L20 136" stroke="#c9a24a" stroke-width=".8"/></svg>
+          <form id="libroForm" class="lv-form" novalidate>
+            <label for="lvFrase">Una frase para el libro</label>
+            <textarea id="lvFrase" maxlength="140" rows="2" placeholder="Lo que se lleva de la visita"></textarea>
+            <div class="lv-fila"><div><label for="lvNombre">Nombre o apodo</label><input id="lvNombre" maxlength="32" autocomplete="off"></div>
+            <div><label for="lvDesde">Desde dónde <small>(opcional)</small></label><input id="lvDesde" maxlength="32" autocomplete="off"></div></div>
+            <p class="lv-err" aria-live="polite"></p>
+            <button class="btn" type="submit">Firmar con pluma</button>
+            <p class="lv-nota">Las firmas se publican en el libro cuando la galería las recibe. No escriba datos personales.</p>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -167,13 +257,14 @@
 
 <div class="room gut" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle"></div>
 
-<script src="/contacto.js"></script>
-<script src="/ficha.js"></script>
-<script src="/guardia.js" defer></script>
-<script src="/luz.js"></script>
+<script src="/contacto.js?v=7736da5c"></script>
+<script src="/ficha.js?v=69e94515"></script>
+<script src="/guardia.js?v=7a837c22" defer></script>
+<script src="/luz.js?v=2d9faf05"></script>
 <script>
 const GABINETE = /*GABINETE*/[]/*FIN-GABINETE*/;
 const GAB_HASH = "a3a5d7d8ea6d0078a495d25e564d9c3ea2eee1a1240da0282da50cf8666f4009";
+const FIRMAS = /*FIRMAS*/[{"nombre": "Galería Procedencia", "desde": "Alcalá de Henares", "frase": "Este libro queda abierto para todos los que pasen por la sala.", "fecha": "2026-10-22"}]/*FIN-FIRMAS*/;
 const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "estado": "disponible", "modo": "vitrina", "vendida": "", "notas": [[34, 64, "«Drawn by J. P. Neale»: el dibujante"], [50, 66.5, "Montacute House, fachada este, Somersetshire"], [66, 64, "«Engraved by W. Wallis»: el grabador"], [50, 70.5, "Pie de imprenta: Londres, edición de Neale"]], "cadena": ["Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-001-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la etiqueta italiana «Certificato di garanzia»: estampa original del siglo XIX, coloreada a mano, procedente de libros de la época.", "detalle": "obras/exp/PRC-001-detalle.jpg", "detalle_txt": "Pie de la lámina: «Drawn by J. P. Neale», «Engraved by W. Wallis», el título y el pie de imprenta de Londres, con Sherwood & Co. en Paternoster Row.", "notas": ["El pie de imprenta con Sherwood & Co. corresponde a la segunda serie de las vistas de Neale, publicada entre 1824 y 1829.", "Lámina con su margen original y el título grabado en la plancha.", "Coloreado a mano sobre el grabado."], "refs": [["Segunda serie de «Views of the Seats», 1824–1829, digitalizada (Getty Research Institute y Universidad de Michigan)", "HathiTrust", "https://catalog.hathitrust.org/Record/000153641"], ["Primera serie de la obra de Neale, 1818–1823, en el Yale Center for British Art", "Yale Center for British Art", "https://collections.britishart.yale.edu/catalog/orbis:3442767"]]}, "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[27, 70.5, "«W. H. Bartlett»: el dibujante viajero"], [75, 70.5, "«Owen»: el grabador"], [37, 37, "La cúpula de los Four Courts"], [66, 55, "Puente de tres arcos sobre el Liffey"]], "cadena": ["Grabada por Owen sobre dibujo de W. H. Bartlett; la misma estampa se publicó en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844)", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-002-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la misma etiqueta italiana «Certificato di garanzia» del enmarcador.", "detalle": "obras/exp/PRC-002-detalle.jpg", "detalle_txt": "Firmas de plancha bajo la imagen: «W. H. Bartlett» a la izquierda y «Owen» a la derecha.", "notas": ["La Biblioteca Nacional de Irlanda cataloga esta misma composición de Bartlett grabada por Owen con el título «The Four Law Courts, Dublin».", "Allí figura publicada en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844); este ejemplar procede probablemente de esa obra o de una de sus ediciones.", "Coloreado a mano sobre el grabado."], "refs": [["«The Four Law Courts, Dublin», Bartlett y Owen, en la Biblioteca Nacional de Irlanda", "National Library of Ireland", "https://catalogue.nli.ie/Record/vtls000542648"]]}, "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[36, 63.5, "«V. Kininger del.»: dibujó la escena"], [64, 63.5, "«Cl. Kohl sc. W.»: grabado por Clemens Kohl en Viena"], [50, 25, "Papel hecho a mano, con la huella de la plancha"]], "cadena": ["Dibujada por V. G. Kininger y grabada por Clemens Kohl en Viena como ilustración de libro, c. 1790–1810", "Montada sobre papel hecho a mano y enmarcada", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-003-reverso.jpg", "reverso_txt": "Reverso cerrado con papel kraft y cinta, con alcayata triangular de latón.", "detalle": "obras/exp/PRC-003-detalle.jpg", "detalle_txt": "Firmas de plancha: «V. Kininger del.» (lo dibujó Kininger) y «Cl. Kohl sc. W.» (lo grabó Clemens Kohl en Viena).", "notas": ["Vincenz Georg Kininger (1767–1851) dibujó numerosas ilustraciones de libro grabadas en Viena.", "El MAK de Viena conserva ilustraciones de libro con la misma pareja de firmas: «V. Kininger del.» y «Cl. Kohl sc.»", "Estampa montada sobre papel hecho a mano, con la huella de la plancha visible."], "refs": [["Ilustración de libro de Kininger grabada por Clemens Kohl, en la colección del MAK", "MAK · Museum für angewandte Kunst, Viena", "https://sammlung.mak.at/en/collect/buchillustration_210703"]]}, "puja": {"cierre": "2026-11-01T20:00:00+01:00", "cierre_txt": "domingo 1 de noviembre, a las 20:00", "salida": 50, "incremento": 5, "pujas": []}, "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado de Clemens Kohl", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851) y grabada por Clemens Kohl en Viena. Bajo la imagen se leen las firmas de plancha: «V. Kininger del.» señala al dibujante y «Cl. Kohl sc. W.», al grabador y la ciudad. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-004-reverso.jpg", "reverso_txt": "Reverso de cartón con cinta de papel y una etiqueta de cartulina antigua.", "detalle": "obras/exp/PRC-004-detalle.jpg", "detalle_txt": "Cromo nº 35 de la serie 21, sección Francia: la duquesa de Étampes. Abajo a la derecha, la marca del impresor «SMH».", "notas": ["Los cuatro cromos pertenecen a la sección Francia de la serie 21: números 35, 46, 49 y 65.", "Cada cromo lleva la marca de impresor «SMH».", "Cromolitografía: impresión en color por planchas sucesivas, típica de los cromos de finales del XIX y principios del XX."], "refs": []}, "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, secciones Oriente, España, Francia e Inglaterra, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-005-reverso.jpg", "reverso_txt": "Reverso de cartón con cinta de papel y alcayata lateral.", "detalle": "obras/exp/PRC-005-detalle.jpg", "detalle_txt": "Cromo nº 57 de la serie 21, sección España: María Calderón, «la Calderona», amiga de Felipe IV.", "notas": ["Cuatro cromos de la serie 21, uno de cada sección: Oriente (nº 20), España (nº 57), Francia (nº 46) e Inglaterra (nº 73).", "La marquesa de Verneuil (Francia, nº 46) aparece también en el otro marco de cromos.", "El cromo de Inglaterra llama «Emma Leona» a Emma Lyon, más tarde lady Hamilton."], "refs": []}, "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-006-reverso.jpg", "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.", "detalle": "", "detalle_txt": "", "notas": ["Reproducción impresa del siglo XX de la vista de Canaletto de la plaza de San Marcos: superficie lisa, sin relieve de pincel.", "El valor de la pieza está en el marco florentino lacado y decorado a mano, que hace pareja con la vista de la Salute."], "refs": []}, "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-007-reverso.jpg", "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.", "detalle": "", "detalle_txt": "", "notas": ["Reproducción impresa del siglo XX de la vista de Canaletto de la entrada al Gran Canal con Santa María de la Salute.", "Mismo marco florentino que la vista de San Marcos, con la que forma pareja."], "refs": []}, "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const ESTADO = ESTADOS;
@@ -324,13 +415,14 @@ function apagar(){
   if(oscuro)return;
   oscuro=document.createElement("div");oscuro.className="oscuridad";oscuro.setAttribute("aria-hidden","true");
   cartel=document.createElement("div");cartel.className="cartel-noche";cartel.setAttribute("role","status");
-  cartel.innerHTML=`<p><b>La galería está cerrada</b>Puede recorrer la sala con la linterna${matchMedia("(hover: none)").matches?": deslice el dedo por la pantalla":": mueva el ratón"}.</p><button type="button" id="encender">Encender las luces</button>`;
+  cartel.innerHTML=`<p><b>La galería está cerrada</b>Los láseres vigilan la sala. Puede recorrerla con la linterna, pero no toque los haces${matchMedia("(hover: none)").matches?": deslice el dedo por la pantalla":": mueva el ratón"}.</p><button type="button" id="encender">Encender las luces</button>`;
   document.body.append(oscuro,cartel);
   document.getElementById("encender").onclick=()=>{store.set("luces","on");encender()};
   document.getElementById("lucesLink").textContent="Encender las luces";
+  setTimeout(()=>{if(oscuro&&window.Seguridad)Seguridad.activar(true)},0);
 }
 function encender(){
-  if(!oscuro)return;oscuro.remove();cartel.remove();oscuro=cartel=null;
+  if(!oscuro)return;oscuro.remove();cartel.remove();oscuro=cartel=null;if(window.Seguridad)Seguridad.desactivar();
   document.getElementById("lucesLink").textContent="Visitar la sala de noche";
 }
 const linterna=(x,y)=>{if(oscuro){oscuro.style.setProperty("--lx",x+"px");oscuro.style.setProperty("--ly",y+"px")}};
@@ -387,6 +479,10 @@ document.getElementById("gabForm").addEventListener("submit",async ev=>{
   }
 });
 </script>
-<script src="/pasillos.js"></script>
+<script src="/pasillos.js?v=fa3f6b87"></script>
+<script src="/laseres.js?v=c6c51101"></script>
+<script src="/restauracion.js?v=4cba291e"></script>
+<script src="/libro.js?v=89c6cf77"></script>
+<script src="/caja.js?v=e9779de0"></script>
 </body>
 </html>
