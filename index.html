@@ -141,7 +141,7 @@ const estado = p => p.estado || "disponible";
 
 function lienzo(p, conCortina){
   if(estado(p)==="vendido") return `<span class="lienzo vendida"><img src="/${p.thumb}" alt="" width="${p.tw}" height="${p.th}"><span class="marca" aria-hidden="true"></span></span>`;
-  return `<span class="lienzo"><img src="/${p.thumb}" alt="${p.t}, enmarcado" width="${p.tw}" height="${p.th}">`+
+  return `<span class="lienzo"><span class="lampara" aria-hidden="true"><span class="haz-l"></span><span class="tallo"></span><span class="pantalla"></span></span><img src="/${p.thumb}" alt="${p.t}, enmarcado" width="${p.tw}" height="${p.th}">`+
     (conCortina?`<span class="veil" aria-hidden="true"><span class="cl"></span><span class="cr"></span><span class="val"></span></span>`:"")+
     (p.modo==="cordon"?`<span class="cord" aria-hidden="true"></span>`:"")+`</span>`;
 }
