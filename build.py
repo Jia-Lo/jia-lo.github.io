@@ -166,6 +166,10 @@ def main():
     idx = re.sub(r"<!--INDICE-->.*?<!--/INDICE-->", lambda m: f"<!--INDICE-->\n{lista}\n<!--/INDICE-->", idx, flags=re.S)
     firmas = json.load(open(ruta("firmas.json"), encoding="utf-8")) if os.path.exists(ruta("firmas.json")) else []
     idx = re.sub(r"/\*FIRMAS\*/.*?/\*FIN-FIRMAS\*/", lambda m: "/*FIRMAS*/" + json.dumps(firmas, ensure_ascii=False) + "/*FIN-FIRMAS*/", idx, flags=re.S)
+    # Web hermana: el pasillo infinito
+    pas = open(ruta("pasillo", "index.html"), encoding="utf-8").read()
+    pas = re.sub(r"/\*OBRAS\*/.*?/\*FIN-OBRAS\*/", lambda m: f"/*OBRAS*/{data}/*FIN-OBRAS*/", pas, flags=re.S)
+    open(ruta("pasillo", "index.html"), "w", encoding="utf-8").write(pas)
     # Diario de la galería
     import diario
     durls, adelanto = diario.construir(BASE, SITIO, CABECERA, FUENTES, sala)
@@ -179,7 +183,7 @@ def main():
 
     # Sitemap y robots
     hoy = date.today().isoformat()
-    urls = [f"{SITIO}/"] + [f"{SITIO}/obra/{p['slug']}/" for p in sala] + [SITIO + u for u in durls]
+    urls = [f"{SITIO}/", f"{SITIO}/pasillo/"] + [f"{SITIO}/obra/{p['slug']}/" for p in sala] + [SITIO + u for u in durls]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + \
          "".join(f"  <url><loc>{u}</loc><lastmod>{hoy}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(ruta("sitemap.xml"), "w").write(sm)
@@ -189,7 +193,7 @@ def main():
     def ver(nombre): return hashlib.sha1(open(ruta(nombre), "rb").read()).hexdigest()[:8]
     for f in glob.glob(ruta("**", "*.html"), recursive=True):
         t = open(f, encoding="utf-8").read()
-        t2 = re.sub(r'(src|href)="/([a-z]+\.(?:js|css))(?:\?v=[0-9a-f]+)?"', lambda m: f'{m.group(1)}="/{m.group(2)}?v={ver(m.group(2))}"', t)
+        t2 = re.sub(r'(src|href)="/((?:pasillo/)?[a-z]+\.(?:js|css))(?:\?v=[0-9a-f]+)?"', lambda m: f'{m.group(1)}="/{m.group(2)}?v={ver(m.group(2))}"', t)
         if t2 != t: open(f, "w", encoding="utf-8").write(t2)
     print(f"{len(obras)} obras · {len(urls)} páginas en el sitemap")
 

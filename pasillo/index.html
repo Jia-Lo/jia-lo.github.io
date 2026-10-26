@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El pasillo infinito · Galería Procedencia</title>
+<meta name="description" content="Un viaje desde el espacio hasta el taller del grabador y un pasillo sin fin donde un trabajador de sala le acerca cada obra. Grabados antiguos y estampas a la venta.">
+<meta property="og:title" content="El pasillo infinito · Galería Procedencia">
+<meta property="og:description" content="Del espacio al taller del grabador, y un pasillo sin fin con obras antiguas a la venta.">
+<meta property="og:image" content="https://jia-lo.github.io/obras/montacute.jpg">
+<meta property="og:url" content="https://jia-lo.github.io/pasillo/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07080c">
+<link rel="canonical" href="https://jia-lo.github.io/pasillo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Archivo:wdth,wght@75..100,400..700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/estilo.css?v=3e77e54a">
+<link rel="stylesheet" href="/pasillo/pasillo.css?v=89a6fa6d">
+</head>
+<body class="pasillo-app">
+
+<!-- 1 · Viaje desde el espacio -->
+<section class="escena" id="esc-espacio" aria-label="Viaje desde el espacio hasta Alcalá de Henares">
+  <canvas id="globo"></canvas>
+  <p class="rotulo" id="rotuloGeo" aria-live="polite"></p>
+</section>
+
+<!-- 2 · Fachada ilustrada -->
+<section class="escena" id="esc-fachada" hidden aria-label="Fachada ilustrada de la galería, de noche">
+  <div class="fachada-cam" id="fachadaCam"><svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="fachadaSvg"></svg></div>
+  <p class="nota-ilustracion">Alcalá de Henares · ilustración</p>
+</section>
+
+<!-- 3 · Taller del grabador -->
+<section class="escena" id="esc-taller" hidden aria-label="Taller del grabador">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="tallerSvg"></svg>
+  <div class="dialogo" id="dialogo" hidden>
+    <p class="dlg-quien">El grabador</p>
+    <p class="dlg-txt" id="dlgTxt"></p>
+    <div class="dlg-opc" id="dlgOpc"></div>
+  </div>
+</section>
+
+<!-- 4 · El pasillo infinito -->
+<section class="escena" id="esc-pasillo" hidden aria-label="El pasillo infinito de la galería">
+  <div class="visor3d" id="visor3d"><div class="mundo" id="mundo"></div></div>
+  <div class="niebla" aria-hidden="true"></div>
+  <div class="hud">
+    <a class="hud-marca" href="/" title="Volver a la galería principal"><span class="sello-marca" aria-hidden="true">P</span><span><b>Procedencia</b><small>El pasillo infinito</small></span></a>
+    <div class="hud-der"><button type="button" class="hud-btn" id="btnLista">Todas las obras</button><button type="button" class="hud-btn" id="btnGustos">Cambiar mis gustos</button></div>
+  </div>
+  <p class="hud-pie" id="hudPie">Deslice o use la rueda para avanzar · toque una obra para que se la acerquen</p>
+  <div class="hud-flechas"><button type="button" id="btnAtras" aria-label="Retroceder">‹</button><button type="button" id="btnAvanza" aria-label="Avanzar">›</button></div>
+</section>
+
+<!-- Trabajador de sala, escalera y obra descolgada -->
+<div class="escena-trabajo" id="trabajo" hidden aria-hidden="true">
+  <div class="trabajador" id="trabajador"></div>
+  <div class="obra-clon" id="obraClon"><img alt=""></div>
+  <div class="franjas"><i></i><i></i></div>
+</div>
+
+<!-- Vista de la obra a pantalla completa -->
+<section class="vista" id="vista" hidden role="dialog" aria-modal="true" aria-labelledby="vTitulo">
+  <div class="vista-escenario stage" id="vistaStage"><img alt="" id="vistaImg"></div>
+  <aside class="presenta">
+    <div class="presenta-quien"><span class="mini-trab" aria-hidden="true"></span><span>Le presenta la obra<br><b>el trabajador de sala</b></span></div>
+    <p class="inv" id="vInv"></p>
+    <h2 id="vTitulo"></h2>
+    <p class="art" id="vAutor"></p>
+    <ul class="vista-datos" id="vDatos"></ul>
+    <p class="story" id="vHistoria"></p>
+    <div id="vPuja"></div>
+    <div class="priceline"><span class="price" id="vPrecio"></span><span class="status" id="vEstado"><i></i></span></div>
+    <div class="acts"><button class="btn" type="button" id="vReservar"></button><button class="btn ghost" type="button" id="vCert">Certificado</button><a class="btn ghost" id="vFicha" href="#">Ficha completa</a></div>
+  </aside>
+  <button type="button" class="vista-cerrar" id="vCerrar">Devolver la obra a su sitio</button>
+</section>
+
+<!-- Lista accesible de todas las obras -->
+<div class="lista-obras" id="listaObras" hidden role="dialog" aria-modal="true" aria-labelledby="listaT">
+  <div class="lo-caja"><button type="button" class="mclose" id="listaCerrar" aria-label="Cerrar">✕</button><h2 id="listaT">Las obras del pasillo</h2><ol id="listaUl"></ol></div>
+</div>
+
+<button type="button" class="saltar" id="saltar">Saltar la entrada →</button>
+
+<script>
+const FIRMAS = [];
+const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "obras/montacute.jpg", "thumb": "obras/mini/montacute.jpg", "tw": 720, "th": 584, "estado": "disponible", "modo": "vitrina", "vendida": "", "notas": [[34, 64, "«Drawn by J. P. Neale»: el dibujante"], [50, 66.5, "Montacute House, fachada este, Somersetshire"], [66, 64, "«Engraved by W. Wallis»: el grabador"], [50, 70.5, "Pie de imprenta: Londres, edición de Neale"]], "cadena": ["Dibujada por J. P. Neale y grabada por W. Wallis para la serie de casas señoriales de Neale, Londres, 1818–1831", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-001-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la etiqueta italiana «Certificato di garanzia»: estampa original del siglo XIX, coloreada a mano, procedente de libros de la época.", "detalle": "obras/exp/PRC-001-detalle.jpg", "detalle_txt": "Pie de la lámina: «Drawn by J. P. Neale», «Engraved by W. Wallis», el título y el pie de imprenta de Londres, con Sherwood & Co. en Paternoster Row.", "notas": ["El pie de imprenta con Sherwood & Co. corresponde a la segunda serie de las vistas de Neale, publicada entre 1824 y 1829.", "Lámina con su margen original y el título grabado en la plancha.", "Coloreado a mano sobre el grabado."], "refs": [["Segunda serie de «Views of the Seats», 1824–1829, digitalizada (Getty Research Institute y Universidad de Michigan)", "HathiTrust", "https://catalog.hathitrust.org/Record/000153641"], ["Primera serie de la obra de Neale, 1818–1823, en el Yale Center for British Art", "Yale Center for British Art", "https://collections.britishart.yale.edu/catalog/orbis:3442767"]]}, "t": "Montacute House, fachada este", "a": "Dibujo de J. P. Neale · grabado de W. Wallis", "y": "Londres, década de 1820", "tech": "Grabado coloreado a mano", "marco": "Madera dorada envejecida con esquinas talladas, paspartú doble", "story": "Lámina de la serie de John Preston Neale sobre las casas señoriales de Inglaterra, publicada en Londres entre 1818 y 1831. Montacute, en Somerset, es una mansión isabelina de finales del siglo XVI. En el margen se leen el título, los nombres del dibujante y del grabador y el pie de imprenta.", "hand": "Una casa señorial que acaba saliendo de otra casa.", "price": 95}, {"id": "PRC-002", "slug": "dublin-four-courts", "img": "obras/four-courts.jpg", "thumb": "obras/mini/four-courts.jpg", "tw": 720, "th": 573, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[27, 70.5, "«W. H. Bartlett»: el dibujante viajero"], [75, 70.5, "«Owen»: el grabador"], [37, 37, "La cúpula de los Four Courts"], [66, 55, "Puente de tres arcos sobre el Liffey"]], "cadena": ["Grabada por Owen sobre dibujo de W. H. Bartlett; la misma estampa se publicó en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844)", "Coloreada a mano", "Enmarcada en Italia: etiqueta de garantía al dorso que la certifica como estampa original del siglo XIX", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-002-reverso.jpg", "reverso_txt": "Reverso con papel de flor de lis y la misma etiqueta italiana «Certificato di garanzia» del enmarcador.", "detalle": "obras/exp/PRC-002-detalle.jpg", "detalle_txt": "Firmas de plancha bajo la imagen: «W. H. Bartlett» a la izquierda y «Owen» a la derecha.", "notas": ["La Biblioteca Nacional de Irlanda cataloga esta misma composición de Bartlett grabada por Owen con el título «The Four Law Courts, Dublin».", "Allí figura publicada en «Ireland Illustrated» (Londres, Fisher, Son & Co., 1844); este ejemplar procede probablemente de esa obra o de una de sus ediciones.", "Coloreado a mano sobre el grabado."], "refs": [["«The Four Law Courts, Dublin», Bartlett y Owen, en la Biblioteca Nacional de Irlanda", "National Library of Ireland", "https://catalogue.nli.ie/Record/vtls000542648"]]}, "t": "Dublín, los Four Courts sobre el Liffey", "a": "Dibujo de W. H. Bartlett · grabado de Owen", "y": "c. 1840–1850", "tech": "Grabado al acero coloreado a mano", "marco": "Madera negra con filete dorado, paspartú", "story": "Vista de los Four Courts, el palacio de justicia de Dublín, con su gran cúpula sobre columnas, el muelle del río Liffey, el puente de tres arcos y las barcas. Bajo la imagen se leen las firmas de plancha: W. H. Bartlett, el dibujante viajero inglés que ilustró libros de vistas de Irlanda, y Owen, el grabador. Al dorso lleva la etiqueta del enmarcador italiano que la certifica como estampa original del XIX procedente de libros de la época, coloreada a mano.", "hand": "La cúpula, el puente y las barcas, a la luz de una tarde gris.", "price": 85}, {"id": "PRC-003", "slug": "kininger-escena-de-interior", "img": "obras/kininger.jpg", "thumb": "obras/mini/kininger.jpg", "tw": 720, "th": 527, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[36, 63.5, "«V. Kininger del.»: dibujó la escena"], [64, 63.5, "«Cl. Kohl sc. W.»: grabado por Clemens Kohl en Viena"], [50, 25, "Papel hecho a mano, con la huella de la plancha"]], "cadena": ["Dibujada por V. G. Kininger y grabada por Clemens Kohl en Viena como ilustración de libro, c. 1790–1810", "Montada sobre papel hecho a mano y enmarcada", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-003-reverso.jpg", "reverso_txt": "Reverso cerrado con papel kraft y cinta, con alcayata triangular de latón.", "detalle": "obras/exp/PRC-003-detalle.jpg", "detalle_txt": "Firmas de plancha: «V. Kininger del.» (lo dibujó Kininger) y «Cl. Kohl sc. W.» (lo grabó Clemens Kohl en Viena).", "notas": ["Vincenz Georg Kininger (1767–1851) dibujó numerosas ilustraciones de libro grabadas en Viena.", "El MAK de Viena conserva ilustraciones de libro con la misma pareja de firmas: «V. Kininger del.» y «Cl. Kohl sc.»", "Estampa montada sobre papel hecho a mano, con la huella de la plancha visible."], "refs": [["Ilustración de libro de Kininger grabada por Clemens Kohl, en la colección del MAK", "MAK · Museum für angewandte Kunst, Viena", "https://sammlung.mak.at/en/collect/buchillustration_210703"]]}, "puja": {"cierre": "2026-11-01T20:00:00+01:00", "cierre_txt": "domingo 1 de noviembre, a las 20:00", "salida": 50, "incremento": 5, "pujas": []}, "t": "Escena de interior con dama, niño y caballero", "a": "Dibujo de V. G. Kininger · grabado de Clemens Kohl", "y": "c. 1790–1810", "tech": "Grabado calcográfico, ilustración de libro", "marco": "Moldura negra y dorada, estampa montada sobre papel hecho a mano", "story": "Ilustración de libro dibujada por Vincenz Georg Kininger (1767–1851) y grabada por Clemens Kohl en Viena. Bajo la imagen se leen las firmas de plancha: «V. Kininger del.» señala al dibujante y «Cl. Kohl sc. W.», al grabador y la ciudad. Una escena teatral, casi de novela, en un salón gótico.", "hand": "Más de dos siglos y la escena sigue en vilo.", "price": 70}, {"id": "PRC-004", "slug": "cromos-favoritas-corte-francia", "img": "obras/cromos-francia.jpg", "thumb": "obras/mini/cromos-francia.jpg", "tw": 609, "th": 720, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [[33, 24.5, "«S.e 21 · Francia»: serie y sección de la colección"], [47, 46.5, "«SMH»: marca del impresor"], [38, 44.5, "La duquesa de Étampes, amiga de Francisco I"]], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, sección Francia, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-004-reverso.jpg", "reverso_txt": "Reverso de cartón con cinta de papel y una etiqueta de cartulina antigua.", "detalle": "obras/exp/PRC-004-detalle.jpg", "detalle_txt": "Cromo nº 35 de la serie 21, sección Francia: la duquesa de Étampes. Abajo a la derecha, la marca del impresor «SMH».", "notas": ["Los cuatro cromos pertenecen a la sección Francia de la serie 21: números 35, 46, 49 y 65.", "Cada cromo lleva la marca de impresor «SMH».", "Cromolitografía: impresión en color por planchas sucesivas, típica de los cromos de finales del XIX y principios del XX."], "refs": []}, "t": "Cuatro favoritas de la corte de Francia", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra, fondo de papel rojo", "story": "Cuatro cromos españoles de una colección de mujeres célebres de la historia, todos de la sección Francia: la duquesa de Étampes, amiga de Francisco I; Enriqueta d'Entraigues, marquesa de Verneuil, amiga de Enrique IV; María Touchet, amiga de Carlos IX, y la duquesa de Châteauroux, amiga de Luis XV. Cada cromo lleva su número de serie y una orla con jarrones, joyas y cartas de amor.", "hand": "Cuatro siglos de secretos de palacio en un solo marco.", "price": 55}, {"id": "PRC-005", "slug": "cromos-mujeres-celebres-cuatro-cortes", "img": "obras/cromos-cuatro-paises.jpg", "thumb": "obras/mini/cromos-cuatro-paises.jpg", "tw": 720, "th": 371, "estado": "disponible", "modo": "telon", "vendida": "", "notas": [], "cadena": ["Impresos en España por «SMH» como cromos de la serie 21, secciones Oriente, España, Francia e Inglaterra, c. 1890–1915", "Reunidos y enmarcados sobre papel rojo", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-005-reverso.jpg", "reverso_txt": "Reverso de cartón con cinta de papel y alcayata lateral.", "detalle": "obras/exp/PRC-005-detalle.jpg", "detalle_txt": "Cromo nº 57 de la serie 21, sección España: María Calderón, «la Calderona», amiga de Felipe IV.", "notas": ["Cuatro cromos de la serie 21, uno de cada sección: Oriente (nº 20), España (nº 57), Francia (nº 46) e Inglaterra (nº 73).", "La marquesa de Verneuil (Francia, nº 46) aparece también en el otro marco de cromos.", "El cromo de Inglaterra llama «Emma Leona» a Emma Lyon, más tarde lady Hamilton."], "refs": []}, "t": "Mujeres célebres de cuatro cortes", "a": "Cromos de la serie 21 · impresor «SMH»", "y": "c. 1890–1915", "tech": "Cromolitografía, cuatro cromos", "marco": "Moldura negra apaisada, fondo de papel rojo", "story": "Cuatro cromos de la misma colección, uno por cada sección: Antonina, mujer de Belisario (Oriente); María Calderón, «la Calderona», amiga de Felipe IV (España); la marquesa de Verneuil (Francia), y Emma Lyon, más tarde lady Hamilton, que el cromo llama «Emma Leona» (Inglaterra). Un recorrido por cuatro cortes de Europa y Oriente.", "hand": "De Bizancio a Londres, pasando por el Madrid de Felipe IV.", "price": 55}, {"id": "PRC-006", "slug": "venecia-plaza-san-marcos", "img": "obras/venecia-san-marco.jpg", "thumb": "obras/mini/venecia-san-marco.jpg", "tw": 720, "th": 581, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-006-reverso.jpg", "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.", "detalle": "", "detalle_txt": "", "notas": ["Reproducción impresa del siglo XX de la vista de Canaletto de la plaza de San Marcos: superficie lisa, sin relieve de pincel.", "El valor de la pieza está en el marco florentino lacado y decorado a mano, que hace pareja con la vista de la Salute."], "refs": []}, "t": "Venecia, la plaza de San Marcos", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de una de las vistas más célebres de Giovanni Antonio Canal, Canaletto (1697–1768): la plaza de San Marcos con la basílica, el campanile y las procuratías. Lo que hace especial la pieza es el marco italiano, lacado en verde y decorado a mano con volutas y lises doradas. Forma pareja con la vista de la Salute.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}, {"id": "PRC-007", "slug": "venecia-gran-canal-salute", "img": "obras/venecia-salute.jpg", "thumb": "obras/mini/venecia-salute.jpg", "tw": 720, "th": 620, "estado": "disponible", "modo": "cordon", "vendida": "", "notas": [], "cadena": ["Reproducción del siglo XX de la vista de Canaletto (1697–1768)", "Montada en marco florentino lacado en verde y decorado a mano", "Colección particular, España"], "gabinete": false, "exp": {"reverso": "obras/exp/PRC-007-reverso.jpg", "reverso_txt": "Reverso de tablero de fibra fijado con puntas al marco florentino, con armella para colgar.", "detalle": "", "detalle_txt": "", "notas": ["Reproducción impresa del siglo XX de la vista de Canaletto de la entrada al Gran Canal con Santa María de la Salute.", "Mismo marco florentino que la vista de San Marcos, con la que forma pareja."], "refs": []}, "t": "Venecia, entrada al Gran Canal y la Salute", "a": "Según Canaletto", "y": "Siglo XX", "tech": "Reproducción sobre tabla con textura de lienzo", "marco": "Marco de estilo florentino, lacado en verde con decoración dorada a mano", "story": "Reproducción de la vista de Canaletto de la entrada al Gran Canal, con la cúpula de Santa María de la Salute, la escalinata y las góndolas. Mismo marco italiano lacado en verde y dorado que la vista de San Marcos, con la que forma pareja.", "hand": "Se venden también en pareja: 80 € las dos.", "price": 45}]/*FIN-OBRAS*/;
+</script>
+<script src="/contacto.js?v=7736da5c"></script>
+<script src="/ficha.js?v=69e94515"></script>
+<script src="/presencia.js?v=b04f4b1f"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="/pasillo/pasillo.js?v=004bd2ee"></script>
+</body>
+</html>

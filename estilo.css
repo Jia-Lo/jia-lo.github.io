@@ -859,3 +859,7 @@ html.cerrada .lampara .haz-l{opacity:0!important;transition:opacity .6s ease}
 .aforo{display:flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid rgba(232,207,134,.35);border-radius:20px;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-soft);white-space:nowrap}
 .aforo i{width:7px;height:7px;border-radius:50%;background:#36d16b;box-shadow:0 0 7px #36d16b;animation:led 2.4s ease-in-out infinite}
 @media (max-width:900px){.aforo{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:-30px;background:var(--wine-deep);font-size:.56rem;padding:5px 9px}}
+.go-alt{display:inline-block;margin:14px 0 0 18px;font-family:var(--f-hand);font-size:1.45rem;color:var(--wine);opacity:.9;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.go-alt:hover{opacity:1}
+.menu .menu-pasillo{font-style:italic}
+@media (max-width:900px){.hero .go-alt{order:7;margin:-4px 0 0;justify-self:start}}
