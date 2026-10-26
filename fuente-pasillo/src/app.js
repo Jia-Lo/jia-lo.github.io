@@ -61,7 +61,11 @@ const gestor = new THREE.LoadingManager();
 const cargador = new THREE.TextureLoader(gestor);
 
 const tierra = crearTierra(cargador, BASE);
-const gal = crearGaleria({ renderer, cargador, base: BASE, obras: ordenar(), calidad, euro });
+const GENTE = [
+  { img: '/pasillo/gente/mujer50.webp', alto: 1.66 },
+  { img: '/pasillo/gente/hombre30.webp', alto: 1.8 },
+];
+const gal = crearGaleria({ renderer, cargador, base: BASE, obras: ordenar(), calidad, euro, gente: GENTE });
 const camara = new THREE.PerspectiveCamera(MOVIL && innerWidth < innerHeight ? 62 : 48, innerWidth / innerHeight, .02, 80);
 gal.escena.add(camara);
 
@@ -114,14 +118,14 @@ function bucle() {
   if (modo === 'tierra') { pasoRender.scene = tierra.escena; pasoRender.camera = tierra.camara; tierra.mat.uniforms.tiempo.value = tTot; }
   else {
     const k = 1 - Math.pow(.0016, dt);
-    if (!ocupado) { s += (sMeta - s) * k * .55; posMeta.set(0, OJOS, -s); }
-    pos.lerp(posMeta, ocupado ? 1 - Math.pow(.02, dt) : 1);
-    if (!ocupado && enPasillo) yawMeta = mirada();
-    yaw += (yawMeta - yaw) * (1 - Math.pow(ocupado ? .03 : .25, dt)); pitch += (pitchMeta - pitch) * (1 - Math.pow(.03, dt));
+    if (!ocupado) { s += (sMeta - s) * k * .55; const lat = Math.max(0, Math.abs(giro) - .6) / (Math.PI / 2 - .6); posMeta.set(-Math.sin(giro) * (innerWidth < innerHeight ? 0 : .85) * Math.min(1, lat), OJOS, -s); }
+    pos.lerp(posMeta, ocupado ? 1 - Math.pow(.02, dt) : (pos.distanceTo(posMeta) > .5 && Math.abs(pos.z - posMeta.z) < .3 ? 1 - Math.pow(.05, dt) : 1));
+    if (!ocupado && enPasillo) { giro += (giroMeta - giro) * (1 - Math.pow(.004, dt)); yawMeta = giro + (Math.abs(giroMeta) < .08 ? mirada() : 0); }
+    yaw += (yawMeta - yaw) * (1 - Math.pow(ocupado ? .03 : .0005, dt)); pitch += (pitchMeta - pitch) * (1 - Math.pow(.03, dt));
     const paso = ocupado ? 0 : Math.min(1, Math.abs(sMeta - s) * 2);
     camara.position.copy(pos); camara.position.y += Math.sin(s * 3.1) * .012 * paso;
     camara.rotation.set(pitch + mirY, yaw + mirX, Math.sin(s * 1.55) * .002 * paso, 'YXZ');
-    gal.actualizar(camara.position.z);
+    gal.actualizar(camara.position.z, camara.position.x, tTot);
     camara.updateMatrixWorld();
     gal.antesDeRender(camara);
     animarManos(dt);
@@ -232,18 +236,42 @@ async function irAlPasillo() {
   $('#escPasillo').hidden = false;
   sMeta = 0;
 }
-function avanzar(d) { if (ocupado || !enPasillo) return; sMeta += d; $('#hudPie').classList.add('visto'); }
+let relojImán = 0;
+const deCara = () => Math.abs(giroMeta) > 1.2;
+function centrar() { if (deCara()) sMeta = Math.round(sMeta / B) * B; }
+function avanzar(d, paso) {
+  if (ocupado || !enPasillo) return; sMeta += d; $('#hudPie').classList.add('visto');
+  if (paso) centrar(); else { clearTimeout(relojImán); relojImán = setTimeout(centrar, 450); }
+}
 addEventListener('wheel', e => { if (!enPasillo || ocupado || !$('#vista').hidden || !$('#listaObras').hidden) return; e.preventDefault(); avanzar(e.deltaY * .006); }, { passive: false });
+// mirar alrededor: arrastrar en horizontal (o ← →, o los botones de giro) gira la cabeza hasta 90° hacia cada pared
+let giro = 0, giroMeta = 0;
+const GIRO_MAX = 1.75, PASOS = [-Math.PI / 2, 0, Math.PI / 2];
+const norm = a => Math.atan2(Math.sin(a), Math.cos(a));
+function girarA(v) { giroMeta = Math.max(-GIRO_MAX, Math.min(GIRO_MAX, v)); $('#hudPie').classList.add('visto'); }
+function girarYCentrar(v) { girarA(v); centrar(); }
+function girarPaso(dir) {
+  // salta al siguiente de: pared izquierda (π/2), al frente (0), pared derecha (−π/2)
+  const actual = giroMeta, sig = dir > 0 ? PASOS.slice().reverse().find(p => p < actual - .2) : PASOS.find(p => p > actual + .2);
+  girarYCentrar(sig === undefined ? actual : sig);
+}
+function imantar() { const c = PASOS.reduce((a, p) => Math.abs(p - giroMeta) < Math.abs(a - giroMeta) ? p : a, 0); if (Math.abs(c - giroMeta) < .3) giroMeta = c; }
 let toque = null;
-lienzo.addEventListener('pointerdown', e => { toque = { y: e.clientY, x: e.clientX, s: sMeta, mov: false, raton: e.pointerType === 'mouse' }; });
+lienzo.addEventListener('pointerdown', e => { toque = { y: e.clientY, x: e.clientX, s: sMeta, g: giroMeta, mov: false, eje: null, raton: e.pointerType === 'mouse' }; });
 addEventListener('pointermove', e => {
-  if (toque && !toque.raton && enPasillo && !ocupado) { const d = (toque.y - e.clientY) * .012 + (toque.x - e.clientX) * .004; if (Math.abs(toque.y - e.clientY) + Math.abs(toque.x - e.clientX) > 10) toque.mov = true; sMeta = toque.s + d; $('#hudPie').classList.add('visto'); }
-  if (e.pointerType === 'mouse' && !ocupado) { mirX = -(e.clientX / innerWidth - .5) * .16; mirY = -(e.clientY / innerHeight - .5) * .08; }
-  if (e.pointerType === 'mouse' && enPasillo && !ocupado) lienzo.style.cursor = tocarObra(e) ? 'pointer' : '';
+  if (toque && enPasillo && !ocupado) {
+    const dx = e.clientX - toque.x, dy = toque.y - e.clientY;
+    if (!toque.eje && Math.abs(dx) + Math.abs(dy) > 10) { toque.mov = true; toque.eje = Math.abs(dx) > Math.abs(dy) * .8 ? 'x' : 'y'; }
+    if (toque.eje === 'x') girarA(toque.g + dx * (Math.PI / Math.max(320, innerWidth * .9)));
+    if (toque.eje === 'y') { sMeta = toque.s + dy * (toque.raton ? .008 : .012); $('#hudPie').classList.add('visto'); }
+  }
+  if (e.pointerType === 'mouse' && !ocupado && !toque) { mirX = -(e.clientX / innerWidth - .5) * .16; mirY = -(e.clientY / innerHeight - .5) * .08; }
+  if (e.pointerType === 'mouse' && enPasillo && !ocupado && !toque) lienzo.style.cursor = tocarObra(e) ? 'pointer' : 'grab';
 }, { passive: true });
 addEventListener('pointerup', e => {
   const t = toque; toque = null;
-  if (!t || t.mov || !enPasillo || ocupado) return;
+  if (!t || !enPasillo || ocupado) return;
+  if (t.mov) { imantar(); if (t.eje === 'y') setTimeout(centrar, 300); else centrar(); return; }
   if (Math.abs(e.clientX - t.x) + Math.abs(e.clientY - t.y) > 8) return;
   const ob = tocarObra(e); if (ob) acercar(ob);
 });
@@ -251,11 +279,16 @@ addEventListener('keydown', e => {
   if (!enPasillo) return;
   if (e.key === 'Escape' && !$('#vista').hidden) { devolver(); return; }
   if (!$('#vista').hidden || !$('#listaObras').hidden || ocupado) return;
-  if (e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); avanzar(B); }
-  if (e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); avanzar(-B); }
+  const k = e.key.toLowerCase();
+  if (k === 'arrowup' || k === 'w' || k === 'pagedown') { e.preventDefault(); avanzar(B, 1); }
+  if (k === 'arrowdown' || k === 's' || k === 'pageup') { e.preventDefault(); avanzar(-B, 1); }
+  if (k === 'arrowleft' || k === 'a' || k === 'q') { e.preventDefault(); girarPaso(1); }
+  if (k === 'arrowright' || k === 'd' || k === 'e') { e.preventDefault(); girarPaso(-1); }
 });
-$('#btnAvanza').onclick = () => avanzar(B);
-$('#btnAtras').onclick = () => avanzar(-B);
+$('#btnAvanza').onclick = () => avanzar(B, 1);
+$('#btnAtras').onclick = () => avanzar(-B, 1);
+$('#btnGiraIzq').onclick = () => girarPaso(1);
+$('#btnGiraDer').onclick = () => girarPaso(-1);
 
 const rayo = new THREE.Raycaster(), ptr = new THREE.Vector2();
 function tocarObra(e) {
@@ -423,7 +456,7 @@ async function devolver() {
 function fin() {
   tween(900, k => { luzMano.intensity = .7 * (1 - k); gal.atenuar(null, 1); });
   // vuelta al centro del pasillo, mirando al fondo
-  s = sMeta = -pos.z; posMeta.set(0, OJOS, pos.z); yawMeta = 0; pitchMeta = 0;
+  s = sMeta = -pos.z; posMeta.set(0, OJOS, pos.z); giro = giroMeta = norm(yawMeta); pitchMeta = 0;
   setTimeout(() => { ocupado = false; document.body.classList.remove('ocupado'); }, RM ? 0 : 900);
 }
 $('#vCerrar').onclick = devolver;
@@ -454,7 +487,7 @@ function sinWebGL() {
 }
 
 /* =========================== Arranque =========================== */
-if (matchMedia('(pointer: coarse)').matches) $('#hudPie').textContent = 'Deslice el dedo para avanzar · toque una obra y se la acercamos';
+$('#hudPie').textContent = matchMedia('(pointer: coarse)').matches ? 'Deslice arriba para avanzar y a los lados para girarse hacia las paredes · toque una obra' : 'Rueda para avanzar · arrastre o use ← → para mirar a las paredes · clic en una obra';
 $('#saltar').onclick = async () => { if (enPasillo) return; if (modo === 'tierra') { entrarEnGaleria(); } $('#dialogo').hidden = true; preguntando = false; irAlPasillo(); };
 async function inicio() {
   const directo = Q.has('directo') || RM;

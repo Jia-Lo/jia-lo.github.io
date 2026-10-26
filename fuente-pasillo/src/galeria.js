@@ -13,7 +13,7 @@ export const OJOS = 1.62;
 const ANCHURA = { 'PRC-001': .58, 'PRC-002': .58, 'PRC-003': .54, 'PRC-004': .44, 'PRC-005': .68, 'PRC-006': .62, 'PRC-007': .62 };
 const TEX = { 'obras/montacute.jpg': 'montacute', 'obras/four-courts.jpg': 'four-courts', 'obras/kininger.jpg': 'kininger', 'obras/cromos-francia.jpg': 'cromos-francia', 'obras/cromos-cuatro-paises.jpg': 'cromos-cuatro-paises', 'obras/venecia-san-marco.jpg': 'venecia-san-marco', 'obras/venecia-salute.jpg': 'venecia-salute' };
 
-export function crearGaleria({ renderer, cargador, base, obras, calidad, euro }) {
+export function crearGaleria({ renderer, cargador, base, obras, calidad, euro, gente = [] }) {
   const escena = new THREE.Scene();
   escena.background = new THREE.Color(0x050403);
   escena.fog = new THREE.FogExp2(0x0d0907, .034);
@@ -148,6 +148,19 @@ export function crearGaleria({ renderer, cargador, base, obras, calidad, euro })
     return new THREE.MeshStandardMaterial({ map: t, roughness: .85 });
   }
 
+  // visitantes: recortes fotográficos (generados con IA) que miran los cuadros
+  const sombraTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+    const r = x.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(0,0,0,.75)'); r.addColorStop(.5, 'rgba(0,0,0,.35)'); r.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = r; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+  const matSombra = new THREE.MeshBasicMaterial({ map: sombraTex, transparent: true, depthWrite: false });
+  const personas = gente.map(g => {
+    const t = cargador.load(g.img); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso;
+    const m = new THREE.MeshBasicMaterial({ map: t, transparent: true, alphaTest: .35, side: THREE.DoubleSide, color: new THREE.Color(.58, .5, .44) });
+    return { ...g, m, t };
+  });
+  const geoPlano = new THREE.PlaneGeometry(1, 1); geoPlano.translate(0, .5, 0);
+  const geoSombra = new THREE.PlaneGeometry(1, 1); geoSombra.rotateX(-Math.PI / 2);
+
   for (let i = 0; i < N; i++) {
     const g = new THREE.Group(); escena.add(g);
     const tr = { g, idx: null, obras: [] };
@@ -187,6 +200,11 @@ export function crearGaleria({ renderer, cargador, base, obras, calidad, euro })
       const cart = new THREE.Mesh(cartelaGeo, []); o.add(cart);
       tr.obras.push({ o, marco, cord, lampara, cart, lado, p: null });
     }
+    // un visitante posible por tramo
+    const vis = new THREE.Group(); vis.visible = false; g.add(vis);
+    const cuerpo = new THREE.Mesh(geoPlano, matSombra); vis.add(cuerpo);
+    const sombra = new THREE.Mesh(geoSombra, matSombra); sombra.position.y = .004; sombra.scale.set(.75, 1, .5); vis.add(sombra);
+    tr.vis = { vis, cuerpo, sombra, fase: Math.random() * 10 };
     tramos.push(tr);
   }
 
@@ -220,6 +238,17 @@ export function crearGaleria({ renderer, cargador, base, obras, calidad, euro })
       ob.cart.material = m.cartela; ob.cart.position.set(w / 2 + .32, 1.42, .004);
       ob.marco.userData.obra = ob;
     });
+    // ¿hay alguien mirando un cuadro en este tramo?
+    const v = tr.vis, n = personas.length;
+    const hay = n && ((((idx * 7 + 3) % 5) + 5) % 5) < 2 && idx > 0;
+    v.vis.visible = !!hay;
+    if (hay) {
+      const per = personas[((idx % n) + n) % n], lado = (((idx * 3) % 2) + 2) % 2 ? 1 : -1;
+      const asp = per.t.image ? per.t.image.width / per.t.image.height : (per.asp || .32);
+      v.cuerpo.material = per.m; v.cuerpo.scale.set(per.alto * asp, per.alto, 1);
+      v.vis.position.set(lado * (MW - 1.15 - (idx % 3) * .12), 0, ((idx % 2) ? .22 : -.18));
+      v.lado = lado; v.per = per;
+    }
   }
 
   let ordenActual = obras, atenuada = null, factorAt = 1;
@@ -228,7 +257,7 @@ export function crearGaleria({ renderer, cargador, base, obras, calidad, euro })
 
   // actualizar con la posición de la cámara (z negativa hacia el fondo)
   const tmp = new THREE.Vector3();
-  function actualizar(camZ) {
+  function actualizar(camZ, camX = 0, t = 0) {
     const i0 = Math.floor(-camZ / B + .5) - 1;
     const quiero = new Set(); for (let k = 0; k < N; k++) quiero.add(i0 + k);
     const libres = tramos.filter(t => !quiero.has(t.idx));
@@ -248,6 +277,18 @@ export function crearGaleria({ renderer, cargador, base, obras, calidad, euro })
       s.target.updateMatrixWorld();
     }
     for (; f < focos.length; f++) focos[f].intensity = 0;
+    // los visitantes giran hacia la cámara, pero siempre de espaldas al pasillo (mirando su cuadro)
+    for (const tr of tramos) {
+      const v = tr.vis; if (!v.vis.visible) continue;
+      v.vis.getWorldPosition(tmp);
+      const haciaCam = Math.atan2(camX - tmp.x, camZ - tmp.z);
+      const base = v.lado > 0 ? -Math.PI / 2 : Math.PI / 2; // mirando a la pared: la espalda hacia el centro
+      let d = haciaCam - base; d = Math.atan2(Math.sin(d), Math.cos(d));
+      d = Math.max(-1.05, Math.min(1.05, d));
+      v.cuerpo.rotation.y = base + d;
+      v.cuerpo.rotation.z = Math.sin(t * .6 + v.fase) * .006;
+      v.cuerpo.scale.y = (v.per ? v.per.alto : 1.7) * (1 + Math.sin(t * 1.4 + v.fase) * .0025);
+    }
     cerca.slice(0, faroles.length).forEach((tr, i) => { tr.farol.getWorldPosition(tmp); faroles[i].position.copy(tmp); faroles[i].position.y -= .1; faroles[i].intensity = 9; });
   }
 
