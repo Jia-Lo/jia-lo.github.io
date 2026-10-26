@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>El pasillo infinito · Galería Procedencia</title>
-<meta name="description" content="Un viaje desde el espacio hasta el taller del grabador y un pasillo sin fin donde un trabajador de sala le acerca cada obra. Grabados antiguos y estampas a la venta.">
+<meta name="description" content="Un viaje desde el espacio hasta Alcalá de Henares y un pasillo de museo sin fin donde unas manos con guantes le acercan cada obra. Grabados antiguos y estampas a la venta.">
 <meta property="og:title" content="El pasillo infinito · Galería Procedencia">
-<meta property="og:description" content="Del espacio al taller del grabador, y un pasillo sin fin con obras antiguas a la venta.">
+<meta property="og:description" content="Del espacio a Alcalá de Henares, y un pasillo de museo sin fin con obras antiguas a la venta.">
 <meta property="og:image" content="https://jia-lo.github.io/obras/montacute.jpg">
 <meta property="og:url" content="https://jia-lo.github.io/pasillo/">
 <meta name="twitter:card" content="summary_large_image">
@@ -15,56 +15,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Archivo:wdth,wght@75..100,400..700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
 <link rel="stylesheet" href="/estilo.css?v=3e77e54a">
-<link rel="stylesheet" href="/pasillo/pasillo.css?v=89a6fa6d">
+<link rel="stylesheet" href="/pasillo/pasillo.css?v=d6aa8706">
 </head>
 <body class="pasillo-app">
 
-<!-- 1 · Viaje desde el espacio -->
-<section class="escena" id="esc-espacio" aria-label="Viaje desde el espacio hasta Alcalá de Henares">
-  <canvas id="globo"></canvas>
-  <p class="rotulo" id="rotuloGeo" aria-live="polite"></p>
-</section>
+<div class="escenario" id="escenario"></div>
+<p class="cargando" id="cargando" hidden>Preparando el viaje…</p>
 
-<!-- 2 · Fachada ilustrada -->
-<section class="escena" id="esc-fachada" hidden aria-label="Fachada ilustrada de la galería, de noche">
-  <div class="fachada-cam" id="fachadaCam"><svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="fachadaSvg"></svg></div>
-  <p class="nota-ilustracion">Alcalá de Henares · ilustración</p>
-</section>
+<!-- Rótulos del viaje desde el espacio -->
+<p class="rotulo" id="rotuloGeo" aria-live="polite"></p>
+<p class="coords" id="coords">40°29′ N · 3°22′ O<br><span>Alcalá de Henares</span></p>
 
-<!-- 3 · Taller del grabador -->
-<section class="escena" id="esc-taller" hidden aria-label="Taller del grabador">
-  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="tallerSvg"></svg>
-  <div class="dialogo" id="dialogo" hidden>
-    <p class="dlg-quien">El grabador</p>
-    <p class="dlg-txt" id="dlgTxt"></p>
-    <div class="dlg-opc" id="dlgOpc"></div>
-  </div>
-</section>
+<!-- Preguntas de la galería -->
+<div class="dialogo" id="dialogo" hidden role="dialog" aria-labelledby="dlgTxt">
+  <p class="dlg-quien"><span class="sello-marca" aria-hidden="true">P</span> Galería Procedencia</p>
+  <p class="dlg-txt" id="dlgTxt"></p>
+  <div class="dlg-opc" id="dlgOpc"></div>
+</div>
 
-<!-- 4 · El pasillo infinito -->
-<section class="escena" id="esc-pasillo" hidden aria-label="El pasillo infinito de la galería">
-  <div class="visor3d" id="visor3d"><div class="mundo" id="mundo"></div></div>
-  <div class="niebla" aria-hidden="true"></div>
+<!-- Controles del pasillo -->
+<section class="esc-pasillo" id="escPasillo" hidden aria-label="El pasillo infinito de la galería">
   <div class="hud">
     <a class="hud-marca" href="/" title="Volver a la galería principal"><span class="sello-marca" aria-hidden="true">P</span><span><b>Procedencia</b><small>El pasillo infinito</small></span></a>
     <div class="hud-der"><button type="button" class="hud-btn" id="btnLista">Todas las obras</button><button type="button" class="hud-btn" id="btnGustos">Cambiar mis gustos</button></div>
   </div>
-  <p class="hud-pie" id="hudPie">Deslice o use la rueda para avanzar · toque una obra para que se la acerquen</p>
+  <p class="hud-pie" id="hudPie">Deslice o use la rueda para avanzar · toque una obra y se la acercamos</p>
   <div class="hud-flechas"><button type="button" id="btnAtras" aria-label="Retroceder">‹</button><button type="button" id="btnAvanza" aria-label="Avanzar">›</button></div>
 </section>
-
-<!-- Trabajador de sala, escalera y obra descolgada -->
-<div class="escena-trabajo" id="trabajo" hidden aria-hidden="true">
-  <div class="trabajador" id="trabajador"></div>
-  <div class="obra-clon" id="obraClon"><img alt=""></div>
-  <div class="franjas"><i></i><i></i></div>
-</div>
 
 <!-- Vista de la obra a pantalla completa -->
 <section class="vista" id="vista" hidden role="dialog" aria-modal="true" aria-labelledby="vTitulo">
   <div class="vista-escenario stage" id="vistaStage"><img alt="" id="vistaImg"></div>
   <aside class="presenta">
-    <div class="presenta-quien"><span class="mini-trab" aria-hidden="true"></span><span>Le presenta la obra<br><b>el trabajador de sala</b></span></div>
     <p class="inv" id="vInv"></p>
     <h2 id="vTitulo"></h2>
     <p class="art" id="vAutor"></p>
@@ -74,7 +56,7 @@
     <div class="priceline"><span class="price" id="vPrecio"></span><span class="status" id="vEstado"><i></i></span></div>
     <div class="acts"><button class="btn" type="button" id="vReservar"></button><button class="btn ghost" type="button" id="vCert">Certificado</button><a class="btn ghost" id="vFicha" href="#">Ficha completa</a></div>
   </aside>
-  <button type="button" class="vista-cerrar" id="vCerrar">Devolver la obra a su sitio</button>
+  <button type="button" class="vista-cerrar" id="vCerrar">Devolver la obra a la pared</button>
 </section>
 
 <!-- Lista accesible de todas las obras -->
@@ -82,7 +64,10 @@
   <div class="lo-caja"><button type="button" class="mclose" id="listaCerrar" aria-label="Cerrar">✕</button><h2 id="listaT">Las obras del pasillo</h2><ol id="listaUl"></ol></div>
 </div>
 
+<div class="sin3d" id="sin3d" hidden><p>Este navegador no puede mostrar el pasillo en 3D.</p><a class="btn" href="/">Ver la galería</a></div>
+
 <button type="button" class="saltar" id="saltar">Saltar la entrada →</button>
+<p class="creditos">Tierra: imágenes de satélite de la NASA (Blue Marble y Black Marble, vía Solar System Scope, CC BY 4.0) · Galería recreada en 3D; las obras son las fotos reales de cada pieza</p>
 
 <script>
 const FIRMAS = [];
@@ -91,9 +76,6 @@ const PIECES = /*OBRAS*/[{"id": "PRC-001", "slug": "montacute-house", "img": "ob
 <script src="/contacto.js?v=7736da5c"></script>
 <script src="/ficha.js?v=69e94515"></script>
 <script src="/presencia.js?v=b04f4b1f"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-<script src="/pasillo/pasillo.js?v=004bd2ee"></script>
+<script type="module" src="/pasillo/app.js?v=6aa1ab93"></script>
 </body>
 </html>
