@@ -1,0 +1,11 @@
+Carpeta de fotos y vídeo de Alianza
+====================================
+Coloca aquí tus archivos con EXACTAMENTE estos nombres y la web los usará automáticamente:
+
+  hero.mp4         Vídeo de portada (en bucle, sin sonido, horizontal, ideal 1920x1080, < 8 MB)
+  galeria-1.jpg    Inspiración · La ceremonia   (vertical 4:5)
+  galeria-2.jpg    Inspiración · Las flores     (cuadrada 1:1)
+  galeria-3.jpg    Inspiración · La pareja      (vertical 3:4)
+  galeria-4.jpg    Inspiración · El pasillo     (horizontal 16:10)
+
+Mientras no existan, la web muestra las ilustraciones.
